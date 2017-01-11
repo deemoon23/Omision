@@ -37,7 +37,7 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.chkInterinato = new System.Windows.Forms.CheckBox();
             this.dgDatos = new System.Windows.Forms.DataGridView();
-            this.txtEmpleado = new System.Windows.Forms.TextBox();
+            this.txtApellidoPa = new System.Windows.Forms.TextBox();
             this.txtSueldo = new System.Windows.Forms.TextBox();
             this.txtElaborada = new System.Windows.Forms.TextBox();
             this.dgTasas = new System.Windows.Forms.DataGridView();
@@ -49,6 +49,8 @@
             this.lstTipo = new System.Windows.Forms.ListBox();
             this.lstDe = new System.Windows.Forms.ListBox();
             this.lstHasta = new System.Windows.Forms.ListBox();
+            this.txtApellidoMa = new System.Windows.Forms.TextBox();
+            this.txtNombre = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.SuspendLayout();
@@ -136,15 +138,15 @@
             this.dgDatos.Size = new System.Drawing.Size(766, 385);
             this.dgDatos.TabIndex = 9;
             // 
-            // txtEmpleado
+            // txtApellidoPa
             // 
-            this.txtEmpleado.Location = new System.Drawing.Point(365, 8);
-            this.txtEmpleado.Name = "txtEmpleado";
-            this.txtEmpleado.Size = new System.Drawing.Size(183, 20);
-            this.txtEmpleado.TabIndex = 10;
-            this.txtEmpleado.Click += new System.EventHandler(this.txtEmpleado_Click);
-            this.txtEmpleado.TextChanged += new System.EventHandler(this.txtEmpleado_TextChanged);
-            this.txtEmpleado.Leave += new System.EventHandler(this.txtEmpleado_Leave);
+            this.txtApellidoPa.Location = new System.Drawing.Point(217, 7);
+            this.txtApellidoPa.Name = "txtApellidoPa";
+            this.txtApellidoPa.Size = new System.Drawing.Size(115, 20);
+            this.txtApellidoPa.TabIndex = 10;
+            this.txtApellidoPa.Click += new System.EventHandler(this.txtEmpleado_Click);
+            this.txtApellidoPa.TextChanged += new System.EventHandler(this.txtEmpleado_TextChanged);
+            this.txtApellidoPa.Leave += new System.EventHandler(this.txtEmpleado_Leave);
             // 
             // txtSueldo
             // 
@@ -259,11 +261,33 @@
             this.lstHasta.Size = new System.Drawing.Size(24, 30);
             this.lstHasta.TabIndex = 22;
             // 
+            // txtApellidoMa
+            // 
+            this.txtApellidoMa.Location = new System.Drawing.Point(338, 6);
+            this.txtApellidoMa.Name = "txtApellidoMa";
+            this.txtApellidoMa.Size = new System.Drawing.Size(100, 20);
+            this.txtApellidoMa.TabIndex = 23;
+            this.txtApellidoMa.Click += new System.EventHandler(this.txtApellidoMa_Click);
+            this.txtApellidoMa.TextChanged += new System.EventHandler(this.txtApellidoMa_TextChanged);
+            this.txtApellidoMa.Leave += new System.EventHandler(this.txtApellidoMa_Leave);
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(448, 6);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(100, 20);
+            this.txtNombre.TabIndex = 24;
+            this.txtNombre.Click += new System.EventHandler(this.txtNombre_Click);
+            this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
+            this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 552);
+            this.Controls.Add(this.txtNombre);
+            this.Controls.Add(this.txtApellidoMa);
             this.Controls.Add(this.lstHasta);
             this.Controls.Add(this.lstDe);
             this.Controls.Add(this.lstTipo);
@@ -275,7 +299,7 @@
             this.Controls.Add(this.dgTasas);
             this.Controls.Add(this.txtElaborada);
             this.Controls.Add(this.txtSueldo);
-            this.Controls.Add(this.txtEmpleado);
+            this.Controls.Add(this.txtApellidoPa);
             this.Controls.Add(this.dgDatos);
             this.Controls.Add(this.chkInterinato);
             this.Controls.Add(this.dateTimePicker2);
@@ -306,7 +330,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.CheckBox chkInterinato;
         private System.Windows.Forms.DataGridView dgDatos;
-        private System.Windows.Forms.TextBox txtEmpleado;
+        private System.Windows.Forms.TextBox txtApellidoPa;
         private System.Windows.Forms.TextBox txtSueldo;
         private System.Windows.Forms.TextBox txtElaborada;
         private System.Windows.Forms.DataGridView dgTasas;
@@ -318,6 +342,8 @@
         private System.Windows.Forms.ListBox lstTipo;
         private System.Windows.Forms.ListBox lstDe;
         private System.Windows.Forms.ListBox lstHasta;
+        private System.Windows.Forms.TextBox txtApellidoMa;
+        private System.Windows.Forms.TextBox txtNombre;
     }
 }
 

@@ -5,6 +5,7 @@ namespace CR.Modelo
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Globalization;
     using System.Linq;
 
     public partial class tasasOmisiones
@@ -30,17 +31,34 @@ namespace CR.Modelo
         }
         public double getTasa(DateTime _inicio)
          {
-            DateTime inicio = new DateTime(_inicio.Year, _inicio.Month+1, 1);
+            DateTime inicio = new DateTime();
+            if (_inicio.Month == 12)
+            {
+                int año = _inicio.Year+1;
+
+                 inicio = new DateTime(año, 1, 1);
+            }
+            else
+            {
+                inicio = new DateTime(_inicio.Year, _inicio.Month + 1, 1);
+            }
+            
 
             try
             {
                 using (var ctx = new _Modelo())
                 {
                     var y = ctx.tasasOmisiones.Where(r => r.fecha >= _inicio).ToList();
-                    var x = Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= _inicio).Select(r => r.tasa).Sum());
-
-                    return Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= _inicio).Select(r => r.tasa).Sum()) * 100 * .8;
-
+                    if (y.Count == 0)
+                    {
+                        Modelo.tasasOmisiones tasas = new tasasOmisiones();
+                        double ultimaTasa = Convert.ToDouble(tasas.getUltimaTasa().tasa);
+                        return ultimaTasa * 100 * .8;
+                    }
+                    //var x = Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= _inicio).Select(r => r.tasa).Sum());
+                    else{
+                        return Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= _inicio).Select(r => r.tasa).Sum()) * 100 * .8;
+                    }
                 }
             }
             catch (Exception) { throw; }
@@ -66,6 +84,7 @@ namespace CR.Modelo
 
         public Dictionary<DateTime, double> getLstTasas(DateTime _inicio, DateTime _final)
         {
+            int contador = 0;
             List<double> tasas = new List<double>();
             Dictionary<DateTime, double> data = new Dictionary<DateTime, double>();
             DateTime inicio = new DateTime(_inicio.Year, _inicio.Month, 1);
@@ -74,14 +93,25 @@ namespace CR.Modelo
             {
                 using (var ctx = new _Modelo())
                 {
+                    var meses = MonthsBetween(inicio, final);
                     var query = ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => new { r.tasa, r.fecha }).OrderBy(r => r.fecha).ToList();
-                    foreach (var item in query)
+                    do
                     {
-                        tasas.Add(Convert.ToDouble(item.tasa));
-                        data.Add(item.fecha, Convert.ToDouble(item.tasa));
+                        ////////EMPAREKAR LISTAS DE MESES Y LA DE QUERY
+                        query.Add(getUltimaTasa(),);
                     }
+                    while (query.Count == meses.Count());
+                    foreach (var item in meses)
+                    {
+                        tasas.Add(Convert.ToDouble(query[0].tasa));
+                        var mes = DateTime.ParseExact(item.Item1, "MMMM", CultureInfo.CurrentCulture).Month;
+                        DateTime fecha = new DateTime(item.Item2, mes, 1);
 
+                        data.Add(fecha, Convert.ToDouble(query[contador].tasa));
+                        contador++;
+                    }
                     return data;
+                    //return data;
                 }
             }
             catch (Exception) { throw; }
@@ -199,7 +229,36 @@ namespace CR.Modelo
             catch (Exception) { throw; }
 
         }
+        public static IEnumerable<Tuple<string, int>> MonthsBetween(
+           DateTime startDate,
+           DateTime endDate)
+        {
+            DateTime iterator;
+            DateTime limit;
+
+            if (endDate > startDate)
+            {
+                iterator = new DateTime(startDate.Year, startDate.Month, 1);
+                limit = endDate;
+            }
+            else
+            {
+                iterator = new DateTime(endDate.Year, endDate.Month, 1);
+                limit = startDate;
+            }
+
+            var dateTimeFormat = CultureInfo.CurrentCulture.DateTimeFormat;
+            while (iterator <= limit)
+            {
+                yield return Tuple.Create(
+                    dateTimeFormat.GetMonthName(iterator.Month),
+                    iterator.Year);
+                iterator = iterator.AddMonths(1);
+            }
+        }
 
 
     }
+
+
 }

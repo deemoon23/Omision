@@ -15,6 +15,7 @@ namespace CR.Modelo
         {
             cat_organismos2 = new HashSet<cat_organismos2>();
         }
+    
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -29,8 +30,7 @@ namespace CR.Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cat_organismos2> cat_organismos2 { get; set; }
-
-
+        
         public List<string> getAll()
         {
             try

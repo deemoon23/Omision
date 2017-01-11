@@ -36,20 +36,27 @@ namespace CR
             dateTimePicker2.CustomFormat = "MMMM yyyy";
             dtUltimaTasa.CustomFormat = "MMMM yyyy";
 
-            txtEmpleado.Text = "Empleado";
-            txtEmpleado.ForeColor = Color.LightGray;
+            txtApellidoPa.Text = "Apellido Paterno";
+            txtApellidoPa.ForeColor = Color.Gray;
+            txtApellidoMa.Text = "Apellido Materno";
+            txtApellidoMa.ForeColor = Color.Gray;
+            txtNombre.Text = "Nombre";
+            txtNombre.ForeColor = Color.Gray;
             txtSueldo.Text = "Sueldo";
-            txtSueldo.ForeColor = Color.LightGray;
-            txtElaborada.Text = "Sueldo";
-            txtElaborada.ForeColor = Color.LightGray;
+            txtSueldo.ForeColor = Color.Gray;
+            txtElaborada.Text = "Elabora";
+            txtElaborada.ForeColor = Color.Gray;
 
             try
             {
                 using (var ctx = new Modelo._Modelo())
                 {
-                    cbLocalidad.DataSource = loc.getAll();
+                    
+                    
+                    cbLocalidad.DataSource = loc.getAll(); 
                     cbOrganismos.DataSource = org.getAll();
-
+                    cbLocalidad.Text = "LOCALIDAD";
+                    cbOrganismos.Text = "ORGANISMOS";
                     dgTasas.DataSource = ctx.tasasOmisiones.Select(r => new { r.fecha, r.tasa }).OrderByDescending(r => r.fecha).ToList();
 
 
@@ -201,25 +208,28 @@ namespace CR
         #region TextBox
         private void txtEmpleado_TextChanged(object sender, EventArgs e)
         {
-            _TypedInto = !String.IsNullOrEmpty(txtEmpleado.Text);
+            _TypedInto = !String.IsNullOrEmpty(txtApellidoPa.Text);
 
-            if (_TypedInto) { txtEmpleado.ForeColor = Color.Black; }
+            if (_TypedInto) { txtApellidoPa.ForeColor = Color.Black; }
 
         }
 
 
         private void txtEmpleado_Click(object sender, EventArgs e)
         {
-            txtEmpleado.Text = ""; 
+            if (txtApellidoPa.ForeColor == Color.Gray)
+            {
+                txtApellidoPa.Text = "";
+            } 
 
         }
 
         private void txtEmpleado_Leave(object sender, EventArgs e)
         {
-            if (txtEmpleado.Text.Count()==0)
+            if (txtApellidoPa.Text.Count()==0)
             {
-                txtEmpleado.Text = "Empleado";
-                txtEmpleado.ForeColor = Color.LightGray;
+                txtApellidoPa.Text = "Apellido Paterno";
+                txtApellidoPa.ForeColor = Color.Gray;
             }
         }
 
@@ -233,7 +243,10 @@ namespace CR
 
         private void txtSueldo_Click(object sender, EventArgs e)
         {
-            txtSueldo.Text = "";
+            if (txtSueldo.ForeColor == Color.Gray)
+            {
+                txtSueldo.Text = "";
+            }
         }
 
         private void txtSueldo_Leave(object sender, EventArgs e)
@@ -241,7 +254,7 @@ namespace CR
             if (txtSueldo.Text.Count() == 0)
             {
                 txtSueldo.Text = "Sueldo";
-                txtSueldo.ForeColor = Color.LightGray;
+                txtSueldo.ForeColor = Color.Gray;
             }
         }
 
@@ -254,7 +267,10 @@ namespace CR
 
         private void txtElaborada_Click(object sender, EventArgs e)
         {
-            txtElaborada.Text = "";
+            if (txtElaborada.ForeColor == Color.Gray)
+            {
+                txtElaborada.Text = "";
+            }
         }
 
         private void txtElaborada_Leave(object sender, EventArgs e)
@@ -262,9 +278,60 @@ namespace CR
             if (txtElaborada.Text.Count() == 0)
             {
                 txtElaborada.Text = "Elabora";
-                txtElaborada.ForeColor = Color.LightGray;
+                txtElaborada.ForeColor = Color.Gray;
             }
         }
         #endregion
+
+
+
+        private void txtNombre_Click(object sender, EventArgs e)
+        {
+            if (txtNombre.ForeColor == Color.Gray)
+            {
+                txtNombre.Text = "";
+            }
+
+        }
+
+        private void txtNombre_Leave(object sender, EventArgs e)
+        {
+            if (txtNombre.Text.Count() == 0)
+            {
+                txtNombre.Text = "Nombre";
+                txtNombre.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            _TypedInto = !String.IsNullOrEmpty(txtNombre.Text);
+
+            if (_TypedInto) { txtNombre.ForeColor = Color.Black; }
+        }
+
+        private void txtApellidoMa_TextChanged(object sender, EventArgs e)
+        {
+            _TypedInto = !String.IsNullOrEmpty(txtApellidoMa.Text);
+
+            if (_TypedInto) { txtApellidoMa.ForeColor = Color.Black; }
+        }
+
+        private void txtApellidoMa_Click(object sender, EventArgs e)
+        {
+            if (txtApellidoMa.ForeColor==Color.Gray)
+            { txtApellidoMa.Text = "";
+
+            }
+        }
+
+        private void txtApellidoMa_Leave(object sender, EventArgs e)
+        {
+            if (txtApellidoMa.Text.Count() == 0)
+            {
+                txtApellidoMa.Text = "Apellido Materno";
+                txtApellidoMa.ForeColor = Color.Gray;
+            }
+        }
     }
 }
