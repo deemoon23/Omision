@@ -64,11 +64,11 @@ namespace CR.Modelo
                 double tasa;
                 if (_Interinato == false)
                 {
-                    tasa = tasas.getTasa(item.Key.AddMonths(1));
+                    tasa = tasas.getTasa(item.Key);
                 }
                 else
                 {
-                    tasa = tasasInter.getTasa(item.Key.AddMonths(1));
+                    tasa = tasasInter.getTasa(item.Key);
                 }
 
                 DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
@@ -88,34 +88,36 @@ namespace CR.Modelo
                 {
                     mes = item.Key.ToString("yy-MMM", CultureInfo.CurrentCulture).ToUpper();
                 }
-                double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
-                double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
-                double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
-                double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
-                double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
-                double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
-                double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
-                double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
-                double importe = totalCuotas * (tasa/100);
-                double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
-                double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
-                double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
-                double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
-                double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
-                double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
-                double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
-                double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
-                double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
-                double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
-                double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
-                double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
-                double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
-                double a_importe = (tasa/100) * a_TotalAportaciones;
-                double totalCuoApo = a_TotalAportaciones + totalCuotas;
-                double totalMor = importe + a_importe;
-                double totalGen = totalMor + totalCuoApo;
+                if (datos.ContainsKey(año))
+                {
+                    double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
+                    double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
+                    double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
+                    double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
+                    double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
+                    double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
+                    double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
+                    double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
+                    double importe = totalCuotas * (tasa / 100);
+                    double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
+                    double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
+                    double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
+                    double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
+                    double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
+                    double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
+                    double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
+                    double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
+                    double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
+                    double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
+                    double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
+                    double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
+                    double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
+                    double a_importe = (tasa / 100) * a_TotalAportaciones;
+                    double totalCuoApo = a_TotalAportaciones + totalCuotas;
+                    double totalMor = importe + a_importe;
+                    double totalGen = totalMor + totalCuoApo;
 
-                string[] row = new string[] { sueldo + "",
+                    string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
                     servMed.ToString("#.##"),
@@ -147,8 +149,13 @@ namespace CR.Modelo
                     totalMor.ToString("#.##"),
                     totalGen.ToString("#.##")
                     };
-                Grid.Rows.Add(row);
+                    Grid.Rows.Add(row);
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron datos del organismo para el año "+año+".");
 
+                }
             }
         }
         public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, DateTime _UltimaTasa, int _Tipo)
@@ -162,11 +169,11 @@ namespace CR.Modelo
                 double tasa;
                 if (_Interinato == false)
                 {
-                    tasa = tasas.getTasa(item.Key.AddMonths(1),_UltimaTasa);
+                    tasa = tasas.getTasa(item.Key,_UltimaTasa);
                 }
                 else
                 {
-                    tasa = tasasInter.getTasa(item.Key.AddMonths(1), _UltimaTasa);
+                    tasa = tasasInter.getTasa(item.Key, _UltimaTasa);
                 }
 
                 DateTime.Now.ToString("MMMM", CultureInfo.InvariantCulture);
@@ -186,34 +193,38 @@ namespace CR.Modelo
                 {
                     mes = item.Key.ToString("yy-MMM", CultureInfo.CurrentCulture).ToUpper();
                 }
-                double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
-                double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
-                double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
-                double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
-                double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
-                double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
-                double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
-                double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
-                double importe = totalCuotas * (tasa / 100);
-                double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
-                double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
-                double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
-                double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
-                double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
-                double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
-                double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
-                double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
-                double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
-                double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
-                double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
-                double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
-                double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
-                double a_importe = (tasa / 100) * a_TotalAportaciones;
-                double totalCuoApo = a_TotalAportaciones + totalCuotas;
-                double totalMor = importe + a_importe;
-                double totalGen = totalMor + totalCuoApo;
+                if (datos.ContainsKey(año))
+                {
 
-                string[] row = new string[] { sueldo + "",
+
+                    double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
+                    double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
+                    double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
+                    double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
+                    double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
+                    double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
+                    double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
+                    double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
+                    double importe = totalCuotas * (tasa / 100);
+                    double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
+                    double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
+                    double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
+                    double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
+                    double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
+                    double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
+                    double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
+                    double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
+                    double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
+                    double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
+                    double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
+                    double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
+                    double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
+                    double a_importe = (tasa / 100) * a_TotalAportaciones;
+                    double totalCuoApo = a_TotalAportaciones + totalCuotas;
+                    double totalMor = importe + a_importe;
+                    double totalGen = totalMor + totalCuoApo;
+
+                    string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
                     servMed.ToString("#.##"),
@@ -245,8 +256,12 @@ namespace CR.Modelo
                     totalMor.ToString("#.##"),
                     totalGen.ToString("#.##")
                     };
-                Grid.Rows.Add(row);
-
+                    Grid.Rows.Add(row);
+                }
+                else
+                {
+                    MessageBox.Show("No se encontraron datos del organismo para el año "+año+"");
+                }
             }
         }
     }

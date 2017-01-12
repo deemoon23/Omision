@@ -10,7 +10,7 @@ using System.Windows.Forms;
 using System.Data.OleDb;
 using System.Data.Entity;
 using System.Data.SqlClient;
-
+using System.Text.RegularExpressions;
 namespace CR
 {
     public partial class frmHome : Form
@@ -35,6 +35,7 @@ namespace CR
             dateTimePicker1.CustomFormat = "MMMM yyyy";
             dateTimePicker2.CustomFormat = "MMMM yyyy";
             dtUltimaTasa.CustomFormat = "MMMM yyyy";
+            dtUltimaTasa.MinDate = dateTimePicker2.Value.AddMonths(1);
 
             txtApellidoPa.Text = "Apellido Paterno";
             txtApellidoPa.ForeColor = Color.Gray;
@@ -118,12 +119,12 @@ namespace CR
             dgv.generarGrid(dgDatos);
             if (chkUltimaTasa.Checked == true)
             {
-                dgv.llenarGrid(lstTasa, 10000, datos, dgDatos, chkInterinato.Checked,dtUltimaTasa.Value, Convert.ToInt32(lstTipo.SelectedIndex));
+                dgv.llenarGrid(lstTasa,Convert.ToDouble(txtSueldo.Text), datos, dgDatos, chkInterinato.Checked,dtUltimaTasa.Value, Convert.ToInt32(lstTipo.SelectedIndex));
 
             }
             else
             {
-                dgv.llenarGrid(lstTasa, 10000, datos, dgDatos, chkInterinato.Checked, Convert.ToInt32(lstTipo.SelectedIndex));
+                dgv.llenarGrid(lstTasa, Convert.ToDouble(txtSueldo.Text), datos, dgDatos, chkInterinato.Checked, Convert.ToInt32(lstTipo.SelectedIndex));
             }
 
             //
@@ -132,7 +133,6 @@ namespace CR
 
 
 
-            frmTabla frm = new frmTabla(localidad, organismo, datos, 13599.22, dateTimePicker1.Value, dateTimePicker2.Value, chkInterinato.Checked);
         }
 
         private void btnAgregar_Click(object sender, EventArgs e)
@@ -332,6 +332,102 @@ namespace CR
                 txtApellidoMa.Text = "Apellido Materno";
                 txtApellidoMa.ForeColor = Color.Gray;
             }
+        }
+
+        private void btnVistaP_Click(object sender, EventArgs e)
+        {
+
+            DataSet1 dt = new DataSet1();
+            
+            foreach (DataGridViewRow r in dgDatos.Rows)
+            {
+
+                if (r.Cells[0].Value != null)
+                {
+                    DataSet1.dtOmisionRow row = dt.dtOmision.NewdtOmisionRow();
+                    row.Sueldo = Convert.ToDouble(r.Cells[0].Value);
+                    row.Mes_Omitido = Convert.ToString(r.Cells[1].Value);
+                    row._S_M = Convert.ToDouble(r.Cells[4].Value);
+                    row._G_I = Convert.ToDouble(r.Cells[5].Value);
+                    row._F_P = Convert.ToDouble(r.Cells[6].Value);
+                    row._C_P = Convert.ToDouble(r.Cells[7].Value);
+                    if (r.Cells[8].Value == "")
+                    {
+                        row._Pren_ = 0;
+                    }
+                    else
+                    {
+                        row._Pren_ = Convert.ToDouble(r.Cells[8].Value);
+                    }
+                    row._S_V = Convert.ToDouble(r.Cells[9].Value);
+                    row._S_R = Convert.ToDouble(r.Cells[10].Value);
+                    row._T__Cuotas = Convert.ToDouble(r.Cells[11].Value);
+                    row._a_S_M = Convert.ToDouble(r.Cells[14].Value);
+                    row._a_G_I = Convert.ToDouble(r.Cells[15].Value);
+                    row._a_F_P = Convert.ToDouble(r.Cells[16].Value);
+                    row._a_C_P = Convert.ToDouble(r.Cells[17].Value);
+                    if (r.Cells[18].Value == "")
+                    {
+                        row._a_Pren_ = 0;
+                    }
+                    else
+                    {
+                        row._a_Pren_ = Convert.ToDouble(r.Cells[18].Value);
+                    }
+                    if (r.Cells[19].Value == "")
+                    {
+                        row._a_I_G = 0;
+                    }
+                    else
+                    {
+                        row._a_I_G = Convert.ToDouble(r.Cells[19].Value);
+                    }
+                    if (r.Cells[20].Value == "")
+                    {
+                        row._a_A_F = 0;
+                    }
+                    else
+                    {
+                        row._a_A_F = Convert.ToDouble(r.Cells[20].Value);
+                    }
+                    row._a_G_A = Convert.ToDouble(r.Cells[21].Value);
+                    if (r.Cells[22].Value == "")
+                    {
+                        row._a_FOVI_ = 0;
+                    }
+                    else
+                    {
+                        row._a_FOVI_ = Convert.ToDouble(r.Cells[22].Value);
+                    }
+                    if (r.Cells[23].Value == "")
+                    {
+                        row._a_P_M = 0;
+                    }
+                    else
+                    {
+                        row._a_P_M = Convert.ToDouble(r.Cells[23].Value);
+                    }
+                    row._a_S_V = Convert.ToDouble(r.Cells[24].Value);
+                    row._a_S_R = Convert.ToDouble(r.Cells[25].Value);
+                    row._T__Aportaciones = Convert.ToDouble(r.Cells[26].Value);
+
+
+                    row.Tasa = r.Cells[13].Value.ToString();
+                    row._Mora__Cuotas = Convert.ToDouble(r.Cells[13].Value);
+                    row._Mora__Aporta_ = Convert.ToDouble(r.Cells[28].Value);
+                    row.Total_Moratorio = Convert.ToDouble(r.Cells[30].Value);
+                    row.Total_Mes = Convert.ToDouble(r.Cells[31].Value);
+                    dt.dtOmision.AdddtOmisionRow(row);
+
+                }
+            }
+            frmVistaPrevia a = new frmVistaPrevia(dt);
+            a.ShowDialog();
+        }
+
+        private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
+        {
+            dtUltimaTasa.MinDate = dateTimePicker2.Value.AddMonths(1);
         }
     }
 }

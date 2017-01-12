@@ -92,8 +92,18 @@ namespace CR.Modelo
             {
                 using (var ctx = new _Modelo())
                 {
-                var query=ctx.cat_organismos2.Where(r => r.idLocalidad == _localidad.codigo && r.idOrganismo == _organismo.codigo && r.idTipoGenera == _tipoGenera && r.vigencia >= inicio && r.vigencia <= final).ToList();
+                    int vigencia = 0;
+                var query=ctx.cat_organismos2.OrderBy(r=>r.vigencia).Where(r => r.idLocalidad == _localidad.codigo && r.idOrganismo == _organismo.codigo && r.idTipoGenera == _tipoGenera && r.vigencia >= inicio && r.vigencia <= final).ToList();
+                    List<cat_organismos2> lista = new List<cat_organismos2>();
                     foreach (var item in query)
+                    {
+                        if (vigencia != item.vigencia)
+                        {
+                            lista.Add(item);
+                        }
+                        vigencia = Convert.ToInt32(item.vigencia);
+                    }
+                        foreach (var item in lista)
                     {
                                         
                         data.Add(item.vigencia.Value,item);

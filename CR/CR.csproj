@@ -64,6 +64,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="CrystalReport1.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>CrystalReport1.rpt</DependentUpon>
+      <SubType>Component</SubType>
+    </Compile>
     <Compile Include="DataSet1.cs">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </Compile>
@@ -78,11 +84,11 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="frmTabla.cs">
+    <Compile Include="frmVistaPrevia.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmTabla.Designer.cs">
-      <DependentUpon>frmTabla.cs</DependentUpon>
+    <Compile Include="frmVistaPrevia.Designer.cs">
+      <DependentUpon>frmVistaPrevia.cs</DependentUpon>
     </Compile>
     <Compile Include="Modelo\cat_organismos2.cs" />
     <Compile Include="Modelo\DatagGridView.cs" />
@@ -94,11 +100,15 @@
     <Compile Include="Modelo\_Modelo.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="CrystalReport1.rpt">
+      <Generator>CrystalDecisions.VSDesigner.CodeGen.ReportCodeGenerator</Generator>
+      <LastGenOutput>CrystalReport1.cs</LastGenOutput>
+    </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="frmTabla.resx">
-      <DependentUpon>frmTabla.cs</DependentUpon>
+    <EmbeddedResource Include="frmVistaPrevia.resx">
+      <DependentUpon>frmVistaPrevia.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
@@ -132,7 +142,9 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="App.config" />
+    <None Include="App.config">
+      <SubType>Designer</SubType>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />

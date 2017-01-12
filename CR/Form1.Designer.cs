@@ -51,6 +51,7 @@
             this.lstHasta = new System.Windows.Forms.ListBox();
             this.txtApellidoMa = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
+            this.btnVistaP = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.SuspendLayout();
@@ -119,6 +120,7 @@
             this.dateTimePicker2.Size = new System.Drawing.Size(134, 20);
             this.dateTimePicker2.TabIndex = 7;
             this.dateTimePicker2.Value = new System.DateTime(2017, 1, 6, 12, 36, 41, 0);
+            this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // chkInterinato
             // 
@@ -281,11 +283,22 @@
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
             // 
+            // btnVistaP
+            // 
+            this.btnVistaP.Location = new System.Drawing.Point(274, 112);
+            this.btnVistaP.Name = "btnVistaP";
+            this.btnVistaP.Size = new System.Drawing.Size(75, 23);
+            this.btnVistaP.TabIndex = 25;
+            this.btnVistaP.Text = "Vista Prevía";
+            this.btnVistaP.UseVisualStyleBackColor = true;
+            this.btnVistaP.Click += new System.EventHandler(this.btnVistaP_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 552);
+            this.Controls.Add(this.btnVistaP);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtApellidoMa);
             this.Controls.Add(this.lstHasta);
@@ -344,6 +357,7 @@
         private System.Windows.Forms.ListBox lstHasta;
         private System.Windows.Forms.TextBox txtApellidoMa;
         private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Button btnVistaP;
     }
 }
 
