@@ -16,10 +16,10 @@ namespace CR.Modelo
     {
         public void generarGrid(DataGridView Grid)
         {
-
+            //TODO GUARDAR 
             //  var lstTasa = tasas.getLstTasas(inicio, final);
 
-            Grid.ColumnCount = 32;
+            Grid.ColumnCount = 33;
             Grid.Columns[0].Name = "Sueldo Mensual";
             Grid.Columns[1].Name = "Mes Omitido";
             Grid.Columns[2].Name = "Número de Meses";
@@ -52,12 +52,32 @@ namespace CR.Modelo
             Grid.Columns[29].Name = "Total cuotas aport.";
             Grid.Columns[30].Name = "Total Moratario";
             Grid.Columns[31].Name = "TOTAL GENERAL";
+            Grid.Columns[32].Name = "Ultima Tasa";
+
 
         }
         public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
         {
+            DateTime ultimaTasa = DateTime.Today;
+            bool bUltima = false;
             Modelo.tasasOmisiones tasas = new Modelo.tasasOmisiones();
             Modelo.tasasOmisionesInterinato tasasInter = new tasasOmisionesInterinato();
+            var y = 0.0;
+
+            foreach (var item in lstTasa)
+            {
+                if (item.Value == y && bUltima == false)
+                {
+                    ultimaTasa = item.Key.AddMonths(-1);
+                    bUltima = true;
+                }
+                else
+                {
+                    y = item.Value;
+                }
+            }
+
+            
             foreach (var item in lstTasa)
             {
                 string mes = "";
@@ -147,7 +167,8 @@ namespace CR.Modelo
                     a_importe.ToString(),
                     totalCuoApo.ToString("#.##"),
                     totalMor.ToString("#.##"),
-                    totalGen.ToString("#.##")
+                    totalGen.ToString("#.##"),
+                    ultimaTasa.ToString("yy-MMM").ToUpper()
                     };
                     Grid.Rows.Add(row);
                 }
@@ -224,6 +245,8 @@ namespace CR.Modelo
                     double totalMor = importe + a_importe;
                     double totalGen = totalMor + totalCuoApo;
 
+                    DateTime ultimaTasa = new DateTime(_UltimaTasa.Year, _UltimaTasa.Month, 1,0,0,0);
+
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
@@ -254,7 +277,8 @@ namespace CR.Modelo
                     a_importe.ToString(),
                     totalCuoApo.ToString("#.##"),
                     totalMor.ToString("#.##"),
-                    totalGen.ToString("#.##")
+                    totalGen.ToString("#.##"),
+                    ultimaTasa.ToString("yy-MMM").ToUpper(),
                     };
                     Grid.Rows.Add(row);
                 }

@@ -688,7 +688,7 @@ namespace CR {
                         double _a_S_V, 
                         double _a_S_R, 
                         double _T__Aportaciones, 
-                        string Tasa, 
+                        double Tasa, 
                         double _Mora__Cuotas, 
                         double _Mora__Aporta_, 
                         double Total_Moratorio, 
@@ -866,7 +866,7 @@ namespace CR {
                 this._columnT__Aportaciones.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnT__Aportaciones");
                 this._columnT__Aportaciones.ExtendedProperties.Add("Generator_UserColumnName", "T. Aportaciones");
                 base.Columns.Add(this._columnT__Aportaciones);
-                this.columnTasa = new global::System.Data.DataColumn("Tasa", typeof(string), null, global::System.Data.MappingType.Element);
+                this.columnTasa = new global::System.Data.DataColumn("Tasa", typeof(double), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columnTasa);
                 this._columnMora__Cuotas = new global::System.Data.DataColumn("Mora. Cuotas", typeof(double), null, global::System.Data.MappingType.Element);
                 this._columnMora__Cuotas.ExtendedProperties.Add("Generator_ColumnVarNameInTable", "_columnMora__Cuotas");
@@ -1707,10 +1707,10 @@ namespace CR {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public string Tasa {
+            public double Tasa {
                 get {
                     try {
-                        return ((string)(this[this.tabledtOmision.TasaColumn]));
+                        return ((double)(this[this.tabledtOmision.TasaColumn]));
                     }
                     catch (global::System.InvalidCastException e) {
                         throw new global::System.Data.StrongTypingException("The value for column \'Tasa\' in table \'dtOmision\' is DBNull.", e);

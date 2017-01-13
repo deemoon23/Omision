@@ -54,8 +54,7 @@ namespace CR.Modelo
                         Modelo.tasasOmisiones tasas = new tasasOmisiones();
                         double ultimaTasa = Convert.ToDouble(tasas.getUltimaTasa().tasa);
                         return ultimaTasa * 100 * .8;
-                    }
-                    //var x = Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= _inicio).Select(r => r.tasa).Sum());
+                    }               
                     else{
                         return Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= inicio).Select(r => r.tasa).Sum()) * 100 * .8;
                     }

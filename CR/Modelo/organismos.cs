@@ -19,13 +19,13 @@ namespace CR.Modelo
         [StringLength(110)]
         public string descripcion { get; set; }
 
-        public List<string> getAll()
+        public List<organismos> getAll()
         {
             try
             {
                 using (var ctx = new _Modelo())
                 {
-                    return ctx.organismos.Select(r => r.descripcion).ToList();
+                    return ctx.organismos.OrderBy(r=>r.descripcion).ToList();
                 }
             }
             catch (Exception) { throw; }

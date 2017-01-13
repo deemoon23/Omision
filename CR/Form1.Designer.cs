@@ -52,6 +52,7 @@
             this.txtApellidoMa = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnVistaP = new System.Windows.Forms.Button();
+            this.txtGuardar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.SuspendLayout();
@@ -293,11 +294,22 @@
             this.btnVistaP.UseVisualStyleBackColor = true;
             this.btnVistaP.Click += new System.EventHandler(this.btnVistaP_Click);
             // 
+            // txtGuardar
+            // 
+            this.txtGuardar.Location = new System.Drawing.Point(274, 141);
+            this.txtGuardar.Name = "txtGuardar";
+            this.txtGuardar.Size = new System.Drawing.Size(75, 23);
+            this.txtGuardar.TabIndex = 26;
+            this.txtGuardar.Text = "Guardar";
+            this.txtGuardar.UseVisualStyleBackColor = true;
+            this.txtGuardar.Click += new System.EventHandler(this.txtGuardar_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 552);
+            this.Controls.Add(this.txtGuardar);
             this.Controls.Add(this.btnVistaP);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtApellidoMa);
@@ -358,6 +370,7 @@
         private System.Windows.Forms.TextBox txtApellidoMa;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnVistaP;
+        private System.Windows.Forms.Button txtGuardar;
     }
 }
 

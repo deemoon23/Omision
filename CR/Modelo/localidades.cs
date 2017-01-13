@@ -31,13 +31,13 @@ namespace CR.Modelo
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cat_organismos2> cat_organismos2 { get; set; }
         
-        public List<string> getAll()
+        public List<localidades> getAll()
         {
             try
             {
                 using (var ctx = new _Modelo())
                 {
-                    return ctx.localidades.Select(r => r.descripcion).ToList();
+                    return ctx.localidades.ToList();
                 }
             }
             catch (Exception) { throw; }

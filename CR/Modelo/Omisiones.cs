@@ -12,7 +12,7 @@ namespace CR.Modelo
 
         public string empleado { get; set; }
 
-        public decimal? sueldo { get; set; }
+        public double sueldo { get; set; }
 
         public DateTime? mesOmitido { get; set; }
 
@@ -33,58 +33,70 @@ namespace CR.Modelo
 
         public string Organismo { get; set; }
 
-        public decimal? csm { get; set; }
+        public double csm { get; set; }
 
-        public decimal? cfp { get; set; }
+        public double cfp { get; set; }
 
-        public decimal? ccp { get; set; }
+        public double ccp { get; set; }
 
-        public decimal? cpren { get; set; }
+        public double cpren { get; set; }
 
-        public decimal? csv { get; set; }
-
-        public decimal? csr { get; set; }
-
-        public decimal? cgi { get; set; }
-
-        public decimal? tcuotas { get; set; }
-
-        public decimal? importeC { get; set; }
-
-        public decimal? asm { get; set; }
-
-        public decimal? afp { get; set; }
-
-        public decimal? acp { get; set; }
-
-        public decimal? apren { get; set; }
-
-        public decimal? asv { get; set; }
-
-        public decimal? asr { get; set; }
-
-        public decimal? agi { get; set; }
-
-        public decimal? afovi { get; set; }
-
-        public decimal? apm { get; set; }
-
-        public decimal? aaf { get; set; }
-
-        public decimal? aig { get; set; }
-
-        public decimal? aga { get; set; }
-
-        public decimal? taporta { get; set; }
-
-        public decimal? importeA { get; set; }
-
-        public decimal? tasa { get; set; }
-
-        public decimal? tmoratorio { get; set; }
-
-        public decimal? tmes { get; set; }
+        public double  csv { get; set; }
+               
+        public double  csr { get; set; }
+               
+        public double  cgi { get; set; }
+               
+        public double  tcuotas { get; set; }
+               
+        public double  importeC { get; set; }
+               
+        public double  asm { get; set; }
+               
+        public double  afp { get; set; }
+               
+        public double  acp { get; set; }
+               
+        public double  apren { get; set; }
+               
+        public double  asv { get; set; }
+               
+        public double  asr { get; set; }
+               
+        public double  agi { get; set; }
+                
+        public double  afovi { get; set; }
+               
+        public double  apm { get; set; }
+               
+        public double  aaf { get; set; }
+               
+        public double  aig { get; set; }
+               
+        public double  aga { get; set; }
+              
+        public double  taporta { get; set; }
+              
+        public double  importeA { get; set; }
+        public double  tasa { get; set; }
+                
+        public double  tmoratorio { get; set; }
+                
+        public double  tmes { get; set; }
 
         public DateTime? TasaCalculada { get; set; }
+
+        public void nuevaOmision(Omisiones _omision)
+        {
+            try
+            {
+                using (var ctx = new _Modelo())
+                {
+                    ctx.Omisiones.Add(_omision);
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception) { throw; }
+        }
     }
 }
