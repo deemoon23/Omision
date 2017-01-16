@@ -19,7 +19,7 @@ namespace CR.Modelo
             //TODO GUARDAR 
             //  var lstTasa = tasas.getLstTasas(inicio, final);
 
-            Grid.ColumnCount = 33;
+            Grid.ColumnCount = 34;
             Grid.Columns[0].Name = "Sueldo Mensual";
             Grid.Columns[1].Name = "Mes Omitido";
             Grid.Columns[2].Name = "Número de Meses";
@@ -53,7 +53,7 @@ namespace CR.Modelo
             Grid.Columns[30].Name = "Total Moratario";
             Grid.Columns[31].Name = "TOTAL GENERAL";
             Grid.Columns[32].Name = "Ultima Tasa";
-
+            Grid.Columns[33].Name = "Fecha";
 
         }
         public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
@@ -140,35 +140,37 @@ namespace CR.Modelo
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    servMed.ToString("#.##"),
-                    gInfHosp.ToString("#.##"),
-                    fondoP.ToString("#.##"),
-                    CP.ToString("#.##"),
-                    prendario.ToString("#.##"),
-                    segurovida.ToString("#.##"),
-                    seguroretiro.ToString("#.##"),
-                    totalCuotas.ToString("#.##"),
-                    tasa.ToString("#.##")+"%",
+                    servMed.ToString("#.0"),
+                    gInfHosp.ToString("#.0"),
+                    fondoP.ToString("#.0"),
+                    CP.ToString("#.0"),
+                    prendario.ToString("#.0"),
+                    segurovida.ToString("#.0"),
+                    seguroretiro.ToString("#.0"),
+                    totalCuotas.ToString("#.0"),
+                    tasa.ToString("#.0")+"%",
                     importe.ToString(),
-                    a_servMed.ToString("#.##"),
-                    a_gInfHosp.ToString("#.##"),
-                    a_fondoP.ToString("#.##"),
-                    a_CP.ToString("#.##"),
-                    a_prendario.ToString("#.##"),
-                    a_indGlobal.ToString("#.##"),
-                    a_ayudaFune.ToString("#.##"),
-                    a_GastosAdmin.ToString("#.##"),
-                    a_pensionMin.ToString("#.##"),
-                    a_Fovi.ToString("#.##"),
-                    a_segurovida.ToString("#.##"),
-                    a_seguroretiro.ToString("#.##"),
-                    a_TotalAportaciones.ToString("#.##"),
-                    tasa.ToString("#.##")+"%",
+                    a_servMed.ToString("#.0"),
+                    a_gInfHosp.ToString("#.0"),
+                    a_fondoP.ToString("#.0"),
+                    a_CP.ToString("#.0"),
+                    a_prendario.ToString("#.0"),
+                    a_indGlobal.ToString("#.0"),
+                    a_ayudaFune.ToString("#.0"),
+                    a_GastosAdmin.ToString("#.0"),
+                    a_pensionMin.ToString("#.0"),
+                    a_Fovi.ToString("#.0"),
+                    a_segurovida.ToString("#.0"),
+                    a_seguroretiro.ToString("#.0"),
+                    a_TotalAportaciones.ToString("#.0"),
+                    tasa.ToString("#.0")+"%",
                     a_importe.ToString(),
-                    totalCuoApo.ToString("#.##"),
-                    totalMor.ToString("#.##"),
-                    totalGen.ToString("#.##"),
-                    ultimaTasa.ToString("yy-MMM").ToUpper()
+                    totalCuoApo.ToString("#.0"),
+                    totalMor.ToString("#.0"),
+                    totalGen.ToString("#.0"),
+                    ultimaTasa.ToShortDateString(),
+                    item.Key.ToShortDateString()
+
                     };
                     Grid.Rows.Add(row);
                 }
@@ -250,35 +252,36 @@ namespace CR.Modelo
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    servMed.ToString("#.##"),
-                    gInfHosp.ToString("#.##"),
-                    fondoP.ToString("#.##"),
-                    CP.ToString("#.##"),
-                    prendario.ToString("#.##"),
-                    segurovida.ToString("#.##"),
-                    seguroretiro.ToString("#.##"),
-                    totalCuotas.ToString("#.##"),
-                    tasa.ToString("#.##")+"%",
+                    servMed.ToString("#.0"),
+                    gInfHosp.ToString("#.0"),
+                    fondoP.ToString("#.0"),
+                    CP.ToString("#.0"),
+                    prendario.ToString("#.0"),
+                    segurovida.ToString("#.0"),
+                    seguroretiro.ToString("#.0"),
+                    totalCuotas.ToString("#.0"),
+                    tasa.ToString("#.0")+"%",
                     importe.ToString(),
-                    a_servMed.ToString("#.##"),
-                    a_gInfHosp.ToString("#.##"),
-                    a_fondoP.ToString("#.##"),
-                    a_CP.ToString("#.##"),
-                    a_prendario.ToString("#.##"),
-                    a_indGlobal.ToString("#.##"),
-                    a_ayudaFune.ToString("#.##"),
-                    a_GastosAdmin.ToString("#.##"),
-                    a_pensionMin.ToString("#.##"),
-                    a_Fovi.ToString("#.##"),
-                    a_segurovida.ToString("#.##"),
-                    a_seguroretiro.ToString("#.##"),
-                    a_TotalAportaciones.ToString("#.##"),
-                    tasa.ToString("#.##")+"%",
+                    a_servMed.ToString("#.0"),
+                    a_gInfHosp.ToString("#.0"),
+                    a_fondoP.ToString("#.0"),
+                    a_CP.ToString("#.0"),
+                    a_prendario.ToString("#.0"),
+                    a_indGlobal.ToString("#.0"),
+                    a_ayudaFune.ToString("#.0"),
+                    a_GastosAdmin.ToString("#.0"),
+                    a_pensionMin.ToString("#.0"),
+                    a_Fovi.ToString("#.0"),
+                    a_segurovida.ToString("#.0"),
+                    a_seguroretiro.ToString("#.0"),
+                    a_TotalAportaciones.ToString("#.0"),
+                    tasa.ToString("#.0")+"%",
                     a_importe.ToString(),
-                    totalCuoApo.ToString("#.##"),
-                    totalMor.ToString("#.##"),
-                    totalGen.ToString("#.##"),
-                    ultimaTasa.ToString("yy-MMM").ToUpper(),
+                    totalCuoApo.ToString("#.0"),
+                    totalMor.ToString("#.0"),
+                    totalGen.ToString("#.0"),
+                    ultimaTasa.ToShortDateString(),
+                    item.Key.ToShortDateString()
                     };
                     Grid.Rows.Add(row);
                 }

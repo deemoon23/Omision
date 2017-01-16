@@ -120,3 +120,5 @@ C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\stdole.dll
 C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\EntityFramework.xml
 C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmVistaPrevia.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmAbrirOmision.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmReporteGeneral.resources

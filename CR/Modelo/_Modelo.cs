@@ -120,9 +120,9 @@ namespace CR.Modelo
                 .HasForeignKey(e => e.idLocalidad)
                 .WillCascadeOnDelete(false);
 
-            modelBuilder.Entity<Omisiones>()
-                .Property(e => e.empleado)
-                .IsUnicode(false);
+            //modelBuilder.Entity<Omisiones>()
+            //    .Property(e => e.empleado)
+            //    .IsUnicode(false);
 
             modelBuilder.Entity<Omisiones>()
                 .Property(e => e.folio)
@@ -243,6 +243,18 @@ namespace CR.Modelo
             modelBuilder.Entity<Omisiones>()
                 .Property(e => e.tmes)
                 .HasPrecision(18, 3);
+
+            modelBuilder.Entity<Omisiones>()
+                .Property(e => e.nombre)
+                .IsUnicode(false);
+
+            modelBuilder.Entity<Omisiones>()
+              .Property(e => e.apellidoP)
+              .IsUnicode(false);
+
+            modelBuilder.Entity<Omisiones>()
+              .Property(e => e.apellidoM)
+              .IsUnicode(false);
 
             modelBuilder.Entity<organismos>()
                 .Property(e => e.descripcion)

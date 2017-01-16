@@ -53,6 +53,8 @@
             this.txtNombre = new System.Windows.Forms.TextBox();
             this.btnVistaP = new System.Windows.Forms.Button();
             this.txtGuardar = new System.Windows.Forms.Button();
+            this.txtAbrir = new System.Windows.Forms.Button();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.SuspendLayout();
@@ -304,11 +306,33 @@
             this.txtGuardar.UseVisualStyleBackColor = true;
             this.txtGuardar.Click += new System.EventHandler(this.txtGuardar_Click);
             // 
+            // txtAbrir
+            // 
+            this.txtAbrir.Location = new System.Drawing.Point(274, 170);
+            this.txtAbrir.Name = "txtAbrir";
+            this.txtAbrir.Size = new System.Drawing.Size(75, 23);
+            this.txtAbrir.TabIndex = 27;
+            this.txtAbrir.Text = "Abrir";
+            this.txtAbrir.UseVisualStyleBackColor = true;
+            this.txtAbrir.Click += new System.EventHandler(this.txtAbrir_Click);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(274, 199);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(75, 44);
+            this.button1.TabIndex = 28;
+            this.button1.Text = "Reporte General";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 552);
+            this.Controls.Add(this.button1);
+            this.Controls.Add(this.txtAbrir);
             this.Controls.Add(this.txtGuardar);
             this.Controls.Add(this.btnVistaP);
             this.Controls.Add(this.txtNombre);
@@ -371,6 +395,8 @@
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnVistaP;
         private System.Windows.Forms.Button txtGuardar;
+        private System.Windows.Forms.Button txtAbrir;
+        private System.Windows.Forms.Button button1;
     }
 }
 

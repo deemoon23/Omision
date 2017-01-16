@@ -84,6 +84,18 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
+    <Compile Include="frmAbrirOmision.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmAbrirOmision.Designer.cs">
+      <DependentUpon>frmAbrirOmision.cs</DependentUpon>
+    </Compile>
+    <Compile Include="frmReporteGeneral.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="frmReporteGeneral.Designer.cs">
+      <DependentUpon>frmReporteGeneral.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmVistaPrevia.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +118,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Form1.resx">
       <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmAbrirOmision.resx">
+      <DependentUpon>frmAbrirOmision.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="frmReporteGeneral.resx">
+      <DependentUpon>frmReporteGeneral.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmVistaPrevia.resx">
       <DependentUpon>frmVistaPrevia.cs</DependentUpon>
