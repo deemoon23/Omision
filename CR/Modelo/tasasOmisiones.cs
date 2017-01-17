@@ -62,6 +62,8 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
+        //
+
 
         public double getTasa(DateTime _inicio, DateTime _final)
         {

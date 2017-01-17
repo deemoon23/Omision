@@ -12,6 +12,7 @@ namespace CR
 {
     public partial class frmAbrirOmision : Form
     {
+        Modelo.Omisiones Omi = new Modelo.Omisiones();
         public string nombre { get { return nombree; } }
         public string apellidoP { get { return apellidoPP; } }
         public string apelidoM { get { return apellidoMM; } }
@@ -28,7 +29,7 @@ namespace CR
 
         private void frmAbrirOmision_Load(object sender, EventArgs e)
         {
-            Modelo.Omisiones Omi = new Modelo.Omisiones();
+           
             dgDatos.DataSource = Omi.getOmisiones();
             dgDatos.Columns[0].HeaderText = "Nombre";
             dgDatos.Columns[1].HeaderText = "Apellido Paterno";
@@ -53,6 +54,11 @@ namespace CR
                 DataGridViewRow row = this.dgDatos.SelectedRows[0];
 
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            dgDatos.DataSource = Omi.getOmisiones(textBox1.Text.Trim());
         }
     }
 }

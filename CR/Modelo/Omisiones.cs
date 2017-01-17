@@ -96,6 +96,11 @@ namespace CR.Modelo
         [StringLength(30)]
         public string apellidoM { get; set; }
 
+        [Column(TypeName = "char")]
+        public string generacion { get; set; }
+
+        public bool interinato { get; set; }
+
         public void nuevaOmision(Omisiones _omision)
         {
             try
@@ -121,6 +126,47 @@ namespace CR.Modelo
                     foreach (var item in x)
                     {
                         lst.Add(new Tuple<string, string, string, string,string, string>(item.Key.nombre,item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(),  item.Key.Localidad, item.Key.Organismo));
+                    }
+                    return lst;
+                }
+            }
+            catch (Exception) { throw; }
+        }
+        public List<Tuple<string, string, string, string, string, string>> getOmisiones(string _nombre)
+        {
+            try
+            {
+                using (var ctx = new _Modelo())
+                {
+                    List<Tuple<string, string, string, string, string, string>> lst = new List<Tuple<string, string, string, string, string, string>>();
+                    var x= ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(_nombre) || r.apellidoM.Contains(_nombre) || r.apellidoP.Contains(_nombre)).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
+                    string[] nombre = _nombre.Split(null);
+                    if (nombre.Count() == 1)
+                    {
+                        string array = nombre[0];
+                         x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(array) || r.apellidoM.Contains(array) || r.apellidoP.Contains(array)).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
+                    }
+                    if (nombre.Count() == 2)
+                    {
+                        string array = nombre[0];
+                        string array2 = nombre[1];
+                         x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(array) || r.apellidoM.Contains(array) || r.apellidoP.Contains(array) || r.nombre.Contains(array2) || r.apellidoM.Contains(array2) || r.apellidoP.Contains(array2)).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
+                    }
+
+                    if (nombre.Count() == 3)
+                    {
+                        string array = nombre[0];
+                        string array2 = nombre[1];
+                        string array3 = nombre[2];
+
+                        x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(array3) && r.apellidoM.Contains(array2) && r.apellidoP.Contains(array) ).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
+                    }
+
+
+
+                    foreach (var item in x)
+                    {
+                        lst.Add(new Tuple<string, string, string, string, string, string>(item.Key.nombre, item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(), item.Key.Localidad, item.Key.Organismo));
                     }
                     return lst;
                 }

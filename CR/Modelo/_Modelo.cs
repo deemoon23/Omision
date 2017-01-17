@@ -256,6 +256,14 @@ namespace CR.Modelo
               .Property(e => e.apellidoM)
               .IsUnicode(false);
 
+            modelBuilder.Entity<Omisiones>()
+            .Property(p => p.generacion)
+            .HasColumnType("char");
+
+            modelBuilder.Entity<Omisiones>()
+        .Property(p => p.interinato)
+        .HasColumnType("bit");
+
             modelBuilder.Entity<organismos>()
                 .Property(e => e.descripcion)
                 .IsUnicode(false);

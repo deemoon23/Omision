@@ -26,6 +26,8 @@ namespace CR
         Modelo.tasasOmisiones tasas = new Modelo.tasasOmisiones();
         Modelo.tasasOmisionesInterinato tasasInter = new Modelo.tasasOmisionesInterinato();
         Modelo.cat_organismos2 catOrg = new Modelo.cat_organismos2();
+        char generacion='X';
+        bool interinato = false;
         public frmHome()
         {
             InitializeComponent();
@@ -56,8 +58,8 @@ namespace CR
             {
                 using (var ctx = new Modelo._Modelo())
                 {
-                    
-                    
+
+
                     cbLocalidad.DataSource = loc.getAll();
                     cbLocalidad.DisplayMember = "DESCRIPCION";
                     cbLocalidad.ValueMember = "codigo";
@@ -71,18 +73,18 @@ namespace CR
 
                     //
                     DateTime fechaHoyAux = DateTime.Today;
-                    DateTime fechaHoy = new DateTime(fechaHoyAux.Year,fechaHoyAux.Month,1);
+                    DateTime fechaHoy = new DateTime(fechaHoyAux.Year, fechaHoyAux.Month, 1);
                     Modelo.tasasOmisiones ultimaFechaTemp = tasas.getUltimaTasa();
-                    DateTime ultimaFecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month,1);
+                    DateTime ultimaFecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month, 1);
 
                     if (ultimaFecha < fechaHoy)
                     {
-                       
-                            lblFecha.BackColor = Color.Red;
 
-                        
+                        lblFecha.BackColor = Color.Red;
+
+
                     }
-                    
+
                     lblFecha.Text = tasas.getUltimaTasa().fecha.AddDays(1).ToString("MMMM yyyy").ToUpper();
 
 
@@ -95,19 +97,27 @@ namespace CR
         private void btnGenerar_Click(object sender, EventArgs e)
         {
             var lstTasa = tasas.getLstTasas(dateTimePicker1.Value, dateTimePicker2.Value);
-            
+            if (rbActual.Checked == true)
+            {
+                generacion = 'A';
+            }
+            else
+            {
+                generacion = 'F';
+            }
+            interinato = chkInterinato.Checked;
             if (lstTipo.SelectedIndex == 1)
             {
                 int De = lstDe.SelectedIndex;
                 int Hasta = lstHasta.SelectedIndex;
-                if (lstDe.SelectedIndex == 1){ De = 2;} else{ De = 1;}
+                if (lstDe.SelectedIndex == 1) { De = 2; } else { De = 1; }
                 if (lstHasta.SelectedIndex == 1) { Hasta = 2; } else { Hasta = 1; }
 
                 lstTasa = tasas.getLstTasas(dateTimePicker1.Value, dateTimePicker2.Value, De, Hasta);
             }
-           
-            
-      //      dgDatos.Rows.Clear();
+
+
+            //      dgDatos.Rows.Clear();
             string TipoGenera;
             if (rbActual.Checked == true)
             {
@@ -115,19 +125,19 @@ namespace CR
             }
             else
             {
-                TipoGenera= "F";
+                TipoGenera = "F";
             }
             Modelo.localidades localidad = loc.getByDescripcion(cbLocalidad.Text);
             Modelo.organismos organismo = org.getByDescripcion(cbOrganismos.Text);
             //DATOS DEL ORGANISMO
-            Dictionary<int,Modelo.cat_organismos2> datos = catOrg.getData(localidad, organismo,TipoGenera, dateTimePicker1.Value,dateTimePicker2.Value);
+            Dictionary<int, Modelo.cat_organismos2> datos = catOrg.getData(localidad, organismo, TipoGenera, dateTimePicker1.Value, dateTimePicker2.Value);
 
             //
             Modelo.DatagGridView dgv = new Modelo.DatagGridView();
-            dgv.generarGrid(dgDatos);
+            dgv.generarGrid(dgDatos,true);
             if (chkUltimaTasa.Checked == true)
             {
-                dgv.llenarGrid(lstTasa,Convert.ToDouble(txtSueldo.Text), datos, dgDatos, chkInterinato.Checked,dtUltimaTasa.Value, Convert.ToInt32(lstTipo.SelectedIndex));
+                dgv.llenarGrid(lstTasa, Convert.ToDouble(txtSueldo.Text), datos, dgDatos, chkInterinato.Checked, dtUltimaTasa.Value, Convert.ToInt32(lstTipo.SelectedIndex));
 
             }
             else
@@ -147,39 +157,39 @@ namespace CR
         {
             //PRUEBA || TODO CREAR UN NUEVO OBJETO CON LA NUEVA FECHA* || IMPLEMENTARLO
             DateTime prueba = new DateTime(2016, 12, 1);
-            DateTime prueba2 = new DateTime(); 
+            DateTime prueba2 = new DateTime();
             if (prueba.Month == 12)
             {
                 prueba2 = new DateTime(prueba.Year + 1, 1, 1);
             }
-           
+
             MessageBox.Show(prueba2.Year.ToString());
 
             //
             Modelo.tasasOmisiones nuevo = new Modelo.tasasOmisiones();
             DateTime fechaHoyAux = DateTime.Today;
             Modelo.tasasOmisiones ultimaFechaTemp = tasas.getUltimaTasa();
-            nuevo.fecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month+1, 1);
+            nuevo.fecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month + 1, 1);
             nuevo.tasa = Convert.ToDecimal(txtInteres.Text.Trim());
-            
+
             var ctx = new Modelo._Modelo();
             ctx.tasasOmisiones.Add(nuevo);
             ctx.SaveChanges();
 
 
             //AGREGAR A UNA CLASE
-                    DateTime fechaHoy = new DateTime(fechaHoyAux.Year,fechaHoyAux.Month,1);
-                    DateTime ultimaFecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month,1);
+            DateTime fechaHoy = new DateTime(fechaHoyAux.Year, fechaHoyAux.Month, 1);
+            DateTime ultimaFecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month, 1);
 
-                    if (ultimaFecha < fechaHoy)
-                    {
-                       
-                            lblFecha.BackColor = Color.Red;
+            if (ultimaFecha < fechaHoy)
+            {
 
-                        
-                    }
-                    
-                    lblFecha.Text = tasas.getUltimaTasa().fecha.AddDays(1).ToString("MMMM yyyy").ToUpper();
+                lblFecha.BackColor = Color.Red;
+
+
+            }
+
+            lblFecha.Text = tasas.getUltimaTasa().fecha.AddDays(1).ToString("MMMM yyyy").ToUpper();
 
 
             //
@@ -228,13 +238,13 @@ namespace CR
             if (txtApellidoPa.ForeColor == Color.Gray)
             {
                 txtApellidoPa.Text = "";
-            } 
+            }
 
         }
 
         private void txtEmpleado_Leave(object sender, EventArgs e)
         {
-            if (txtApellidoPa.Text.Count()==0)
+            if (txtApellidoPa.Text.Count() == 0)
             {
                 txtApellidoPa.Text = "Apellido Paterno";
                 txtApellidoPa.ForeColor = Color.Gray;
@@ -327,7 +337,7 @@ namespace CR
 
         private void txtApellidoMa_Click(object sender, EventArgs e)
         {
-            if (txtApellidoMa.ForeColor==Color.Gray)
+            if (txtApellidoMa.ForeColor == Color.Gray)
             { txtApellidoMa.Text = "";
 
             }
@@ -346,7 +356,7 @@ namespace CR
         {
 
             DataSet1 dt = new DataSet1();
-            
+
             foreach (DataGridViewRow r in dgDatos.Rows)
             {
 
@@ -422,7 +432,7 @@ namespace CR
                     row._a_S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[24].Value).ToString("#.##"));
                     row._a_S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[25].Value).ToString("#.##"));
                     row._T__Aportaciones = Convert.ToDouble(Convert.ToDouble(r.Cells[26].Value).ToString("#.##"));
-                    string tasa= r.Cells[13].Value.ToString().Substring(0, r.Cells[13].Value.ToString().Count()-1);                    
+                    string tasa = r.Cells[13].Value.ToString().Substring(0, r.Cells[13].Value.ToString().Count() - 1);
                     row.Tasa = Convert.ToDouble(Convert.ToDouble(tasa).ToString("#.##"));
                     row._Mora__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[13].Value).ToString("#.##"));
                     row._Mora__Aporta_ = Convert.ToDouble(Convert.ToDouble(r.Cells[28].Value).ToString("#.##"));
@@ -451,9 +461,9 @@ namespace CR
 
                     Omi.nombre = txtNombre.Text.Trim();
                     Omi.apellidoP = txtApellidoPa.Text.Trim();
-                    Omi.apellidoM = txtElaborada.Text.Trim();
+                    Omi.apellidoM = txtApellidoMa.Text.Trim();
                     Omi.sueldo = Convert.ToDecimal(row.Cells[0].Value);
-                    Omi.mesOmitido = Convert.ToDateTime(row.Cells[33].Value);                    
+                    Omi.mesOmitido = Convert.ToDateTime(row.Cells[33].Value);
                     Omi.mesCalculo = DateTime.Today;
                     Omi.folio = txtElaborada.Text.Trim();
                     if (lstTipo.SelectedIndex == 0)
@@ -461,7 +471,7 @@ namespace CR
                         Omi.tipoCobro = "M";
                     }
                     else
-                    {                      
+                    {
 
                         Omi.tipoCobro = row.Cells[1].Value.ToString().Substring(0, 2);
                     }
@@ -494,15 +504,17 @@ namespace CR
                     Omi.importeA = Convert.ToDecimal(row.Cells[28].Value.ToString());
 
                     Omi.tasa = Convert.ToDecimal(row.Cells[27].Value.ToString().Substring(0, row.Cells[27].Value.ToString().Count() - 1));
-                    Omi.tmoratorio = Convert.ToDecimal(row.Cells[14].Value.ToString());
-                    Omi.tmes = Convert.ToDecimal(row.Cells[30].Value.ToString());
+                    Omi.tmoratorio = Convert.ToDecimal(row.Cells[30].Value.ToString());
+                    Omi.tmes = Convert.ToDecimal(row.Cells[31].Value.ToString());
                     Omi.TasaCalculada = Convert.ToDateTime(row.Cells[32].Value.ToString());
+                    Omi.generacion = generacion.ToString();
+                    Omi.interinato = interinato;
                     ctx.Omisiones.Add(Omi);
                     ctx.SaveChanges();
 
                     //Omi.mesOmitido;
                 }
-               
+
             }
             //if (ctx.SaveChanges() > 0)
             //{
@@ -516,15 +528,15 @@ namespace CR
 
             frmAbrirOmision frmAbrir = new frmAbrirOmision();
             frmAbrir.ShowDialog();
-            string nombre= frmAbrir.nombre;
+            string nombre = frmAbrir.nombre;
             string apellidoP = frmAbrir.apellidoP;
             string apellidoM = frmAbrir.apelidoM;
             dgDatos.DataSource = Omi.getOmision(nombre, apellidoP, apellidoM);
-            
+
             this.dgDatos.Columns[0].Visible = false;
             this.dgDatos.Columns[6].Visible = false;
             this.dgDatos.Columns[8].Visible = false;
-    
+
             dgDatos.Columns[37].DisplayIndex = 2;
             dgDatos.Columns[38].DisplayIndex = 3;
             dgDatos.Columns[39].DisplayIndex = 4;
@@ -538,6 +550,48 @@ namespace CR
         {
             frmReporteGeneral frmRpt = new frmReporteGeneral();
             frmRpt.Show();
+
+        }
+
+        private void btnRecalcular_Click(object sender, EventArgs e)
+        {
+            int i = 0;
+
+            List<double> sueldos = new List<double>();
+            foreach (DataGridViewRow row in dgDatos.Rows)
+            {
+                sueldos.Add(Convert.ToDouble(dgDatos.Rows[i].Cells[1].Value));
+                i++;
+            }
+            //1 Sueldo
+            DateTime de = Convert.ToDateTime(dgDatos.Rows[0].Cells[2].Value);
+            DateTime hasta = Convert.ToDateTime(dgDatos.Rows[dgDatos.Rows.Count - 1].Cells[2].Value);
+            double sueldo = Convert.ToDouble(dgDatos.Rows[0].Cells[1].Value);
+            
+            var lstTasa = tasas.getLstTasas(de, hasta);
+
+            if (lstTipo.SelectedIndex == 1)
+            {
+                int q1 = Convert.ToInt32(dgDatos.Rows[0].Cells[5].Value);
+                int q2 = Convert.ToInt32(dgDatos.Rows[dgDatos.Rows.Count - 1].Cells[5].Value);
+
+
+                lstTasa = tasas.getLstTasas(de, hasta, q1, q2);
+
+            }
+            string generacion = dgDatos.Rows[0].Cells[40].Value.ToString();
+            bool interinato = Convert.ToBoolean(dgDatos.Rows[0].Cells[41].Value.ToString());
+            Modelo.localidades localidad = loc.getByDescripcion(dgDatos.Rows[0].Cells[7].Value.ToString().Trim());
+            Modelo.organismos organismo = org.getByDescripcion(dgDatos.Rows[0].Cells[9].Value.ToString().Trim());
+            //DATOS DEL ORGANISMO
+            Dictionary<int, Modelo.cat_organismos2> datos = catOrg.getData(localidad, organismo, generacion, de, hasta);
+
+            Modelo.DatagGridView dgv = new Modelo.DatagGridView();
+            dgv.generarGrid(dgDatos, false);
+                dgv.llenarGrid(lstTasa, sueldos, datos, dgDatos, interinato, Convert.ToInt32(lstTipo.SelectedIndex));
+            MessageBox.Show("exito");
+
+
 
         }
     }

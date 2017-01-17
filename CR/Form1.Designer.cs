@@ -55,6 +55,7 @@
             this.txtGuardar = new System.Windows.Forms.Button();
             this.txtAbrir = new System.Windows.Forms.Button();
             this.button1 = new System.Windows.Forms.Button();
+            this.btnRecalcular = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.SuspendLayout();
@@ -326,11 +327,22 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // btnRecalcular
+            // 
+            this.btnRecalcular.Location = new System.Drawing.Point(936, 53);
+            this.btnRecalcular.Name = "btnRecalcular";
+            this.btnRecalcular.Size = new System.Drawing.Size(75, 37);
+            this.btnRecalcular.TabIndex = 29;
+            this.btnRecalcular.Text = "Recalcular";
+            this.btnRecalcular.UseVisualStyleBackColor = true;
+            this.btnRecalcular.Click += new System.EventHandler(this.btnRecalcular_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1157, 552);
+            this.Controls.Add(this.btnRecalcular);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.txtAbrir);
             this.Controls.Add(this.txtGuardar);
@@ -397,6 +409,7 @@
         private System.Windows.Forms.Button txtGuardar;
         private System.Windows.Forms.Button txtAbrir;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnRecalcular;
     }
 }
 
