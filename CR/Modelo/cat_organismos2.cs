@@ -81,7 +81,15 @@ namespace CR.Modelo
 
         public virtual localidades localidades { get; set; }
 
-
+        /// <summary>
+        /// Obtiene un Dictionary con los datos del organismo seleccionado.
+        /// </summary>
+        /// <param name="_localidad">Localidad del organismo</param>
+        /// <param name="_organismo">Organismo</param>
+        /// <param name="_tipoGenera">Tipo de generación</param>
+        /// <param name="_inicio">Vigencia inicial</param>
+        /// <param name="_final">Vigencia final</param>
+        /// <returns></returns>
         public Dictionary<int, cat_organismos2> getData(localidades _localidad, organismos _organismo, string _tipoGenera, DateTime _inicio, DateTime _final)
         {
             Dictionary<int, cat_organismos2> data = new Dictionary<int, cat_organismos2>();

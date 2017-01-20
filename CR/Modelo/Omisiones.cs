@@ -101,6 +101,11 @@ namespace CR.Modelo
 
         public bool interinato { get; set; }
 
+
+        // Guarda una omisión.
+        /// <summary>
+        /// <param name="_omision">Objeto con la informacíon que se guardará</param>
+        /// </summary>
         public void nuevaOmision(Omisiones _omision)
         {
             try
@@ -114,6 +119,11 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Regresa una Lista con una tupla con los datos de las omisiones guardadas.
+        /// </summary>
+        /// <returns></returns>
         public List<Tuple<string, string, string, string, string, string>> getOmisiones()
         {
             try
@@ -132,6 +142,12 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Regresa una lista con una tupla con los datos de las omisiones según el texto mandado por la variable
+        /// </summary>
+        /// <param name="_nombre">Busca las omisiones que contengan el texto de la variable.</param>
+        /// <returns></returns>
         public List<Tuple<string, string, string, string, string, string>> getOmisiones(string _nombre)
         {
             try
@@ -173,6 +189,14 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Obtiene una lista con todas las omisiones de un empleado en específico.
+        /// </summary>
+        /// <param name="_nombre">Nombre(s) del empleado</param>
+        /// <param name="_apellidoP">Apellido paterno del empleado</param>
+        /// <param name="_apellidoM">Apellido materno del emleado </param>
+        /// <returns></returns>
         public List<Omisiones> getOmision(string _nombre, string _apellidoP, string _apellidoM)
         {
             try

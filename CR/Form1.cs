@@ -28,6 +28,13 @@ namespace CR
         Modelo.cat_organismos2 catOrg = new Modelo.cat_organismos2();
         char generacion='X';
         bool interinato = false;
+        int idLocalidad=0;
+        string strlocalidad = "";
+        int idOrganismo = 0;
+        string strOrganismo = "";
+        string empleado = "";
+        string elaboro = "";
+
         public frmHome()
         {
             InitializeComponent();
@@ -145,6 +152,12 @@ namespace CR
                 dgv.llenarGrid(lstTasa, Convert.ToDouble(txtSueldo.Text), datos, dgDatos, chkInterinato.Checked, Convert.ToInt32(lstTipo.SelectedIndex));
             }
 
+            empleado= txtApellidoPa.Text.Trim() + " " + txtApellidoMa.Text.Trim() + " " + txtNombre.Text.Trim();
+            idLocalidad = localidad.codigo;
+            strlocalidad = localidad.descripcion;
+            idOrganismo = organismo.codigo;
+            strOrganismo = organismo.descripcion;
+            elaboro = txtElaborada.Text.Trim();
             //
 
 
@@ -356,88 +369,90 @@ namespace CR
         {
 
             DataSet1 dt = new DataSet1();
-
+            DataSet1.dtInfoRow dato = dt.dtInfo.NewdtInfoRow();
+            dato.Elaboro = elaboro;
+            dato.Empleado = empleado;
+            dato.idLocalidad = idLocalidad.ToString();
+            dato.Localidad = strlocalidad;
+            dato.idOrganismo = idOrganismo.ToString();
+            dato.Organismo = strOrganismo;
+            dt.dtInfo.AdddtInfoRow(dato);
             foreach (DataGridViewRow r in dgDatos.Rows)
             {
 
-                if (r.Cells[0].Value != null)
+                if (r.Cells[0].Value != null && Convert.ToDouble(r.Cells[31].Value) != 0)
                 {
                     DataSet1.dtOmisionRow row = dt.dtOmision.NewdtOmisionRow();
-                    row.Sueldo = Convert.ToDouble(Convert.ToDouble(r.Cells[0].Value).ToString("#.##"));
+                    row.Sueldo = Convert.ToDouble(Convert.ToDouble(r.Cells[0].Value));
                     row.Mes_Omitido = Convert.ToString(r.Cells[1].Value);
-                    row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[4].Value).ToString("#.##"));
-
-                    row._G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[5].Value).ToString("#.##"));
-                    row._F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[6].Value).ToString("#.##"));
-                    row._C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[7].Value).ToString("#.##"));
-                    if (r.Cells[8].Value == "")
-                    {
-                        row._Pren_ = 0;
-                    }
-                    else
-                    {
-                        row._Pren_ = Convert.ToDouble(r.Cells[8].Value);
-                    }
+                    row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[4].Value));
+                    row._G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[5].Value));
+                    row._F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[6].Value));
+                    row._C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[7].Value));                   
+                    row._Pren_ = Convert.ToDouble(r.Cells[8].Value);                    
                     var uno = Convert.ToDouble(r.Cells[9].Value);
-                    var dos = Convert.ToDouble(r.Cells[9].Value).ToString("#.##");
-                    var tres = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value).ToString("#.##"));
-                    row._S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value).ToString("#.##"));
-                    row._S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[10].Value).ToString("#.##"));
-                    row._T__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[11].Value).ToString("#.##"));
-                    row._a_S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[14].Value).ToString("#.##"));
-                    row._a_G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[15].Value).ToString("#.##"));
-                    row._a_F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[16].Value).ToString("#.##"));
-                    row._a_C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[17].Value).ToString("#.##"));
-                    if (r.Cells[18].Value == "")
-                    {
-                        row._a_Pren_ = 0;
-                    }
-                    else
-                    {
-                        row._a_Pren_ = Convert.ToDouble(Convert.ToDouble(r.Cells[18].Value).ToString("#.##"));
-                    }
-                    if (r.Cells[19].Value == "")
-                    {
-                        row._a_I_G = 0;
-                    }
-                    else
-                    {
-                        row._a_I_G = Convert.ToDouble(Convert.ToDouble(r.Cells[19].Value).ToString("#.##"));
-                    }
-                    if (r.Cells[20].Value == "")
-                    {
-                        row._a_A_F = 0;
-                    }
-                    else
-                    {
-                        row._a_A_F = Convert.ToDouble(Convert.ToDouble(r.Cells[20].Value).ToString("#.##"));
-                    }
-                    row._a_G_A = Convert.ToDouble(r.Cells[21].Value);
-                    if (r.Cells[22].Value == "")
-                    {
-                        row._a_FOVI_ = 0;
-                    }
-                    else
-                    {
-                        row._a_FOVI_ = Convert.ToDouble(Convert.ToDouble(r.Cells[22].Value).ToString("#.##"));
-                    }
-                    if (r.Cells[23].Value == "")
-                    {
-                        row._a_P_M = 0;
-                    }
-                    else
-                    {
-                        row._a_P_M = Convert.ToDouble(Convert.ToDouble(r.Cells[23].Value).ToString("#.##"));
-                    }
-                    row._a_S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[24].Value).ToString("#.##"));
-                    row._a_S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[25].Value).ToString("#.##"));
-                    row._T__Aportaciones = Convert.ToDouble(Convert.ToDouble(r.Cells[26].Value).ToString("#.##"));
+                    var dos = Convert.ToDouble(r.Cells[9].Value);
+                    var tres = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
+                    row._S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
+                    row._S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[10].Value));
+                    row._T__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[11].Value));
+                    row._a_S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[14].Value));
+                    row._a_G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[15].Value));
+                    row._a_F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[16].Value));
+                    row._a_C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[17].Value));
+                    row._a_Pren_ = Convert.ToDouble(Convert.ToDouble(r.Cells[18].Value));                                   
+                    row._a_I_G = Convert.ToDouble(Convert.ToDouble(r.Cells[19].Value));                  
+                    row._a_A_F = Convert.ToDouble(Convert.ToDouble(r.Cells[20].Value));                    
+                    row._a_G_A = Convert.ToDouble(r.Cells[21].Value);                    
+                    row._a_FOVI_ = Convert.ToDouble(Convert.ToDouble(r.Cells[22].Value));                   
+                    row._a_P_M = Convert.ToDouble(Convert.ToDouble(r.Cells[23].Value));                    
+                    row._a_S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[24].Value));
+                    row._a_S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[25].Value));
+                    row._T__Aportaciones = Convert.ToDouble(Convert.ToDouble(r.Cells[26].Value));
                     string tasa = r.Cells[13].Value.ToString().Substring(0, r.Cells[13].Value.ToString().Count() - 1);
-                    row.Tasa = Convert.ToDouble(Convert.ToDouble(tasa).ToString("#.##"));
-                    row._Mora__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[13].Value).ToString("#.##"));
-                    row._Mora__Aporta_ = Convert.ToDouble(Convert.ToDouble(r.Cells[28].Value).ToString("#.##"));
-                    row.Total_Moratorio = Convert.ToDouble(Convert.ToDouble(r.Cells[30].Value).ToString("#.##"));
-                    row.Total_Mes = Convert.ToDouble(Convert.ToDouble(r.Cells[31].Value).ToString("#.##"));
+                    row.Tasa = Convert.ToDouble(Convert.ToDouble(tasa));
+                    row._Mora__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[13].Value));
+                    row._Mora__Aporta_ = Convert.ToDouble(Convert.ToDouble(r.Cells[28].Value));
+                    row.Total_Moratorio = Convert.ToDouble(Convert.ToDouble(r.Cells[30].Value));
+                    row.Total_Mes = Convert.ToDouble(Convert.ToDouble(r.Cells[31].Value));
+                    dt.dtOmision.AdddtOmisionRow(row);
+
+                }
+                if (r.Cells[0].Value != null && Convert.ToDouble(r.Cells[31].Value) == 0)
+                {
+                    DataSet1.dtOmisionRow row = dt.dtOmision.NewdtOmisionRow();
+                    row.Sueldo = Convert.ToDouble(Convert.ToDouble(r.Cells[0].Value));
+                    row.Mes_Omitido = Convert.ToString(r.Cells[1].Value);
+                    row._S_M = 0;
+                    row._G_I = 0;
+                    row._F_P = 0;
+                    row._C_P = 0;
+                    row._Pren_ = 0;
+                   // var uno = Convert.ToDouble(r.Cells[9].Value);
+                    //var dos = Convert.ToDouble(r.Cells[9].Value);
+                    //var tres = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
+                    row._S_V = 0;
+                    row._S_R = 0;
+                    row._T__Cuotas = 0;
+                    row._a_S_M = 0;
+                    row._a_G_I = 0;
+                    row._a_F_P = 0;
+                    row._a_C_P = 0;
+                    row._a_Pren_ = 0;
+                    row._a_I_G = 0;
+                    row._a_A_F = 0;
+                    row._a_G_A = 0;
+                    row._a_FOVI_ = 0;
+                    row._a_P_M = 0;
+                    row._a_S_V = 0;
+                    row._a_S_R = 0;
+                    row._T__Aportaciones = 0;
+                    
+                    row.Tasa = 0;
+                    row._Mora__Cuotas = 0;
+                    row._Mora__Aporta_ = 0;
+                    row.Total_Moratorio = 0;
+                    row.Total_Mes = 0;
                     dt.dtOmision.AdddtOmisionRow(row);
 
                 }
@@ -531,6 +546,7 @@ namespace CR
             string nombre = frmAbrir.nombre;
             string apellidoP = frmAbrir.apellidoP;
             string apellidoM = frmAbrir.apelidoM;
+            dgDatos.Columns.Clear();
             dgDatos.DataSource = Omi.getOmision(nombre, apellidoP, apellidoM);
 
             this.dgDatos.Columns[0].Visible = false;

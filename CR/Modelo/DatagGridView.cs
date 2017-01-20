@@ -14,6 +14,11 @@ namespace CR.Modelo
 {
     class DatagGridView
     {
+        /// <summary>
+        /// Da formato a un DataGridView
+        /// </summary>
+        /// <param name="Grid">DataGridView que se quiere aplicar el formato</param>
+        /// <param name="agregar">Booleano que dice si se borra el contenido anterior del DataGridView o se concatena</param>
         public void generarGrid(DataGridView Grid, bool agregar)
         {
             //TODO GUARDAR VERIFICAR DATOS
@@ -60,6 +65,16 @@ namespace CR.Modelo
             Grid.Columns[33].Name = "Fecha";
 
         }
+
+        /// <summary>
+        /// Alimenta de información el DataGridView con el cálculo de omisión.
+        /// </summary>
+        /// <param name="lstTasa">Lista de tasas de cada mes entre el rango de fechas de la omisión.</param>
+        /// <param name="sueldo">Sueldo del empleado</param>
+        /// <param name="datos">Datos del catálogo de organismos</param>
+        /// <param name="Grid">DataGridView que se desea utilizar</param>
+        /// <param name="_Interinato">Booleano que determina si el cálculo se realizara con las tasas de interinato</param>
+        /// <param name="_Tipo">Tipo de cobro.</param>
         public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
         {
            

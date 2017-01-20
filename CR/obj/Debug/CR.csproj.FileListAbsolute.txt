@@ -122,3 +122,4 @@ C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmVistaPrevia.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmAbrirOmision.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmReporteGeneral.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.CrystalReport1.resources
