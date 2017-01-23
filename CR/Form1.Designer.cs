@@ -28,6 +28,8 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmHome));
             this.cbLocalidad = new System.Windows.Forms.ComboBox();
             this.cbOrganismos = new System.Windows.Forms.ComboBox();
             this.btnGenerar = new System.Windows.Forms.Button();
@@ -51,11 +53,12 @@
             this.lstHasta = new System.Windows.Forms.ListBox();
             this.txtApellidoMa = new System.Windows.Forms.TextBox();
             this.txtNombre = new System.Windows.Forms.TextBox();
-            this.btnVistaP = new System.Windows.Forms.Button();
-            this.txtGuardar = new System.Windows.Forms.Button();
-            this.txtAbrir = new System.Windows.Forms.Button();
-            this.button1 = new System.Windows.Forms.Button();
             this.btnRecalcular = new System.Windows.Forms.Button();
+            this.btnRptGeneral = new System.Windows.Forms.Button();
+            this.btnAbrir = new System.Windows.Forms.Button();
+            this.btnGuardar = new System.Windows.Forms.Button();
+            this.btnVistaP = new System.Windows.Forms.Button();
+            this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.SuspendLayout();
@@ -63,7 +66,7 @@
             // cbLocalidad
             // 
             this.cbLocalidad.FormattingEnabled = true;
-            this.cbLocalidad.Location = new System.Drawing.Point(745, 7);
+            this.cbLocalidad.Location = new System.Drawing.Point(862, 7);
             this.cbLocalidad.Name = "cbLocalidad";
             this.cbLocalidad.Size = new System.Drawing.Size(184, 21);
             this.cbLocalidad.TabIndex = 0;
@@ -71,14 +74,14 @@
             // cbOrganismos
             // 
             this.cbOrganismos.FormattingEnabled = true;
-            this.cbOrganismos.Location = new System.Drawing.Point(554, 7);
+            this.cbOrganismos.Location = new System.Drawing.Point(671, 7);
             this.cbOrganismos.Name = "cbOrganismos";
             this.cbOrganismos.Size = new System.Drawing.Size(185, 21);
             this.cbOrganismos.TabIndex = 1;
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(936, 6);
+            this.btnGenerar.Location = new System.Drawing.Point(1053, 6);
             this.btnGenerar.Name = "btnGenerar";
             this.btnGenerar.Size = new System.Drawing.Size(78, 41);
             this.btnGenerar.TabIndex = 3;
@@ -89,7 +92,7 @@
             // rbActual
             // 
             this.rbActual.AutoSize = true;
-            this.rbActual.Location = new System.Drawing.Point(365, 64);
+            this.rbActual.Location = new System.Drawing.Point(482, 64);
             this.rbActual.Name = "rbActual";
             this.rbActual.Size = new System.Drawing.Size(55, 17);
             this.rbActual.TabIndex = 4;
@@ -100,7 +103,7 @@
             // rbFutura
             // 
             this.rbFutura.AutoSize = true;
-            this.rbFutura.Location = new System.Drawing.Point(425, 64);
+            this.rbFutura.Location = new System.Drawing.Point(542, 64);
             this.rbFutura.Name = "rbFutura";
             this.rbFutura.Size = new System.Drawing.Size(55, 17);
             this.rbFutura.TabIndex = 5;
@@ -111,7 +114,7 @@
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(471, 34);
+            this.dateTimePicker1.Location = new System.Drawing.Point(588, 34);
             this.dateTimePicker1.Name = "dateTimePicker1";
             this.dateTimePicker1.Size = new System.Drawing.Size(134, 20);
             this.dateTimePicker1.TabIndex = 6;
@@ -119,7 +122,7 @@
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(611, 34);
+            this.dateTimePicker2.Location = new System.Drawing.Point(728, 34);
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Size = new System.Drawing.Size(134, 20);
             this.dateTimePicker2.TabIndex = 7;
@@ -129,7 +132,7 @@
             // chkInterinato
             // 
             this.chkInterinato.AutoSize = true;
-            this.chkInterinato.Location = new System.Drawing.Point(486, 66);
+            this.chkInterinato.Location = new System.Drawing.Point(603, 66);
             this.chkInterinato.Name = "chkInterinato";
             this.chkInterinato.Size = new System.Drawing.Size(70, 17);
             this.chkInterinato.TabIndex = 8;
@@ -139,14 +142,14 @@
             // dgDatos
             // 
             this.dgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDatos.Location = new System.Drawing.Point(365, 96);
+            this.dgDatos.Location = new System.Drawing.Point(312, 96);
             this.dgDatos.Name = "dgDatos";
-            this.dgDatos.Size = new System.Drawing.Size(766, 385);
+            this.dgDatos.Size = new System.Drawing.Size(819, 385);
             this.dgDatos.TabIndex = 9;
             // 
             // txtApellidoPa
             // 
-            this.txtApellidoPa.Location = new System.Drawing.Point(217, 7);
+            this.txtApellidoPa.Location = new System.Drawing.Point(334, 7);
             this.txtApellidoPa.Name = "txtApellidoPa";
             this.txtApellidoPa.Size = new System.Drawing.Size(115, 20);
             this.txtApellidoPa.TabIndex = 10;
@@ -156,7 +159,7 @@
             // 
             // txtSueldo
             // 
-            this.txtSueldo.Location = new System.Drawing.Point(365, 34);
+            this.txtSueldo.Location = new System.Drawing.Point(482, 34);
             this.txtSueldo.Name = "txtSueldo";
             this.txtSueldo.Size = new System.Drawing.Size(100, 20);
             this.txtSueldo.TabIndex = 11;
@@ -166,7 +169,7 @@
             // 
             // txtElaborada
             // 
-            this.txtElaborada.Location = new System.Drawing.Point(751, 60);
+            this.txtElaborada.Location = new System.Drawing.Point(868, 60);
             this.txtElaborada.Name = "txtElaborada";
             this.txtElaborada.Size = new System.Drawing.Size(178, 20);
             this.txtElaborada.TabIndex = 12;
@@ -177,21 +180,21 @@
             // dgTasas
             // 
             this.dgTasas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTasas.Location = new System.Drawing.Point(12, 127);
+            this.dgTasas.Location = new System.Drawing.Point(12, 96);
             this.dgTasas.Name = "dgTasas";
-            this.dgTasas.Size = new System.Drawing.Size(240, 413);
+            this.dgTasas.Size = new System.Drawing.Size(240, 444);
             this.dgTasas.TabIndex = 13;
             // 
             // txtInteres
             // 
-            this.txtInteres.Location = new System.Drawing.Point(12, 60);
+            this.txtInteres.Location = new System.Drawing.Point(12, 37);
             this.txtInteres.Name = "txtInteres";
             this.txtInteres.Size = new System.Drawing.Size(100, 20);
             this.txtInteres.TabIndex = 14;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 86);
+            this.btnAgregar.Location = new System.Drawing.Point(12, 63);
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.Size = new System.Drawing.Size(75, 23);
             this.btnAgregar.TabIndex = 16;
@@ -202,7 +205,7 @@
             // lblFecha
             // 
             this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(12, 34);
+            this.lblFecha.Location = new System.Drawing.Point(12, 11);
             this.lblFecha.Name = "lblFecha";
             this.lblFecha.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
             this.lblFecha.Size = new System.Drawing.Size(0, 13);
@@ -212,7 +215,7 @@
             // 
             this.dtUltimaTasa.Enabled = false;
             this.dtUltimaTasa.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtUltimaTasa.Location = new System.Drawing.Point(751, 34);
+            this.dtUltimaTasa.Location = new System.Drawing.Point(868, 34);
             this.dtUltimaTasa.Name = "dtUltimaTasa";
             this.dtUltimaTasa.Size = new System.Drawing.Size(178, 20);
             this.dtUltimaTasa.TabIndex = 18;
@@ -220,7 +223,7 @@
             // chkUltimaTasa
             // 
             this.chkUltimaTasa.AutoSize = true;
-            this.chkUltimaTasa.Location = new System.Drawing.Point(562, 64);
+            this.chkUltimaTasa.Location = new System.Drawing.Point(679, 64);
             this.chkUltimaTasa.Name = "chkUltimaTasa";
             this.chkUltimaTasa.Size = new System.Drawing.Size(100, 17);
             this.chkUltimaTasa.TabIndex = 19;
@@ -235,7 +238,7 @@
             this.lstTipo.Items.AddRange(new object[] {
             "M",
             "Q"});
-            this.lstTipo.Location = new System.Drawing.Point(663, 60);
+            this.lstTipo.Location = new System.Drawing.Point(780, 60);
             this.lstTipo.Name = "lstTipo";
             this.lstTipo.Size = new System.Drawing.Size(22, 30);
             this.lstTipo.TabIndex = 20;
@@ -249,7 +252,7 @@
             this.lstDe.Items.AddRange(new object[] {
             "Q1",
             "Q2"});
-            this.lstDe.Location = new System.Drawing.Point(691, 60);
+            this.lstDe.Location = new System.Drawing.Point(808, 60);
             this.lstDe.Name = "lstDe";
             this.lstDe.Size = new System.Drawing.Size(24, 30);
             this.lstDe.TabIndex = 21;
@@ -262,14 +265,14 @@
             this.lstHasta.Items.AddRange(new object[] {
             "Q1",
             "Q2"});
-            this.lstHasta.Location = new System.Drawing.Point(721, 60);
+            this.lstHasta.Location = new System.Drawing.Point(838, 60);
             this.lstHasta.Name = "lstHasta";
             this.lstHasta.Size = new System.Drawing.Size(24, 30);
             this.lstHasta.TabIndex = 22;
             // 
             // txtApellidoMa
             // 
-            this.txtApellidoMa.Location = new System.Drawing.Point(338, 6);
+            this.txtApellidoMa.Location = new System.Drawing.Point(455, 6);
             this.txtApellidoMa.Name = "txtApellidoMa";
             this.txtApellidoMa.Size = new System.Drawing.Size(100, 20);
             this.txtApellidoMa.TabIndex = 23;
@@ -279,7 +282,7 @@
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(448, 6);
+            this.txtNombre.Location = new System.Drawing.Point(565, 6);
             this.txtNombre.Name = "txtNombre";
             this.txtNombre.Size = new System.Drawing.Size(100, 20);
             this.txtNombre.TabIndex = 24;
@@ -287,49 +290,9 @@
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
             // 
-            // btnVistaP
-            // 
-            this.btnVistaP.Location = new System.Drawing.Point(274, 112);
-            this.btnVistaP.Name = "btnVistaP";
-            this.btnVistaP.Size = new System.Drawing.Size(75, 23);
-            this.btnVistaP.TabIndex = 25;
-            this.btnVistaP.Text = "Vista Prevía";
-            this.btnVistaP.UseVisualStyleBackColor = true;
-            this.btnVistaP.Click += new System.EventHandler(this.btnVistaP_Click);
-            // 
-            // txtGuardar
-            // 
-            this.txtGuardar.Location = new System.Drawing.Point(274, 141);
-            this.txtGuardar.Name = "txtGuardar";
-            this.txtGuardar.Size = new System.Drawing.Size(75, 23);
-            this.txtGuardar.TabIndex = 26;
-            this.txtGuardar.Text = "Guardar";
-            this.txtGuardar.UseVisualStyleBackColor = true;
-            this.txtGuardar.Click += new System.EventHandler(this.txtGuardar_Click);
-            // 
-            // txtAbrir
-            // 
-            this.txtAbrir.Location = new System.Drawing.Point(274, 170);
-            this.txtAbrir.Name = "txtAbrir";
-            this.txtAbrir.Size = new System.Drawing.Size(75, 23);
-            this.txtAbrir.TabIndex = 27;
-            this.txtAbrir.Text = "Abrir";
-            this.txtAbrir.UseVisualStyleBackColor = true;
-            this.txtAbrir.Click += new System.EventHandler(this.txtAbrir_Click);
-            // 
-            // button1
-            // 
-            this.button1.Location = new System.Drawing.Point(274, 199);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 44);
-            this.button1.TabIndex = 28;
-            this.button1.Text = "Reporte General";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
             // btnRecalcular
             // 
-            this.btnRecalcular.Location = new System.Drawing.Point(936, 53);
+            this.btnRecalcular.Location = new System.Drawing.Point(1056, 53);
             this.btnRecalcular.Name = "btnRecalcular";
             this.btnRecalcular.Size = new System.Drawing.Size(75, 37);
             this.btnRecalcular.TabIndex = 29;
@@ -337,15 +300,72 @@
             this.btnRecalcular.UseVisualStyleBackColor = true;
             this.btnRecalcular.Click += new System.EventHandler(this.btnRecalcular_Click);
             // 
+            // btnRptGeneral
+            // 
+            this.btnRptGeneral.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRptGeneral.BackgroundImage")));
+            this.btnRptGeneral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnRptGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnRptGeneral.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnRptGeneral.Location = new System.Drawing.Point(258, 215);
+            this.btnRptGeneral.Name = "btnRptGeneral";
+            this.btnRptGeneral.Size = new System.Drawing.Size(48, 40);
+            this.btnRptGeneral.TabIndex = 28;
+            this.btnRptGeneral.UseVisualStyleBackColor = true;
+            this.btnRptGeneral.Click += new System.EventHandler(this.button1_Click);
+            // 
+            // btnAbrir
+            // 
+            this.btnAbrir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAbrir.BackgroundImage")));
+            this.btnAbrir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnAbrir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnAbrir.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnAbrir.Location = new System.Drawing.Point(258, 96);
+            this.btnAbrir.Name = "btnAbrir";
+            this.btnAbrir.Size = new System.Drawing.Size(46, 31);
+            this.btnAbrir.TabIndex = 27;
+            this.btnAbrir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.btnAbrir.UseVisualStyleBackColor = true;
+            this.btnAbrir.Click += new System.EventHandler(this.txtAbrir_Click);
+            // 
+            // btnGuardar
+            // 
+            this.btnGuardar.BackColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGuardar.BackgroundImage")));
+            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnGuardar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnGuardar.Location = new System.Drawing.Point(258, 133);
+            this.btnGuardar.Name = "btnGuardar";
+            this.btnGuardar.Size = new System.Drawing.Size(46, 33);
+            this.btnGuardar.TabIndex = 26;
+            this.btnGuardar.UseVisualStyleBackColor = false;
+            this.btnGuardar.Click += new System.EventHandler(this.txtGuardar_Click);
+            // 
+            // btnVistaP
+            // 
+            this.btnVistaP.BackColor = System.Drawing.SystemColors.Control;
+            this.btnVistaP.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnVistaP.BackgroundImage")));
+            this.btnVistaP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnVistaP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            this.btnVistaP.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnVistaP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
+            this.btnVistaP.Location = new System.Drawing.Point(258, 172);
+            this.btnVistaP.Name = "btnVistaP";
+            this.btnVistaP.Size = new System.Drawing.Size(46, 37);
+            this.btnVistaP.TabIndex = 25;
+            this.btnVistaP.UseVisualStyleBackColor = false;
+            this.btnVistaP.Click += new System.EventHandler(this.btnVistaP_Click);
+            // 
             // frmHome
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1157, 552);
             this.Controls.Add(this.btnRecalcular);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.txtAbrir);
-            this.Controls.Add(this.txtGuardar);
+            this.Controls.Add(this.btnRptGeneral);
+            this.Controls.Add(this.btnAbrir);
+            this.Controls.Add(this.btnGuardar);
             this.Controls.Add(this.btnVistaP);
             this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.txtApellidoMa);
@@ -406,10 +426,11 @@
         private System.Windows.Forms.TextBox txtApellidoMa;
         private System.Windows.Forms.TextBox txtNombre;
         private System.Windows.Forms.Button btnVistaP;
-        private System.Windows.Forms.Button txtGuardar;
-        private System.Windows.Forms.Button txtAbrir;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnGuardar;
+        private System.Windows.Forms.Button btnAbrir;
+        private System.Windows.Forms.Button btnRptGeneral;
         private System.Windows.Forms.Button btnRecalcular;
+        private System.Windows.Forms.ToolTip toolTip1;
     }
 }
 

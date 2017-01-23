@@ -151,13 +151,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
-      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <Compile Include="Properties\Resources.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DependentUpon>Resources.resx</DependentUpon>
-    </Compile>
     <None Include="DataSet1.xsc">
       <DependentUpon>DataSet1.xsd</DependentUpon>
     </None>
@@ -185,6 +181,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
     <Compile Include="Properties\Settings.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Settings.settings</DependentUpon>
@@ -198,6 +199,27 @@
   </ItemGroup>
   <ItemGroup>
     <Service Include="{C0C07587-41A7-46C8-8FBD-3F9C8EBE2DDC}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\1485226963_document-preview.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\1485227244_Document.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\1485228351_BT_save.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\1485228383_BT_folder_file_open.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\1485228422_More.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Recursos\1485228579_common-search-lookup-glyph.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

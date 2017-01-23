@@ -38,6 +38,14 @@ namespace CR
         public frmHome()
         {
             InitializeComponent();
+            System.Windows.Forms.ToolTip ToolTip1 = new System.Windows.Forms.ToolTip();
+            ToolTip1.SetToolTip(this.btnVistaP, "Vista Previa");
+            ToolTip1.SetToolTip(this.btnGuardar, "Guardar");
+            ToolTip1.SetToolTip(this.btnAbrir, "Abrir Omisión");
+            ToolTip1.SetToolTip(this.btnRptGeneral, "Reporte General");
+
+
+
         }
 
         private void Form1_Load(object sender, EventArgs e)
