@@ -31,9 +31,13 @@ namespace CR
         {
            
             dgDatos.DataSource = Omi.getOmisiones();
+
             dgDatos.Columns[0].HeaderText = "Nombre";
+            dgDatos.Columns[0].DisplayIndex = 2;
             dgDatos.Columns[1].HeaderText = "Apellido Paterno";
+            dgDatos.Columns[1].DisplayIndex = 0;
             dgDatos.Columns[2].HeaderText = "Apellido Materno";
+            dgDatos.Columns[2].DisplayIndex = 1;
             dgDatos.Columns[3].HeaderText = "Fecha";
             dgDatos.Columns[3].DisplayIndex = 5;
             dgDatos.Columns[4].HeaderText = "Localidad";
@@ -59,6 +63,11 @@ namespace CR
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             dgDatos.DataSource = Omi.getOmisiones(textBox1.Text.Trim());
+        }
+
+        private void lblNombre_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

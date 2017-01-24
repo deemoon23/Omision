@@ -27,7 +27,7 @@ namespace CR
         Modelo.tasasOmisionesInterinato tasasInter = new Modelo.tasasOmisionesInterinato();
         Modelo.cat_organismos2 catOrg = new Modelo.cat_organismos2();
         char generacion='X';
-        bool interinato = false;
+        bool interinato = false, flag = false;
         int idLocalidad=0;
         string strlocalidad = "";
         int idOrganismo = 0;
@@ -100,7 +100,7 @@ namespace CR
 
                     }
 
-                    lblFecha.Text = tasas.getUltimaTasa().fecha.AddDays(1).ToString("MMMM yyyy").ToUpper();
+                    lblFecha.Text = tasas.getUltimaTasa().fecha.AddMonths(1).ToString("MMMM yyyy").ToUpper();
 
 
                     //
@@ -149,7 +149,8 @@ namespace CR
 
             //
             Modelo.DatagGridView dgv = new Modelo.DatagGridView();
-            dgv.generarGrid(dgDatos,true);
+            dgv.generarGrid(dgDatos,true,flag);
+            flag = false;
             if (chkUltimaTasa.Checked == true)
             {
                 dgv.llenarGrid(lstTasa, Convert.ToDouble(txtSueldo.Text), datos, dgDatos, chkInterinato.Checked, dtUltimaTasa.Value, Convert.ToInt32(lstTipo.SelectedIndex));
@@ -249,7 +250,8 @@ namespace CR
         {
             _TypedInto = !String.IsNullOrEmpty(txtApellidoPa.Text);
 
-            if (_TypedInto) { txtApellidoPa.ForeColor = Color.Black; }
+            if (_TypedInto) { txtApellidoPa.ForeColor = Color.Black;
+            }
 
         }
 
@@ -378,53 +380,101 @@ namespace CR
 
             DataSet1 dt = new DataSet1();
             DataSet1.dtInfoRow dato = dt.dtInfo.NewdtInfoRow();
-            dato.Elaboro = elaboro;
-            dato.Empleado = empleado;
-            dato.idLocalidad = idLocalidad.ToString();
-            dato.Localidad = strlocalidad;
-            dato.idOrganismo = idOrganismo.ToString();
-            dato.Organismo = strOrganismo;
-            dt.dtInfo.AdddtInfoRow(dato);
+            if (flag == false)
+            {
+                dato.Elaboro = elaboro;
+                dato.Empleado = empleado;
+                dato.idLocalidad = idLocalidad.ToString();
+                dato.Localidad = strlocalidad;
+                dato.idOrganismo = idOrganismo.ToString();
+                dato.Organismo = strOrganismo;
+                dt.dtInfo.AdddtInfoRow(dato);
+            }
+            else
+            {
+                dato.Elaboro = dgDatos.Rows[0].Cells[4].Value.ToString();
+                dato.Empleado = dgDatos.Rows[0].Cells[38].Value.ToString()+" "+dgDatos.Rows[0].Cells[39].Value.ToString()+" "+dgDatos.Rows[0].Cells[37].Value.ToString();
+                dato.idLocalidad = dgDatos.Rows[0].Cells[6].Value.ToString();
+                dato.Localidad = dgDatos.Rows[0].Cells[7].Value.ToString();
+                dato.idOrganismo = dgDatos.Rows[0].Cells[8].Value.ToString();
+                dato.Organismo = dgDatos.Rows[0].Cells[9].Value.ToString();
+                dt.dtInfo.AdddtInfoRow(dato);
+            }
             foreach (DataGridViewRow r in dgDatos.Rows)
             {
 
                 if (r.Cells[0].Value != null && Convert.ToDouble(r.Cells[31].Value) != 0)
                 {
-                    DataSet1.dtOmisionRow row = dt.dtOmision.NewdtOmisionRow();
-                    row.Sueldo = Convert.ToDouble(Convert.ToDouble(r.Cells[0].Value));
-                    row.Mes_Omitido = Convert.ToString(r.Cells[1].Value);
-                    row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[4].Value));
-                    row._G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[5].Value));
-                    row._F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[6].Value));
-                    row._C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[7].Value));                   
-                    row._Pren_ = Convert.ToDouble(r.Cells[8].Value);                    
-                    var uno = Convert.ToDouble(r.Cells[9].Value);
-                    var dos = Convert.ToDouble(r.Cells[9].Value);
-                    var tres = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
-                    row._S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
-                    row._S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[10].Value));
-                    row._T__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[11].Value));
-                    row._a_S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[14].Value));
-                    row._a_G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[15].Value));
-                    row._a_F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[16].Value));
-                    row._a_C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[17].Value));
-                    row._a_Pren_ = Convert.ToDouble(Convert.ToDouble(r.Cells[18].Value));                                   
-                    row._a_I_G = Convert.ToDouble(Convert.ToDouble(r.Cells[19].Value));                  
-                    row._a_A_F = Convert.ToDouble(Convert.ToDouble(r.Cells[20].Value));                    
-                    row._a_G_A = Convert.ToDouble(r.Cells[21].Value);                    
-                    row._a_FOVI_ = Convert.ToDouble(Convert.ToDouble(r.Cells[22].Value));                   
-                    row._a_P_M = Convert.ToDouble(Convert.ToDouble(r.Cells[23].Value));                    
-                    row._a_S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[24].Value));
-                    row._a_S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[25].Value));
-                    row._T__Aportaciones = Convert.ToDouble(Convert.ToDouble(r.Cells[26].Value));
-                    string tasa = r.Cells[13].Value.ToString().Substring(0, r.Cells[13].Value.ToString().Count() - 1);
-                    row.Tasa = Convert.ToDouble(Convert.ToDouble(tasa));
-                    row._Mora__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[13].Value));
-                    row._Mora__Aporta_ = Convert.ToDouble(Convert.ToDouble(r.Cells[28].Value));
-                    row.Total_Moratorio = Convert.ToDouble(Convert.ToDouble(r.Cells[30].Value));
-                    row.Total_Mes = Convert.ToDouble(Convert.ToDouble(r.Cells[31].Value));
-                    dt.dtOmision.AdddtOmisionRow(row);
-
+                    if (flag == false)
+                    {
+                        DataSet1.dtOmisionRow row = dt.dtOmision.NewdtOmisionRow();
+                        row.Sueldo = Convert.ToDouble(Convert.ToDouble(r.Cells[0].Value));
+                        row.Mes_Omitido = Convert.ToString(r.Cells[1].Value);
+                        row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[4].Value));
+                        row._G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[5].Value));
+                        row._F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[6].Value));
+                        row._C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[7].Value));
+                        row._Pren_ = Convert.ToDouble(r.Cells[8].Value);
+                      
+                        row._S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
+                        row._S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[10].Value));
+                        row._T__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[11].Value));
+                        row._a_S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[14].Value));
+                        row._a_G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[15].Value));
+                        row._a_F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[16].Value));
+                        row._a_C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[17].Value));
+                        row._a_Pren_ = Convert.ToDouble(Convert.ToDouble(r.Cells[18].Value));
+                        row._a_I_G = Convert.ToDouble(Convert.ToDouble(r.Cells[19].Value));
+                        row._a_A_F = Convert.ToDouble(Convert.ToDouble(r.Cells[20].Value));
+                        row._a_G_A = Convert.ToDouble(r.Cells[21].Value);
+                        row._a_FOVI_ = Convert.ToDouble(Convert.ToDouble(r.Cells[22].Value));
+                        row._a_P_M = Convert.ToDouble(Convert.ToDouble(r.Cells[23].Value));
+                        row._a_S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[24].Value));
+                        row._a_S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[25].Value));
+                        row._T__Aportaciones = Convert.ToDouble(Convert.ToDouble(r.Cells[26].Value));
+                        string tasa = r.Cells[13].Value.ToString().Substring(0, r.Cells[13].Value.ToString().Count() - 1);
+                        row.Tasa = Convert.ToDouble(Convert.ToDouble(tasa));
+                        row._Mora__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[13].Value));
+                        row._Mora__Aporta_ = Convert.ToDouble(Convert.ToDouble(r.Cells[28].Value));
+                        row.Total_Moratorio = Convert.ToDouble(Convert.ToDouble(r.Cells[30].Value));
+                        row.Total_Mes = Convert.ToDouble(Convert.ToDouble(r.Cells[31].Value));
+                        dt.dtOmision.AdddtOmisionRow(row);
+                    }
+                    else
+                    {
+                        DataSet1.dtOmisionRow row = dt.dtOmision.NewdtOmisionRow();
+                        row.Sueldo = Convert.ToDouble(Convert.ToDouble(r.Cells[1].Value));
+                        row.Mes_Omitido = Convert.ToDateTime(r.Cells[2].Value).ToString("yy-MMM").ToUpper();
+                        row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[10].Value));
+                        row._G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[16].Value));
+                        row._F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[11].Value));
+                        row._C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[12].Value));
+                        row._Pren_ = Convert.ToDouble(r.Cells[13].Value);
+                       
+                        row._S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[14].Value));
+                        row._S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[15].Value));
+                        row._T__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[17].Value));
+                        row._a_S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[19].Value));
+                        row._a_G_I = Convert.ToDouble(Convert.ToDouble(r.Cells[25].Value));
+                        row._a_F_P = Convert.ToDouble(Convert.ToDouble(r.Cells[20].Value));
+                        row._a_C_P = Convert.ToDouble(Convert.ToDouble(r.Cells[21].Value));
+                        row._a_Pren_ = Convert.ToDouble(Convert.ToDouble(r.Cells[22].Value));
+                        row._a_I_G = Convert.ToDouble(Convert.ToDouble(r.Cells[29].Value));
+                        row._a_A_F = Convert.ToDouble(Convert.ToDouble(r.Cells[27].Value));
+                        row._a_G_A = Convert.ToDouble(r.Cells[30].Value);
+                        row._a_FOVI_ = Convert.ToDouble(Convert.ToDouble(r.Cells[26].Value));
+                        row._a_P_M = Convert.ToDouble(Convert.ToDouble(r.Cells[27].Value));
+                        row._a_S_V = Convert.ToDouble(Convert.ToDouble(r.Cells[23].Value));
+                        row._a_S_R = Convert.ToDouble(Convert.ToDouble(r.Cells[24].Value));
+                        row._T__Aportaciones = Convert.ToDouble(Convert.ToDouble(r.Cells[31].Value));
+                        string tasa = r.Cells[33].Value.ToString().Substring(0, r.Cells[33].Value.ToString().Count() - 1);
+                        row.Tasa = Convert.ToDouble(Convert.ToDouble(tasa));
+                        row._Mora__Cuotas = Convert.ToDouble(Convert.ToDouble(r.Cells[18].Value));
+                        row._Mora__Aporta_ = Convert.ToDouble(Convert.ToDouble(r.Cells[32].Value));
+                        row.Total_Moratorio = Convert.ToDouble(Convert.ToDouble(r.Cells[34].Value));
+                        row.Total_Mes = Convert.ToDouble(Convert.ToDouble(r.Cells[35].Value));
+                        dt.dtOmision.AdddtOmisionRow(row);
+                    }
                 }
                 if (r.Cells[0].Value != null && Convert.ToDouble(r.Cells[31].Value) == 0)
                 {
@@ -476,74 +526,84 @@ namespace CR
 
         private void txtGuardar_Click(object sender, EventArgs e)
         {
-            foreach (DataGridViewRow row in dgDatos.Rows)
+            if (dgDatos.Rows.Count != 0)
             {
-                //row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[4].Value).ToString("#.##"));
-                if (Convert.ToDouble(row.Cells[0].Value) != 0)
+                foreach (DataGridViewRow row in dgDatos.Rows)
                 {
+                    //row._S_M = Convert.ToDouble(Convert.ToDouble(r.Cells[4].Value).ToString("#.##"));
 
-                    Omi.nombre = txtNombre.Text.Trim();
-                    Omi.apellidoP = txtApellidoPa.Text.Trim();
-                    Omi.apellidoM = txtApellidoMa.Text.Trim();
-                    Omi.sueldo = Convert.ToDecimal(row.Cells[0].Value);
-                    Omi.mesOmitido = Convert.ToDateTime(row.Cells[33].Value);
-                    Omi.mesCalculo = DateTime.Today;
-                    Omi.folio = txtElaborada.Text.Trim();
-                    if (lstTipo.SelectedIndex == 0)
+                    if (Convert.ToDecimal(row.Cells[0].Value) != 0)
                     {
-                        Omi.tipoCobro = "M";
-                    }
-                    else
-                    {
+                        Omi.nombre = txtNombre.Text.Trim();
+                        Omi.apellidoP = txtApellidoPa.Text.Trim();
+                        Omi.apellidoM = txtApellidoMa.Text.Trim();
+                        Omi.sueldo = Convert.ToDecimal(row.Cells[0].Value);
+                        Omi.mesOmitido = Convert.ToDateTime(row.Cells[33].Value);
+                        Omi.mesCalculo = DateTime.Today;
+                        Omi.folio = txtElaborada.Text.Trim();
+                        if (lstTipo.SelectedIndex == 0)
+                        {
+                            Omi.tipoCobro = "M";
+                        }
+                        else
+                        {
 
-                        Omi.tipoCobro = row.Cells[1].Value.ToString().Substring(0, 2);
-                    }
-                    Omi.idLoc = Convert.ToInt32(cbLocalidad.SelectedValue);
-                    Omi.Localidad = cbLocalidad.Text.ToString();
-                    Omi.idOrg = Convert.ToInt32(cbOrganismos.SelectedValue);
-                    Omi.Organismo = cbOrganismos.Text.ToString();
-                    Omi.csm = Convert.ToDecimal(row.Cells[4].Value.ToString());
-                    Omi.ccp = Convert.ToDecimal(row.Cells[7].Value.ToString());
-                    Omi.cfp = Convert.ToDecimal(row.Cells[6].Value.ToString());
-                    Omi.cpren = Convert.ToDecimal(row.Cells[8].Value.ToString());
-                    Omi.csv = Convert.ToDecimal(row.Cells[9].Value.ToString());
-                    Omi.csr = Convert.ToDecimal(row.Cells[10].Value.ToString());
-                    Omi.cgi = Convert.ToDecimal(row.Cells[5].Value.ToString());
-                    Omi.tcuotas = Convert.ToDecimal(row.Cells[11].Value.ToString());
-                    Omi.importeC = Convert.ToDecimal(row.Cells[13].Value.ToString());
-                    Omi.asm = Convert.ToDecimal(row.Cells[14].Value.ToString());
-                    Omi.afp = Convert.ToDecimal(row.Cells[16].Value.ToString());
-                    Omi.acp = Convert.ToDecimal(row.Cells[17].Value.ToString());
-                    Omi.apren = Convert.ToDecimal(row.Cells[18].Value.ToString());
-                    Omi.asv = Convert.ToDecimal(row.Cells[24].Value.ToString());
-                    Omi.asr = Convert.ToDecimal(row.Cells[25].Value.ToString());
-                    Omi.agi = Convert.ToDecimal(row.Cells[15].Value.ToString());
-                    Omi.afovi = Convert.ToDecimal(row.Cells[23].Value.ToString());
-                    Omi.apm = Convert.ToDecimal(row.Cells[22].Value.ToString());
-                    Omi.aaf = Convert.ToDecimal(row.Cells[20].Value.ToString());
-                    Omi.aig = Convert.ToDecimal(row.Cells[19].Value.ToString());
-                    Omi.aga = Convert.ToDecimal(row.Cells[21].Value.ToString());
-                    Omi.taporta = Convert.ToDecimal(row.Cells[26].Value.ToString());
-                    Omi.importeA = Convert.ToDecimal(row.Cells[28].Value.ToString());
+                            Omi.tipoCobro = row.Cells[1].Value.ToString().Substring(0, 2);
+                        }
+                        Omi.idLoc = Convert.ToInt32(cbLocalidad.SelectedValue);
+                        Omi.Localidad = cbLocalidad.Text.ToString();
+                        Omi.idOrg = Convert.ToInt32(cbOrganismos.SelectedValue);
+                        Omi.Organismo = cbOrganismos.Text.ToString();
+                        Omi.csm = Convert.ToDecimal(row.Cells[4].Value.ToString());
+                        Omi.ccp = Convert.ToDecimal(row.Cells[7].Value.ToString());
+                        Omi.cfp = Convert.ToDecimal(row.Cells[6].Value.ToString());
+                        Omi.cpren = Convert.ToDecimal(row.Cells[8].Value.ToString());
+                        Omi.csv = Convert.ToDecimal(row.Cells[9].Value.ToString());
+                        Omi.csr = Convert.ToDecimal(row.Cells[10].Value.ToString());
+                        Omi.cgi = Convert.ToDecimal(row.Cells[5].Value.ToString());
+                        Omi.tcuotas = Convert.ToDecimal(row.Cells[11].Value.ToString());
+                        Omi.importeC = Convert.ToDecimal(row.Cells[13].Value.ToString());
+                        Omi.asm = Convert.ToDecimal(row.Cells[14].Value.ToString());
+                        Omi.afp = Convert.ToDecimal(row.Cells[16].Value.ToString());
+                        Omi.acp = Convert.ToDecimal(row.Cells[17].Value.ToString());
+                        Omi.apren = Convert.ToDecimal(row.Cells[18].Value.ToString());
+                        Omi.asv = Convert.ToDecimal(row.Cells[24].Value.ToString());
+                        Omi.asr = Convert.ToDecimal(row.Cells[25].Value.ToString());
+                        Omi.agi = Convert.ToDecimal(row.Cells[15].Value.ToString());
+                        Omi.afovi = Convert.ToDecimal(row.Cells[23].Value.ToString());
+                        Omi.apm = Convert.ToDecimal(row.Cells[22].Value.ToString());
+                        Omi.aaf = Convert.ToDecimal(row.Cells[20].Value.ToString());
+                        Omi.aig = Convert.ToDecimal(row.Cells[19].Value.ToString());
+                        Omi.aga = Convert.ToDecimal(row.Cells[21].Value.ToString());
+                        Omi.taporta = Convert.ToDecimal(row.Cells[26].Value.ToString());
+                        Omi.importeA = Convert.ToDecimal(row.Cells[28].Value.ToString());
 
-                    Omi.tasa = Convert.ToDecimal(row.Cells[27].Value.ToString().Substring(0, row.Cells[27].Value.ToString().Count() - 1));
-                    Omi.tmoratorio = Convert.ToDecimal(row.Cells[30].Value.ToString());
-                    Omi.tmes = Convert.ToDecimal(row.Cells[31].Value.ToString());
-                    Omi.TasaCalculada = Convert.ToDateTime(row.Cells[32].Value.ToString());
-                    Omi.generacion = generacion.ToString();
-                    Omi.interinato = interinato;
-                    ctx.Omisiones.Add(Omi);
-                    ctx.SaveChanges();
+                        Omi.tasa = Convert.ToDecimal(row.Cells[27].Value.ToString().Substring(0, row.Cells[27].Value.ToString().Count() - 1));
+                        Omi.tmoratorio = Convert.ToDecimal(row.Cells[30].Value.ToString());
+                        Omi.tmes = Convert.ToDecimal(row.Cells[31].Value.ToString());
+                        Omi.TasaCalculada = Convert.ToDateTime(row.Cells[32].Value.ToString());
+                        Omi.generacion = generacion.ToString();
+                        Omi.interinato = interinato;
+                        ctx.Omisiones.Add(Omi);
+                        ctx.SaveChanges();
+                        if (ctx.SaveChanges() > 0)
+                        {
+                            statusStrip1.Items[0].Text = "Omisión guardada.";
+                            timer1.Start();
+
+                        }
+
+                    }
 
                     //Omi.mesOmitido;
                 }
 
             }
-            //if (ctx.SaveChanges() > 0)
-            //{
-            //    MessageBox.Show("Omision guardada.");
-            //}
-
+            else
+            {
+                MessageBox.Show("No hay datos en el grid.");
+            }
+           
         }
 
         private void txtAbrir_Click(object sender, EventArgs e)
@@ -566,7 +626,7 @@ namespace CR
             dgDatos.Columns[39].DisplayIndex = 4;
             dgDatos.Columns[7].DisplayIndex = 5;
             dgDatos.Columns[9].DisplayIndex = 6;
-
+            flag = true;
 
         }
 
@@ -575,6 +635,23 @@ namespace CR
             frmReporteGeneral frmRpt = new frmReporteGeneral();
             frmRpt.Show();
 
+        }
+
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            MessageBox.Show("Desea limpiar el grid?","Borrar", MessageBoxButtons.YesNo,MessageBoxIcon.Warning);
+           
+            dgDatos.DataSource = null;
+            dgDatos.Rows.Clear();
+            statusStrip1.Text = "Grid borrado.";
+            statusStrip1.Items[0].Text= "Grid borrado.";
+            timer1.Start();
+            
+        }
+
+        private void timer1_Tick(object sender, EventArgs e)
+        {
+            statusStrip1.Items[0].Text = "";
         }
 
         private void btnRecalcular_Click(object sender, EventArgs e)
@@ -611,7 +688,8 @@ namespace CR
             Dictionary<int, Modelo.cat_organismos2> datos = catOrg.getData(localidad, organismo, generacion, de, hasta);
 
             Modelo.DatagGridView dgv = new Modelo.DatagGridView();
-            dgv.generarGrid(dgDatos, false);
+            dgv.generarGrid(dgDatos, false, flag);
+            flag = false;
                 dgv.llenarGrid(lstTasa, sueldos, datos, dgDatos, interinato, Convert.ToInt32(lstTipo.SelectedIndex));
             MessageBox.Show("exito");
 

@@ -19,11 +19,11 @@ namespace CR.Modelo
         /// </summary>
         /// <param name="Grid">DataGridView que se quiere aplicar el formato</param>
         /// <param name="agregar">Booleano que dice si se borra el contenido anterior del DataGridView o se concatena</param>
-        public void generarGrid(DataGridView Grid, bool agregar)
+        public void generarGrid(DataGridView Grid, bool agregar, bool flag)
         {
             //TODO GUARDAR VERIFICAR DATOS
             //  var lstTasa = tasas.getLstTasas(inicio, final);
-            if (agregar == false)
+            if (agregar == false || flag==true)
             {
                 Grid.DataSource = null;
                 Grid.Rows.Clear();

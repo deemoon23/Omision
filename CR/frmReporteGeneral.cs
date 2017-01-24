@@ -31,15 +31,18 @@ namespace CR
             dateTimePicker1.CustomFormat = "MMMM yyyy";
             dateTimePicker2.CustomFormat = "MMMM yyyy";
             dgEmpleados.DataSource = Omi.getOmisiones();
+         
             dgEmpleados.Columns[0].HeaderText = "Nombre";
+            dgEmpleados.Columns[0].DisplayIndex = 2;
             dgEmpleados.Columns[1].HeaderText = "Apellido Paterno";
+            dgEmpleados.Columns[1].DisplayIndex = 0;
             dgEmpleados.Columns[2].HeaderText = "Apellido Materno";
+            dgEmpleados.Columns[2].DisplayIndex = 1;
             dgEmpleados.Columns[3].HeaderText = "Fecha";
             dgEmpleados.Columns[3].DisplayIndex = 5;
             dgEmpleados.Columns[4].HeaderText = "Localidad";
             dgEmpleados.Columns[5].HeaderText = "Organismo";
 
-            
         }
 
         private void dgEmpleados_CellContentDoubleClick(object sender, DataGridViewCellEventArgs e)
@@ -276,6 +279,12 @@ namespace CR
                     iterator.Year);
                 iterator = iterator.AddMonths(1);
             }
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            dgEmpleados.DataSource = Omi.getOmisiones(txtNombre.Text.Trim());
+
         }
     }
 }

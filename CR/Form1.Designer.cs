@@ -59,120 +59,94 @@
             this.btnGuardar = new System.Windows.Forms.Button();
             this.btnVistaP = new System.Windows.Forms.Button();
             this.toolTip1 = new System.Windows.Forms.ToolTip(this.components);
+            this.btnLimpiar = new System.Windows.Forms.Button();
+            this.statusStrip1 = new System.Windows.Forms.StatusStrip();
+            this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
+            this.statusStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
             // cbLocalidad
             // 
             this.cbLocalidad.FormattingEnabled = true;
-            this.cbLocalidad.Location = new System.Drawing.Point(862, 7);
+            resources.ApplyResources(this.cbLocalidad, "cbLocalidad");
             this.cbLocalidad.Name = "cbLocalidad";
-            this.cbLocalidad.Size = new System.Drawing.Size(184, 21);
-            this.cbLocalidad.TabIndex = 0;
             // 
             // cbOrganismos
             // 
             this.cbOrganismos.FormattingEnabled = true;
-            this.cbOrganismos.Location = new System.Drawing.Point(671, 7);
+            resources.ApplyResources(this.cbOrganismos, "cbOrganismos");
             this.cbOrganismos.Name = "cbOrganismos";
-            this.cbOrganismos.Size = new System.Drawing.Size(185, 21);
-            this.cbOrganismos.TabIndex = 1;
             // 
             // btnGenerar
             // 
-            this.btnGenerar.Location = new System.Drawing.Point(1053, 6);
+            resources.ApplyResources(this.btnGenerar, "btnGenerar");
             this.btnGenerar.Name = "btnGenerar";
-            this.btnGenerar.Size = new System.Drawing.Size(78, 41);
-            this.btnGenerar.TabIndex = 3;
-            this.btnGenerar.Text = "Generar";
             this.btnGenerar.UseVisualStyleBackColor = true;
             this.btnGenerar.Click += new System.EventHandler(this.btnGenerar_Click);
             // 
             // rbActual
             // 
-            this.rbActual.AutoSize = true;
-            this.rbActual.Location = new System.Drawing.Point(482, 64);
+            resources.ApplyResources(this.rbActual, "rbActual");
             this.rbActual.Name = "rbActual";
-            this.rbActual.Size = new System.Drawing.Size(55, 17);
-            this.rbActual.TabIndex = 4;
             this.rbActual.TabStop = true;
-            this.rbActual.Text = "Actual";
             this.rbActual.UseVisualStyleBackColor = true;
             // 
             // rbFutura
             // 
-            this.rbFutura.AutoSize = true;
-            this.rbFutura.Location = new System.Drawing.Point(542, 64);
+            resources.ApplyResources(this.rbFutura, "rbFutura");
             this.rbFutura.Name = "rbFutura";
-            this.rbFutura.Size = new System.Drawing.Size(55, 17);
-            this.rbFutura.TabIndex = 5;
             this.rbFutura.TabStop = true;
-            this.rbFutura.Text = "Futura";
             this.rbFutura.UseVisualStyleBackColor = true;
             // 
             // dateTimePicker1
             // 
             this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker1.Location = new System.Drawing.Point(588, 34);
+            resources.ApplyResources(this.dateTimePicker1, "dateTimePicker1");
             this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(134, 20);
-            this.dateTimePicker1.TabIndex = 6;
             // 
             // dateTimePicker2
             // 
             this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dateTimePicker2.Location = new System.Drawing.Point(728, 34);
+            resources.ApplyResources(this.dateTimePicker2, "dateTimePicker2");
             this.dateTimePicker2.Name = "dateTimePicker2";
-            this.dateTimePicker2.Size = new System.Drawing.Size(134, 20);
-            this.dateTimePicker2.TabIndex = 7;
             this.dateTimePicker2.Value = new System.DateTime(2017, 1, 6, 12, 36, 41, 0);
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
             // 
             // chkInterinato
             // 
-            this.chkInterinato.AutoSize = true;
-            this.chkInterinato.Location = new System.Drawing.Point(603, 66);
+            resources.ApplyResources(this.chkInterinato, "chkInterinato");
             this.chkInterinato.Name = "chkInterinato";
-            this.chkInterinato.Size = new System.Drawing.Size(70, 17);
-            this.chkInterinato.TabIndex = 8;
-            this.chkInterinato.Text = "Interinato";
             this.chkInterinato.UseVisualStyleBackColor = true;
             // 
             // dgDatos
             // 
             this.dgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDatos.Location = new System.Drawing.Point(312, 96);
+            resources.ApplyResources(this.dgDatos, "dgDatos");
             this.dgDatos.Name = "dgDatos";
-            this.dgDatos.Size = new System.Drawing.Size(819, 385);
-            this.dgDatos.TabIndex = 9;
             // 
             // txtApellidoPa
             // 
-            this.txtApellidoPa.Location = new System.Drawing.Point(334, 7);
+            resources.ApplyResources(this.txtApellidoPa, "txtApellidoPa");
             this.txtApellidoPa.Name = "txtApellidoPa";
-            this.txtApellidoPa.Size = new System.Drawing.Size(115, 20);
-            this.txtApellidoPa.TabIndex = 10;
             this.txtApellidoPa.Click += new System.EventHandler(this.txtEmpleado_Click);
             this.txtApellidoPa.TextChanged += new System.EventHandler(this.txtEmpleado_TextChanged);
             this.txtApellidoPa.Leave += new System.EventHandler(this.txtEmpleado_Leave);
             // 
             // txtSueldo
             // 
-            this.txtSueldo.Location = new System.Drawing.Point(482, 34);
+            resources.ApplyResources(this.txtSueldo, "txtSueldo");
             this.txtSueldo.Name = "txtSueldo";
-            this.txtSueldo.Size = new System.Drawing.Size(100, 20);
-            this.txtSueldo.TabIndex = 11;
             this.txtSueldo.Click += new System.EventHandler(this.txtSueldo_Click);
             this.txtSueldo.TextChanged += new System.EventHandler(this.txtSueldo_TextChanged);
             this.txtSueldo.Leave += new System.EventHandler(this.txtSueldo_Leave);
             // 
             // txtElaborada
             // 
-            this.txtElaborada.Location = new System.Drawing.Point(868, 60);
+            resources.ApplyResources(this.txtElaborada, "txtElaborada");
             this.txtElaborada.Name = "txtElaborada";
-            this.txtElaborada.Size = new System.Drawing.Size(178, 20);
-            this.txtElaborada.TabIndex = 12;
             this.txtElaborada.Click += new System.EventHandler(this.txtElaborada_Click);
             this.txtElaborada.TextChanged += new System.EventHandler(this.txtElaborada_TextChanged);
             this.txtElaborada.Leave += new System.EventHandler(this.txtElaborada_Leave);
@@ -180,188 +154,155 @@
             // dgTasas
             // 
             this.dgTasas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgTasas.Location = new System.Drawing.Point(12, 96);
+            resources.ApplyResources(this.dgTasas, "dgTasas");
             this.dgTasas.Name = "dgTasas";
-            this.dgTasas.Size = new System.Drawing.Size(240, 444);
-            this.dgTasas.TabIndex = 13;
             // 
             // txtInteres
             // 
-            this.txtInteres.Location = new System.Drawing.Point(12, 37);
+            resources.ApplyResources(this.txtInteres, "txtInteres");
             this.txtInteres.Name = "txtInteres";
-            this.txtInteres.Size = new System.Drawing.Size(100, 20);
-            this.txtInteres.TabIndex = 14;
             // 
             // btnAgregar
             // 
-            this.btnAgregar.Location = new System.Drawing.Point(12, 63);
+            resources.ApplyResources(this.btnAgregar, "btnAgregar");
             this.btnAgregar.Name = "btnAgregar";
-            this.btnAgregar.Size = new System.Drawing.Size(75, 23);
-            this.btnAgregar.TabIndex = 16;
-            this.btnAgregar.Text = "Agregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
             // 
             // lblFecha
             // 
-            this.lblFecha.AutoSize = true;
-            this.lblFecha.Location = new System.Drawing.Point(12, 11);
+            resources.ApplyResources(this.lblFecha, "lblFecha");
             this.lblFecha.Name = "lblFecha";
-            this.lblFecha.RightToLeft = System.Windows.Forms.RightToLeft.Yes;
-            this.lblFecha.Size = new System.Drawing.Size(0, 13);
-            this.lblFecha.TabIndex = 17;
             // 
             // dtUltimaTasa
             // 
-            this.dtUltimaTasa.Enabled = false;
+            resources.ApplyResources(this.dtUltimaTasa, "dtUltimaTasa");
             this.dtUltimaTasa.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.dtUltimaTasa.Location = new System.Drawing.Point(868, 34);
             this.dtUltimaTasa.Name = "dtUltimaTasa";
-            this.dtUltimaTasa.Size = new System.Drawing.Size(178, 20);
-            this.dtUltimaTasa.TabIndex = 18;
             // 
             // chkUltimaTasa
             // 
-            this.chkUltimaTasa.AutoSize = true;
-            this.chkUltimaTasa.Location = new System.Drawing.Point(679, 64);
+            resources.ApplyResources(this.chkUltimaTasa, "chkUltimaTasa");
             this.chkUltimaTasa.Name = "chkUltimaTasa";
-            this.chkUltimaTasa.Size = new System.Drawing.Size(100, 17);
-            this.chkUltimaTasa.TabIndex = 19;
-            this.chkUltimaTasa.Text = "Rango de Tasa";
             this.chkUltimaTasa.UseVisualStyleBackColor = true;
             this.chkUltimaTasa.CheckedChanged += new System.EventHandler(this.chkUltimaTasa_CheckedChanged);
             // 
             // lstTipo
             // 
-            this.lstTipo.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lstTipo, "lstTipo");
             this.lstTipo.FormattingEnabled = true;
             this.lstTipo.Items.AddRange(new object[] {
-            "M",
-            "Q"});
-            this.lstTipo.Location = new System.Drawing.Point(780, 60);
+            resources.GetString("lstTipo.Items"),
+            resources.GetString("lstTipo.Items1")});
             this.lstTipo.Name = "lstTipo";
-            this.lstTipo.Size = new System.Drawing.Size(22, 30);
-            this.lstTipo.TabIndex = 20;
             this.lstTipo.SelectedIndexChanged += new System.EventHandler(this.lstTipo_SelectedIndexChanged);
             // 
             // lstDe
             // 
-            this.lstDe.Enabled = false;
-            this.lstDe.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lstDe, "lstDe");
             this.lstDe.FormattingEnabled = true;
             this.lstDe.Items.AddRange(new object[] {
-            "Q1",
-            "Q2"});
-            this.lstDe.Location = new System.Drawing.Point(808, 60);
+            resources.GetString("lstDe.Items"),
+            resources.GetString("lstDe.Items1")});
             this.lstDe.Name = "lstDe";
-            this.lstDe.Size = new System.Drawing.Size(24, 30);
-            this.lstDe.TabIndex = 21;
             // 
             // lstHasta
             // 
-            this.lstHasta.Enabled = false;
-            this.lstHasta.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            resources.ApplyResources(this.lstHasta, "lstHasta");
             this.lstHasta.FormattingEnabled = true;
             this.lstHasta.Items.AddRange(new object[] {
-            "Q1",
-            "Q2"});
-            this.lstHasta.Location = new System.Drawing.Point(838, 60);
+            resources.GetString("lstHasta.Items"),
+            resources.GetString("lstHasta.Items1")});
             this.lstHasta.Name = "lstHasta";
-            this.lstHasta.Size = new System.Drawing.Size(24, 30);
-            this.lstHasta.TabIndex = 22;
             // 
             // txtApellidoMa
             // 
-            this.txtApellidoMa.Location = new System.Drawing.Point(455, 6);
+            resources.ApplyResources(this.txtApellidoMa, "txtApellidoMa");
             this.txtApellidoMa.Name = "txtApellidoMa";
-            this.txtApellidoMa.Size = new System.Drawing.Size(100, 20);
-            this.txtApellidoMa.TabIndex = 23;
             this.txtApellidoMa.Click += new System.EventHandler(this.txtApellidoMa_Click);
             this.txtApellidoMa.TextChanged += new System.EventHandler(this.txtApellidoMa_TextChanged);
             this.txtApellidoMa.Leave += new System.EventHandler(this.txtApellidoMa_Leave);
             // 
             // txtNombre
             // 
-            this.txtNombre.Location = new System.Drawing.Point(565, 6);
+            resources.ApplyResources(this.txtNombre, "txtNombre");
             this.txtNombre.Name = "txtNombre";
-            this.txtNombre.Size = new System.Drawing.Size(100, 20);
-            this.txtNombre.TabIndex = 24;
             this.txtNombre.Click += new System.EventHandler(this.txtNombre_Click);
             this.txtNombre.TextChanged += new System.EventHandler(this.txtNombre_TextChanged);
             this.txtNombre.Leave += new System.EventHandler(this.txtNombre_Leave);
             // 
             // btnRecalcular
             // 
-            this.btnRecalcular.Location = new System.Drawing.Point(1056, 53);
+            resources.ApplyResources(this.btnRecalcular, "btnRecalcular");
             this.btnRecalcular.Name = "btnRecalcular";
-            this.btnRecalcular.Size = new System.Drawing.Size(75, 37);
-            this.btnRecalcular.TabIndex = 29;
-            this.btnRecalcular.Text = "Recalcular";
             this.btnRecalcular.UseVisualStyleBackColor = true;
             this.btnRecalcular.Click += new System.EventHandler(this.btnRecalcular_Click);
             // 
             // btnRptGeneral
             // 
-            this.btnRptGeneral.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnRptGeneral.BackgroundImage")));
-            this.btnRptGeneral.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnRptGeneral.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnRptGeneral, "btnRptGeneral");
             this.btnRptGeneral.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnRptGeneral.Location = new System.Drawing.Point(258, 215);
             this.btnRptGeneral.Name = "btnRptGeneral";
-            this.btnRptGeneral.Size = new System.Drawing.Size(48, 40);
-            this.btnRptGeneral.TabIndex = 28;
             this.btnRptGeneral.UseVisualStyleBackColor = true;
             this.btnRptGeneral.Click += new System.EventHandler(this.button1_Click);
             // 
             // btnAbrir
             // 
-            this.btnAbrir.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnAbrir.BackgroundImage")));
-            this.btnAbrir.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnAbrir.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnAbrir, "btnAbrir");
             this.btnAbrir.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnAbrir.Location = new System.Drawing.Point(258, 96);
             this.btnAbrir.Name = "btnAbrir";
-            this.btnAbrir.Size = new System.Drawing.Size(46, 31);
-            this.btnAbrir.TabIndex = 27;
-            this.btnAbrir.TextAlign = System.Drawing.ContentAlignment.MiddleRight;
             this.btnAbrir.UseVisualStyleBackColor = true;
             this.btnAbrir.Click += new System.EventHandler(this.txtAbrir_Click);
             // 
             // btnGuardar
             // 
             this.btnGuardar.BackColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnGuardar.BackgroundImage")));
-            this.btnGuardar.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.btnGuardar.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnGuardar, "btnGuardar");
             this.btnGuardar.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnGuardar.Location = new System.Drawing.Point(258, 133);
             this.btnGuardar.Name = "btnGuardar";
-            this.btnGuardar.Size = new System.Drawing.Size(46, 33);
-            this.btnGuardar.TabIndex = 26;
             this.btnGuardar.UseVisualStyleBackColor = false;
             this.btnGuardar.Click += new System.EventHandler(this.txtGuardar_Click);
             // 
             // btnVistaP
             // 
             this.btnVistaP.BackColor = System.Drawing.SystemColors.Control;
-            this.btnVistaP.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("btnVistaP.BackgroundImage")));
-            this.btnVistaP.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnVistaP.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
+            resources.ApplyResources(this.btnVistaP, "btnVistaP");
             this.btnVistaP.ForeColor = System.Drawing.SystemColors.Control;
-            this.btnVistaP.ImageAlign = System.Drawing.ContentAlignment.TopCenter;
-            this.btnVistaP.Location = new System.Drawing.Point(258, 172);
             this.btnVistaP.Name = "btnVistaP";
-            this.btnVistaP.Size = new System.Drawing.Size(46, 37);
-            this.btnVistaP.TabIndex = 25;
             this.btnVistaP.UseVisualStyleBackColor = false;
             this.btnVistaP.Click += new System.EventHandler(this.btnVistaP_Click);
             // 
+            // btnLimpiar
+            // 
+            resources.ApplyResources(this.btnLimpiar, "btnLimpiar");
+            this.btnLimpiar.Name = "btnLimpiar";
+            this.btnLimpiar.UseVisualStyleBackColor = true;
+            this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
+            // 
+            // statusStrip1
+            // 
+            this.statusStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.toolStripStatusLabel1});
+            resources.ApplyResources(this.statusStrip1, "statusStrip1");
+            this.statusStrip1.Name = "statusStrip1";
+            // 
+            // toolStripStatusLabel1
+            // 
+            this.toolStripStatusLabel1.Name = "toolStripStatusLabel1";
+            resources.ApplyResources(this.toolStripStatusLabel1, "toolStripStatusLabel1");
+            // 
+            // timer1
+            // 
+            this.timer1.Interval = 4000;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
             // frmHome
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(1157, 552);
+            this.Controls.Add(this.statusStrip1);
+            this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnRecalcular);
             this.Controls.Add(this.btnRptGeneral);
             this.Controls.Add(this.btnAbrir);
@@ -391,10 +332,11 @@
             this.Controls.Add(this.cbOrganismos);
             this.Controls.Add(this.cbLocalidad);
             this.Name = "frmHome";
-            this.Text = "Home";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).EndInit();
+            this.statusStrip1.ResumeLayout(false);
+            this.statusStrip1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -431,6 +373,10 @@
         private System.Windows.Forms.Button btnRptGeneral;
         private System.Windows.Forms.Button btnRecalcular;
         private System.Windows.Forms.ToolTip toolTip1;
+        private System.Windows.Forms.Button btnLimpiar;
+        private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
+        private System.Windows.Forms.StatusStrip statusStrip1;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

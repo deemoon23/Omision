@@ -34,6 +34,9 @@
             this.dateTimePicker2 = new System.Windows.Forms.DateTimePicker();
             this.btnGenerar = new System.Windows.Forms.Button();
             this.lblParciales = new System.Windows.Forms.Label();
+            this.lblNombre = new System.Windows.Forms.Label();
+            this.txtNombre = new System.Windows.Forms.TextBox();
+            this.lblMsg = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgEmpleados)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             this.SuspendLayout();
@@ -87,17 +90,48 @@
             // lblParciales
             // 
             this.lblParciales.AutoSize = true;
-            this.lblParciales.Location = new System.Drawing.Point(660, 19);
+            this.lblParciales.ForeColor = System.Drawing.SystemColors.Highlight;
+            this.lblParciales.Location = new System.Drawing.Point(817, 16);
             this.lblParciales.Name = "lblParciales";
             this.lblParciales.Size = new System.Drawing.Size(13, 13);
             this.lblParciales.TabIndex = 5;
             this.lblParciales.Text = "1";
+            // 
+            // lblNombre
+            // 
+            this.lblNombre.AutoSize = true;
+            this.lblNombre.Location = new System.Drawing.Point(15, 63);
+            this.lblNombre.Name = "lblNombre";
+            this.lblNombre.Size = new System.Drawing.Size(47, 13);
+            this.lblNombre.TabIndex = 7;
+            this.lblNombre.Text = "Nombre:";
+            // 
+            // txtNombre
+            // 
+            this.txtNombre.Location = new System.Drawing.Point(62, 60);
+            this.txtNombre.Name = "txtNombre";
+            this.txtNombre.Size = new System.Drawing.Size(262, 20);
+            this.txtNombre.TabIndex = 6;
+            this.txtNombre.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
+            // 
+            // lblMsg
+            // 
+            this.lblMsg.AutoSize = true;
+            this.lblMsg.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblMsg.Location = new System.Drawing.Point(659, 15);
+            this.lblMsg.Name = "lblMsg";
+            this.lblMsg.Size = new System.Drawing.Size(161, 13);
+            this.lblMsg.TabIndex = 8;
+            this.lblMsg.Text = "# De Parciales para Cobro:";
             // 
             // frmReporteGeneral
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1145, 499);
+            this.Controls.Add(this.lblMsg);
+            this.Controls.Add(this.lblNombre);
+            this.Controls.Add(this.txtNombre);
             this.Controls.Add(this.lblParciales);
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.dateTimePicker2);
@@ -122,5 +156,8 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker2;
         private System.Windows.Forms.Button btnGenerar;
         private System.Windows.Forms.Label lblParciales;
+        private System.Windows.Forms.Label lblNombre;
+        private System.Windows.Forms.TextBox txtNombre;
+        private System.Windows.Forms.Label lblMsg;
     }
 }

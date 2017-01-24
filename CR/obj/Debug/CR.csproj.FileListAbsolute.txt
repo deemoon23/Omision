@@ -123,3 +123,6 @@ C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmVistaPrevia.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmAbrirOmision.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmReporteGeneral.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.CrystalReport1.resources
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\es-MX\CR.resources.dll
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmHome.es-MX.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\es-MX\CR.resources.dll
