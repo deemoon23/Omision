@@ -63,6 +63,7 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.toolStripStatusLabel1 = new System.Windows.Forms.ToolStripStatusLabel();
             this.timer1 = new System.Windows.Forms.Timer(this.components);
+            this.label1 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.statusStrip1.SuspendLayout();
@@ -70,14 +71,14 @@
             // 
             // cbLocalidad
             // 
-            this.cbLocalidad.FormattingEnabled = true;
             resources.ApplyResources(this.cbLocalidad, "cbLocalidad");
+            this.cbLocalidad.FormattingEnabled = true;
             this.cbLocalidad.Name = "cbLocalidad";
             // 
             // cbOrganismos
             // 
-            this.cbOrganismos.FormattingEnabled = true;
             resources.ApplyResources(this.cbOrganismos, "cbOrganismos");
+            this.cbOrganismos.FormattingEnabled = true;
             this.cbOrganismos.Name = "cbOrganismos";
             // 
             // btnGenerar
@@ -103,14 +104,14 @@
             // 
             // dateTimePicker1
             // 
-            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             resources.ApplyResources(this.dateTimePicker1, "dateTimePicker1");
+            this.dateTimePicker1.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker1.Name = "dateTimePicker1";
             // 
             // dateTimePicker2
             // 
-            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             resources.ApplyResources(this.dateTimePicker2, "dateTimePicker2");
+            this.dateTimePicker2.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dateTimePicker2.Name = "dateTimePicker2";
             this.dateTimePicker2.Value = new System.DateTime(2017, 1, 6, 12, 36, 41, 0);
             this.dateTimePicker2.ValueChanged += new System.EventHandler(this.dateTimePicker2_ValueChanged);
@@ -123,8 +124,8 @@
             // 
             // dgDatos
             // 
-            this.dgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dgDatos, "dgDatos");
+            this.dgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgDatos.Name = "dgDatos";
             // 
             // txtApellidoPa
@@ -141,6 +142,7 @@
             this.txtSueldo.Name = "txtSueldo";
             this.txtSueldo.Click += new System.EventHandler(this.txtSueldo_Click);
             this.txtSueldo.TextChanged += new System.EventHandler(this.txtSueldo_TextChanged);
+            this.txtSueldo.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtSueldo_KeyPress);
             this.txtSueldo.Leave += new System.EventHandler(this.txtSueldo_Leave);
             // 
             // txtElaborada
@@ -153,18 +155,20 @@
             // 
             // dgTasas
             // 
-            this.dgTasas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             resources.ApplyResources(this.dgTasas, "dgTasas");
+            this.dgTasas.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgTasas.Name = "dgTasas";
             // 
             // txtInteres
             // 
             resources.ApplyResources(this.txtInteres, "txtInteres");
             this.txtInteres.Name = "txtInteres";
+            this.txtInteres.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.txtInteres_KeyPress);
             // 
             // btnAgregar
             // 
             resources.ApplyResources(this.btnAgregar, "btnAgregar");
+            this.btnAgregar.ForeColor = System.Drawing.SystemColors.Control;
             this.btnAgregar.Name = "btnAgregar";
             this.btnAgregar.UseVisualStyleBackColor = true;
             this.btnAgregar.Click += new System.EventHandler(this.btnAgregar_Click);
@@ -275,6 +279,7 @@
             // btnLimpiar
             // 
             resources.ApplyResources(this.btnLimpiar, "btnLimpiar");
+            this.btnLimpiar.ForeColor = System.Drawing.SystemColors.Control;
             this.btnLimpiar.Name = "btnLimpiar";
             this.btnLimpiar.UseVisualStyleBackColor = true;
             this.btnLimpiar.Click += new System.EventHandler(this.btnLimpiar_Click);
@@ -293,14 +298,21 @@
             // 
             // timer1
             // 
-            this.timer1.Interval = 4000;
+            this.timer1.Interval = 6000;
             this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
+            // 
+            // label1
+            // 
+            resources.ApplyResources(this.label1, "label1");
+            this.label1.Name = "label1";
+            this.label1.Click += new System.EventHandler(this.label1_Click);
             // 
             // frmHome
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnLimpiar);
             this.Controls.Add(this.btnRecalcular);
@@ -377,6 +389,7 @@
         private System.Windows.Forms.ToolStripStatusLabel toolStripStatusLabel1;
         private System.Windows.Forms.StatusStrip statusStrip1;
         private System.Windows.Forms.Timer timer1;
+        private System.Windows.Forms.Label label1;
     }
 }
 

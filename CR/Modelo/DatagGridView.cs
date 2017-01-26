@@ -148,34 +148,34 @@ namespace CR.Modelo
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    servMed.ToString("#.0"),
-                    gInfHosp.ToString("#.0"),
-                    fondoP.ToString("#.0"),
-                    CP.ToString("#.0"),
-                    prendario.ToString("#.0"),
-                    segurovida.ToString("#.0"),
-                    seguroretiro.ToString("#.0"),
-                    totalCuotas.ToString("#.0"),
-                    tasa.ToString("#.0")+"%",
+                    servMed.ToString("#.00"),
+                    gInfHosp.ToString("#.00"),
+                    fondoP.ToString("#.00"),
+                    CP.ToString("#.00"),
+                    prendario.ToString("#.00"),
+                    segurovida.ToString("#.00"),
+                    seguroretiro.ToString(),
+                    totalCuotas.ToString("#.00"),
+                    tasa.ToString("#.00")+"%",
                     importe.ToString(),
-                    a_servMed.ToString("#.0"),
-                    a_gInfHosp.ToString("#.0"),
-                    a_fondoP.ToString("#.0"),
-                    a_CP.ToString("#.0"),
-                    a_prendario.ToString("#.0"),
-                    a_indGlobal.ToString("#.0"),
-                    a_ayudaFune.ToString("#.0"),
-                    a_GastosAdmin.ToString("#.0"),
-                    a_pensionMin.ToString("#.0"),
-                    a_Fovi.ToString("#.0"),
-                    a_segurovida.ToString("#.0"),
-                    a_seguroretiro.ToString("#.0"),
-                    a_TotalAportaciones.ToString("#.0"),
-                    tasa.ToString("#.0")+"%",
+                    a_servMed.ToString("#.00"),
+                    a_gInfHosp.ToString("#.00"),
+                    a_fondoP.ToString("#.00"),
+                    a_CP.ToString("#.00"),
+                    a_prendario.ToString("#.00"),
+                    a_indGlobal.ToString("#.00"),
+                    a_ayudaFune.ToString("#.00"),
+                    a_GastosAdmin.ToString("#.00"),
+                    a_pensionMin.ToString("#.00"),
+                    a_Fovi.ToString("#.00"),
+                    a_segurovida.ToString("#.00"),
+                    a_seguroretiro.ToString("#.00"),
+                    a_TotalAportaciones.ToString("#.00"),
+                    tasa.ToString()+"%",
                     a_importe.ToString(),
-                    totalCuoApo.ToString("#.0"),
-                    totalMor.ToString("#.0"),
-                    totalGen.ToString("#.0"),
+                    totalCuoApo.ToString("#.00"),
+                    totalMor.ToString("#.00"),
+                    totalGen.ToString("#.00"),
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
 
@@ -225,6 +225,16 @@ namespace CR.Modelo
                 }
             }
         }
+        /// <summary>
+        /// Alimenta de información el DataGridView con el cálculo de omisión.
+        /// </summary>
+        /// <param name="lstTasa">Lista de tasas de cada mes entre el rango de fechas de la omisión.</param>
+        /// <param name="sueldo">Sueldo del empleado</param>
+        /// <param name="datos">Datos del catálogo de organismos</param>
+        /// <param name="Grid">DataGridView que se desea utilizar</param>
+        /// <param name="_Interinato">Booleano que determina si el cálculo se realizara con las tasas de interinato</param>
+        /// <param name="_UltimaTasa">Fecha de la ultima tasa que se desea utilizar para el cálculo.</param>
+        /// <param name="_Tipo">Tipo de cobro.</param>
         public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, DateTime _UltimaTasa, int _Tipo)
         {
             string mes = "";

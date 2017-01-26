@@ -11,7 +11,7 @@ namespace CR.Modelo
     {
         public long id { get; set; }
 
-        //    public string empleado { get; set; }
+        public string empleado { get; set; }
 
         public decimal? sueldo { get; set; }
 
@@ -131,9 +131,9 @@ namespace CR.Modelo
                 using (var ctx = new _Modelo())
                 {
                     List<Tuple<string, string, string,string, string, string>> lst = new List<Tuple<string, string, string,string, string, string>>();
-                   
-                    var x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
-                    foreach (var item in x)
+                    var x = (ctx.Omisiones.Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).OrderByDescending(r=>r.mesCalculo).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo })).ToList();
+                    var xx = x.OrderByDescending(r => r.Key.mesCalculo);
+                    foreach (var item in xx)
                     {
                         lst.Add(new Tuple<string, string, string, string,string, string>(item.Key.nombre,item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(),  item.Key.Localidad, item.Key.Organismo));
                     }
@@ -203,7 +203,23 @@ namespace CR.Modelo
             {
                 using (var ctx = new _Modelo())
                 {
-                    return ctx.Omisiones.Where(r => r.nombre == _nombre && r.apellidoP == _apellidoP && r.apellidoM == _apellidoM).ToList();
+                    return ctx.Omisiones.OrderBy(r=>r.mesOmitido).Where(r => r.nombre == _nombre && r.apellidoP == _apellidoP && r.apellidoM == _apellidoM).ToList();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        /// <summary>
+        /// Obtiene una con todos los empleados.
+        /// </summary>
+        /// <returns></returns>
+        public List<string> getEmpleados()
+        {
+            try
+            {
+                using (var ctx = new _Modelo())
+                {
+                    return ctx.Omisiones.Select(r=>r.empleado).ToList();
                 }
             }
             catch (Exception) { throw; }

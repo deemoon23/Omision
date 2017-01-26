@@ -15,7 +15,11 @@ namespace CR.Modelo
         public DateTime? fecha { get; set; }
 
         public decimal? tasa { get; set; }
-
+        /// <summary>
+        /// Calcula la tasa desde la fecha indicada como parametro hasta la ultima registrada en la base de datos.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se desea calcular la tasa.</param>
+        /// <returns></returns>
         public double getTasa(DateTime _inicio)
         {
             DateTime inicio = new DateTime(_inicio.Year, _inicio.Month, 1);
@@ -31,7 +35,13 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
-
+        
+        /// <summary>
+        /// Calcula la tasa entre las fechas indicadas como parametros.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se desea calcular la tasa</param>
+        /// <param name="_final">Ultima fecha que se desea para calcular la tasa</param>
+        /// <returns></returns>
         public double getTasa(DateTime _inicio, DateTime _final)
         {
             DateTime inicio = new DateTime(_inicio.Year, _inicio.Month, 1);
@@ -48,6 +58,10 @@ namespace CR.Modelo
             catch (Exception) { throw; }
         }
 
+        /// <summary>
+        /// Obtiene una lista de las Omisiones de Interinato con todos  sus datos.
+        /// </summary>
+        /// <returns></returns>
         public List<tasasOmisionesInterinato> getAll()
         {
            

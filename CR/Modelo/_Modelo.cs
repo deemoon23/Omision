@@ -120,9 +120,9 @@ namespace CR.Modelo
                 .HasForeignKey(e => e.idLocalidad)
                 .WillCascadeOnDelete(false);
 
-            //modelBuilder.Entity<Omisiones>()
-            //    .Property(e => e.empleado)
-            //    .IsUnicode(false);
+            modelBuilder.Entity<Omisiones>()
+                .Property(e => e.empleado)
+                .IsUnicode(false);
 
             modelBuilder.Entity<Omisiones>()
                 .Property(e => e.folio)

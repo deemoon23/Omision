@@ -31,7 +31,6 @@ namespace CR
         {
            
             dgDatos.DataSource = Omi.getOmisiones();
-
             dgDatos.Columns[0].HeaderText = "Nombre";
             dgDatos.Columns[0].DisplayIndex = 2;
             dgDatos.Columns[1].HeaderText = "Apellido Paterno";
@@ -42,6 +41,10 @@ namespace CR
             dgDatos.Columns[3].DisplayIndex = 5;
             dgDatos.Columns[4].HeaderText = "Localidad";
             dgDatos.Columns[5].HeaderText = "Organismo";
+
+
+
+               
         }
 
        
@@ -62,11 +65,16 @@ namespace CR
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            dgDatos.DataSource = Omi.getOmisiones(textBox1.Text.Trim());
         }
 
         private void lblNombre_Click(object sender, EventArgs e)
         {
+
+        }
+
+        private void btnBuscar_Click(object sender, EventArgs e)
+        {
+            dgDatos.DataSource = Omi.getOmisiones(textBox1.Text.Trim());
 
         }
     }

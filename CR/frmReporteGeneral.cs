@@ -20,7 +20,8 @@ namespace CR
         List<Modelo.Omisiones> lstAux = new List<Modelo.Omisiones>();
         BindingList<Modelo.Omisiones> lst;
         List<string> lstEmpleados = new List<string>();
-        List<Tuple<string, string, string>> lstTEmpleados = new List<Tuple<string, string, string>>();
+        List<string> lstChkEmpleados = new List<string>();
+        List<Tuple<string, string, string,string>> lstTEmpleados = new List<Tuple<string, string, string,string>>();
         public frmReporteGeneral()
         {
             InitializeComponent();
@@ -49,10 +50,10 @@ namespace CR
         {
             //TODO ADD LIST TO BINDINGLIST
             int rowIndex = e.RowIndex;
-
-            string nombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString();
-            lstTEmpleados.Add(new Tuple<string, string, string>(dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString()));
-            if (!lstEmpleados.Contains(nombre))
+            string nombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString();
+            string chknombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString();
+            lstTEmpleados.Add(new Tuple<string, string, string,string>(dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString()));
+            if (!lstChkEmpleados.Contains(chknombre))
             {
                 List<Modelo.Omisiones> newlst = new List<Modelo.Omisiones>();
                 newlst = Omi.getOmision(dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString());
@@ -71,11 +72,12 @@ namespace CR
                 dgDatos.Columns[7].DisplayIndex = 5;
                 dgDatos.Columns[9].DisplayIndex = 6;
                 lstEmpleados.Add(nombre);
+                lstChkEmpleados.Add(chknombre);
                 //lstEmpleadoSel.Add();
             }
             else
             {
-                MessageBox.Show("Empleado ya agregado.");
+                MessageBox.Show("Registros ya agregados.");
             }
 
         }
@@ -102,150 +104,160 @@ namespace CR
 
         private void button1_Click(object sender, EventArgs e)
         {
-            DSGeneral ds = new DSGeneral();
-
-            int i = 0;
-            string localidad = (from a in lst select a.Localidad).FirstOrDefault();
-            string organismo = (from a in lst select a.Organismo).FirstOrDefault();
-            DSGeneral.dtInfoRow dtInfoRow = ds.dtInfo.NewdtInfoRow();
-            dtInfoRow.Localidad = localidad;
-            dtInfoRow.Organismo = organismo;
-            dtInfoRow.idLocalidad = Loc.getByDescripcion(localidad).codigo;
-            dtInfoRow.idOrganismo = Org.getByDescripcion(organismo).codigo;
-            ds.dtInfo.AdddtInfoRow(dtInfoRow);
-            List<int> lstAnios = new List<int>();
-            int anio = 0;
-            double sm = 0;
-            if (i == 0)
+            if (dgDatos.Rows.Count != 0)
             {
 
-                anio = Convert.ToDateTime(dgDatos.Rows[0].Cells[2].Value.ToString()).Year;
-                lstAnios.Add(anio);
 
-            }
+                DSGeneral ds = new DSGeneral();
 
-            foreach (DataGridViewRow row in dgDatos.Rows)
-            {
-                if (i < dgDatos.Rows.Count - 1)
-
+                int i = 0;
+                string localidad = (from a in lst select a.Localidad).FirstOrDefault();
+                string organismo = (from a in lst select a.Organismo).FirstOrDefault();
+                DSGeneral.dtInfoRow dtInfoRow = ds.dtInfo.NewdtInfoRow();
+                dtInfoRow.Localidad = localidad;
+                dtInfoRow.Organismo = organismo;
+                dtInfoRow.idLocalidad = Loc.getByDescripcion(localidad).codigo;
+                dtInfoRow.idOrganismo = Org.getByDescripcion(organismo).codigo;
+                ds.dtInfo.AdddtInfoRow(dtInfoRow);
+                List<int> lstAnios = new List<int>();
+                int anio = 0;
+                double sm = 0;
+                if (i == 0)
                 {
-                    if (anio != Convert.ToDateTime(dgDatos.Rows[i].Cells[2].Value.ToString()).Year)
-                    {
-                        anio = Convert.ToDateTime(dgDatos.Rows[i].Cells[2].Value.ToString()).Year;
-                        if (!lstAnios.Contains(anio))
-                        {
-                            lstAnios.Add(anio);
-                        }
-                    }
+
+                    anio = Convert.ToDateTime(dgDatos.Rows[0].Cells[3].Value.ToString()).Year;
+                    lstAnios.Add(anio);
+
                 }
 
-                i++;
+                foreach (DataGridViewRow row in dgDatos.Rows)
+                {
+                    if (i < dgDatos.Rows.Count - 1)
+
+                    {
+                        if (anio != Convert.ToDateTime(dgDatos.Rows[i].Cells[3].Value.ToString()).Year)
+                        {
+                            anio = Convert.ToDateTime(dgDatos.Rows[i].Cells[3].Value.ToString()).Year;
+                            if (!lstAnios.Contains(anio))
+                            {
+                                lstAnios.Add(anio);
+                            }
+                        }
+                    }
+
+                    i++;
 
 
-            }
-            lstAnios.Sort();
+                }
+                lstAnios.Sort();
 
-            int count = 0;
+                int count = 0;
 
-            foreach (var item in lstAnios)
-            {
-                DSGeneral.dtDatosAñoRow dato = ds.dtDatosAño.NewdtDatosAñoRow();
-                dato.año = lstAnios[count];
-                dato.sueldo = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.sueldo).Sum());
-                dato.csm = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.csm).Sum());
-                dato.cfp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cfp).Sum());
-                dato.ccp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.ccp).Sum());
-                dato.cpren = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cpren).Sum());
-                dato.csv = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.csv).Sum());
-                dato.csr = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.csr).Sum());
-                dato.cgi = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cgi).Sum());
-                dato.tcuotas = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tcuotas).Sum());
-                dato.importeC = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.importeC).Sum());
-                dato.afp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.afp).Sum());
-                dato.asm = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.asm).Sum());
-                dato.cfp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cfp).Sum());
-                dato.acp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.acp).Sum());
-                dato.apren = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.apren).Sum());
-                dato.asr = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.asr).Sum());
-                dato.agi = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.agi).Sum());
-                dato.asv = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.asv).Sum());
-                dato.afovi = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.afovi).Sum());
-                dato.apm = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.apm).Sum());
-                dato.aaf = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.aaf).Sum());
-                dato.aig = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.aig).Sum());
-                dato.aga = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.aga).Sum());
-                dato.taporte = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.taporta).Sum());
-                dato.importeA = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.importeA).Sum());
-                dato.tasa = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tasa).Sum());
-                dato.tmoratorio = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tmoratorio).Sum());
-                dato.tmes = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tmes).Sum());
-                ds.dtDatosAño.AdddtDatosAñoRow(dato);
+                foreach (var item in lstAnios)
+                {
+                    DSGeneral.dtDatosAñoRow dato = ds.dtDatosAño.NewdtDatosAñoRow();
+                    dato.año = lstAnios[count];
+                    dato.sueldo = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.sueldo).Sum());
+                    dato.csm = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.csm).Sum());
+                    dato.cfp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cfp).Sum());
+                    dato.ccp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.ccp).Sum());
+                    dato.cpren = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cpren).Sum());
+                    dato.csv = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.csv).Sum());
+                    dato.csr = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.csr).Sum());
+                    dato.cgi = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cgi).Sum());
+                    dato.tcuotas = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tcuotas).Sum());
+                    dato.importeC = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.importeC).Sum());
+                    dato.afp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.afp).Sum());
+                    dato.asm = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.asm).Sum());
+                    dato.cfp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.cfp).Sum());
+                    dato.acp = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.acp).Sum());
+                    dato.apren = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.apren).Sum());
+                    dato.asr = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.asr).Sum());
+                    dato.agi = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.agi).Sum());
+                    dato.asv = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.asv).Sum());
+                    dato.afovi = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.afovi).Sum());
+                    dato.apm = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.apm).Sum());
+                    dato.aaf = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.aaf).Sum());
+                    dato.aig = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.aig).Sum());
+                    dato.aga = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.aga).Sum());
+                    dato.taporte = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.taporta).Sum());
+                    dato.importeA = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.importeA).Sum());
+                    dato.tasa = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tasa).Sum());
+                    dato.tmoratorio = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tmoratorio).Sum());
+                    dato.tmes = Convert.ToDecimal((from a in lst where a.mesOmitido.Value.Year == lstAnios[count] select a.tmes).Sum());
+                    ds.dtDatosAño.AdddtDatosAñoRow(dato);
 
-                count++;
-            }
+                    count++;
+                }
 
-            count = 0;
-            foreach (var item in lstEmpleados)
-            {
-                DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
-                dato.nombre = item;
-                dato.tMes = Convert.ToDecimal((from a in lst where a.nombre == lstTEmpleados[count].Item3 && a.apellidoM == lstTEmpleados[count].Item2 &&
-                                               a.apellidoP == lstTEmpleados[count].Item1 select a.tmes).Sum());
-                ds.dtEmpleado.AdddtEmpleadoRow(dato);
-                count++;
-            }
-            DataTable dt = new DataTable();
-            DSGeneral dsGeneral = new DSGeneral();
-            dt = dsGeneral.dtPorMes.Clone();
-            DSGeneral.dtPorMesRow data = ds.dtPorMes.NewdtPorMesRow();
-            int numMeses = Convert.ToInt32(lblParciales.Text);
-            DateTime startDate = dateTimePicker1.Value;
-            DateTime endDate = dateTimePicker2.Value;
-            var months = MonthsBetween(startDate, endDate);
-            for (int ii = 0; ii < numMeses; ii++)
-            {
+                count = 0;
+                foreach (var item in lstEmpleados)
+                {
+                    DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
+                    dato.nombre = item;
+                    dato.tMes = Convert.ToDecimal((from a in lst
+                                                   where a.nombre == lstTEmpleados[count].Item3 && a.apellidoM == lstTEmpleados[count].Item2 &&
+                                     a.apellidoP == lstTEmpleados[count].Item1
+                                                   select a.tmes).Sum());
+                    ds.dtEmpleado.AdddtEmpleadoRow(dato);
+                    count++;
+                }
+                DataTable dt = new DataTable();
+                DSGeneral dsGeneral = new DSGeneral();
+                dt = dsGeneral.dtPorMes.Clone();
+                DSGeneral.dtPorMesRow data = ds.dtPorMes.NewdtPorMesRow();
+                int numMeses = Convert.ToInt32(lblParciales.Text);
+                DateTime startDate = dateTimePicker1.Value;
+                DateTime endDate = dateTimePicker2.Value;
+                var months = MonthsBetween(startDate, endDate);
+                for (int ii = 0; ii < numMeses; ii++)
+                {
 
-                // DataRow rowDsOmision2 = dsOmisiones.DtOmisionesReport.NewRow();
-                DataRow row = dsGeneral.dtPorMes.NewRow();
-                row["mes"] = months.ElementAt(ii).Item1 + " " + months.ElementAt(ii).Item2.ToString();
-                row["sueldo"] = Convert.ToDecimal((from a in lst select a.sueldo).Sum()) / numMeses;
-                row["cfp"] = Convert.ToDecimal((from a in lst select a.cfp).Sum()) / numMeses;
-                row["ccp"] = Convert.ToDecimal((from a in lst select a.ccp).Sum()) / numMeses;
-                row["csm"] = Convert.ToDecimal((from a in lst select a.csm).Sum()) / numMeses;
-                row["apren"] = Convert.ToDecimal((from a in lst select a.apren).Sum()) / numMeses;
-                row["csv"] = Convert.ToDecimal((from a in lst select a.csv).Sum()) / numMeses;
-                row["csr"] = Convert.ToDecimal((from a in lst select a.csr).Sum()) / numMeses;
-                row["cgi"] = Convert.ToDecimal((from a in lst select a.cgi).Sum()) / numMeses;
-                row["tcuotas"] = Convert.ToDecimal((from a in lst select a.tcuotas).Sum()) / numMeses;
-                row["importeC"] = Convert.ToDecimal((from a in lst select a.importeC).Sum()) / numMeses;
-                row["acp"] = Convert.ToDecimal((from a in lst select a.acp).Sum()) / numMeses;
-                row["afp"] = Convert.ToDecimal((from a in lst select a.afp).Sum()) / numMeses;
-                row["asm"] = Convert.ToDecimal((from a in lst select a.asm).Sum()) / numMeses;
-                row["cpren"] = Convert.ToDecimal((from a in lst select a.cpren).Sum()) / numMeses;
-                row["asv"] = Convert.ToDecimal((from a in lst select a.asv).Sum()) / numMeses;
-                row["asr"] = Convert.ToDecimal((from a in lst select a.asr).Sum()) / numMeses;
-                row["agi"] = Convert.ToDecimal((from a in lst select a.agi).Sum()) / numMeses;
-                row["afovi"] = Convert.ToDecimal((from a in lst select a.afovi).Sum()) / numMeses;                
-                row["apm"] = Convert.ToDecimal((from a in lst select a.apm).Sum()) / numMeses;
-                row["aaf"] = Convert.ToDecimal((from a in lst select a.aaf).Sum()) / numMeses;
-                row["aig"] = Convert.ToDecimal((from a in lst select a.aig).Sum()) / numMeses;
-                row["aga"] = Convert.ToDecimal((from a in lst select a.aga).Sum()) / numMeses;
-                row["taporte"] = Convert.ToDecimal((from a in lst select a.taporta).Sum()) / numMeses;
-                row["importeA"] = Convert.ToDecimal((from a in lst select a.importeA).Sum()) / numMeses;
-                row["tasa"] = Convert.ToDecimal((from a in lst select a.tasa).Sum()) / numMeses;
-                row["tmoratorio"] = Convert.ToDecimal((from a in lst select a.tmoratorio).Sum()) / numMeses;
-                row["tmes"] = Convert.ToDecimal((from a in lst select a.tmes).Sum()) / numMeses;
-                row["AUX"] = ii;
-                dsGeneral.dtPorMes.Rows.Add(row);
-            }
-            foreach (DataRow dr in dsGeneral.dtPorMes.Rows)
-            {
-                
+                    // DataRow rowDsOmision2 = dsOmisiones.DtOmisionesReport.NewRow();
+                    DataRow row = dsGeneral.dtPorMes.NewRow();
+                    row["mes"] = months.ElementAt(ii).Item1 + " " + months.ElementAt(ii).Item2.ToString();
+                    row["sueldo"] = Convert.ToDecimal((from a in lst select a.sueldo).Sum()) / numMeses;
+                    row["cfp"] = Convert.ToDecimal((from a in lst select a.cfp).Sum()) / numMeses;
+                    row["ccp"] = Convert.ToDecimal((from a in lst select a.ccp).Sum()) / numMeses;
+                    row["csm"] = Convert.ToDecimal((from a in lst select a.csm).Sum()) / numMeses;
+                    row["apren"] = Convert.ToDecimal((from a in lst select a.apren).Sum()) / numMeses;
+                    row["csv"] = Convert.ToDecimal((from a in lst select a.csv).Sum()) / numMeses;
+                    row["csr"] = Convert.ToDecimal((from a in lst select a.csr).Sum()) / numMeses;
+                    row["cgi"] = Convert.ToDecimal((from a in lst select a.cgi).Sum()) / numMeses;
+                    row["tcuotas"] = Convert.ToDecimal((from a in lst select a.tcuotas).Sum()) / numMeses;
+                    row["importeC"] = Convert.ToDecimal((from a in lst select a.importeC).Sum()) / numMeses;
+                    row["acp"] = Convert.ToDecimal((from a in lst select a.acp).Sum()) / numMeses;
+                    row["afp"] = Convert.ToDecimal((from a in lst select a.afp).Sum()) / numMeses;
+                    row["asm"] = Convert.ToDecimal((from a in lst select a.asm).Sum()) / numMeses;
+                    row["cpren"] = Convert.ToDecimal((from a in lst select a.cpren).Sum()) / numMeses;
+                    row["asv"] = Convert.ToDecimal((from a in lst select a.asv).Sum()) / numMeses;
+                    row["asr"] = Convert.ToDecimal((from a in lst select a.asr).Sum()) / numMeses;
+                    row["agi"] = Convert.ToDecimal((from a in lst select a.agi).Sum()) / numMeses;
+                    row["afovi"] = Convert.ToDecimal((from a in lst select a.afovi).Sum()) / numMeses;
+                    row["apm"] = Convert.ToDecimal((from a in lst select a.apm).Sum()) / numMeses;
+                    row["aaf"] = Convert.ToDecimal((from a in lst select a.aaf).Sum()) / numMeses;
+                    row["aig"] = Convert.ToDecimal((from a in lst select a.aig).Sum()) / numMeses;
+                    row["aga"] = Convert.ToDecimal((from a in lst select a.aga).Sum()) / numMeses;
+                    row["taporte"] = Convert.ToDecimal((from a in lst select a.taporta).Sum()) / numMeses;
+                    row["importeA"] = Convert.ToDecimal((from a in lst select a.importeA).Sum()) / numMeses;
+                    row["tasa"] = Convert.ToDecimal((from a in lst select a.tasa).Sum()) / numMeses;
+                    row["tmoratorio"] = Convert.ToDecimal((from a in lst select a.tmoratorio).Sum()) / numMeses;
+                    row["tmes"] = Convert.ToDecimal((from a in lst select a.tmes).Sum()) / numMeses;
+                    row["AUX"] = ii;
+                    dsGeneral.dtPorMes.Rows.Add(row);
+                }
+                foreach (DataRow dr in dsGeneral.dtPorMes.Rows)
+                {
+
                     ds.dtPorMes.Rows.Add(dr.ItemArray);
+                }
+                frmVistaPrevia frm = new frmVistaPrevia(ds);
+                frm.Show();
             }
-            frmVistaPrevia frm = new frmVistaPrevia(ds);
-            frm.Show();
-
+            else
+            {
+                MessageBox.Show("Grid vacío, Seleccione empleados.");
+            }
         }
 
         private void dgEmpleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -281,7 +293,7 @@ namespace CR
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        private void btnBuscar_Click(object sender, EventArgs e)
         {
             dgEmpleados.DataSource = Omi.getOmisiones(txtNombre.Text.Trim());
 

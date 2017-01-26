@@ -19,6 +19,10 @@ namespace CR.Modelo
         [StringLength(110)]
         public string descripcion { get; set; }
 
+        /// <summary>
+        /// Obtiene una lista con todos los organismos.
+        /// </summary>
+        /// <returns></returns>
         public List<organismos> getAll()
         {
             try
@@ -30,6 +34,12 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Obtiene un organismo buscado por la descripción el cual se indica en el parametro
+        /// </summary>
+        /// <param name="_descripcion">Descripción del organismo que se desea buscar</param>
+        /// <returns></returns>
         public organismos getByDescripcion(string _descripcion)
         {
             try

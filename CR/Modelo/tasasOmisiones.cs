@@ -16,6 +16,11 @@ namespace CR.Modelo
 
         public decimal tasa { get; set; }
 
+
+        /// <summary>
+        /// Obtiene una lista con toda la información de las tasas.
+        /// </summary>
+        /// <returns></returns>
         public List<tasasOmisiones> getAll()
         {
 
@@ -29,6 +34,12 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Calcula la tasa desde la fecha indicada como parametro hastala última encontrada en la base de datos.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se deasea calcular la tasa.</param>
+        /// <returns></returns>
         public double getTasa(DateTime _inicio)
          {
             DateTime inicio = new DateTime();
@@ -61,10 +72,14 @@ namespace CR.Modelo
                 }
             }
             catch (Exception) { throw; }
-        }
-        //
+        }        
 
-
+        /// <summary>
+        /// Calcula la tasa entre las fechas indicadas como parametros.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se desea calcular la tasa</param>
+        /// <param name="_final">Ultima fecha que se desea para calcular la tasa</param>
+        /// <returns></returns>
         public double getTasa(DateTime _inicio, DateTime _final)
         {
             DateTime inicio = new DateTime();
@@ -105,6 +120,12 @@ namespace CR.Modelo
             
         }
 
+        /// <summary>
+        /// Obtiene Diccionario de la tasa junto con la fecha.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se desea buscar la tasa</param>
+        /// <param name="_final">Ultima fecha que se desea para buscar la tasa</param>
+        /// <returns></returns>
         public Dictionary<DateTime, double> getLstTasas(DateTime _inicio, DateTime _final)
         {
             int contador = 0;
@@ -146,6 +167,14 @@ namespace CR.Modelo
 
         }
 
+        /// <summary>
+        /// Obtiene Diccionario de la tasa junto con la fecha, se usa cuando el calculo es por quincenas.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se desea buscar la tasa</param>
+        /// <param name="_final">Ultima fecha que se desea para buscar la tasa</param>
+        /// <param name="_quincenainicial">Número de la quincena en la que inicia | 1 ó 2</param>
+        /// <param name="_quincenafinal">Número de la quincena en la que finaliza | 1 ó 2</param>
+        /// <returns></returns>
         public Dictionary<DateTime, double> getLstTasas(DateTime _inicio, DateTime _final, int _quincenainicial, int _quincenafinal)
         {
             List<double> tasas = new List<double>();
@@ -220,7 +249,11 @@ namespace CR.Modelo
 
         }
 
-
+        /// <summary>
+        /// Obtiene Diccionario de la tasa junto con la fecha, desde la fecha indicado como parametro hasta el ultimo registro encontrado en la base de datos.
+        /// </summary>
+        /// <param name="_inicio">Fecha desde la que se desea buscar la tasa</param
+        /// <returns></returns>
         public Dictionary<DateTime, double> getLstTasas(DateTime _inicio)
         {
             List<double> tasas = new List<double>();
@@ -244,6 +277,11 @@ namespace CR.Modelo
             catch (Exception) { throw; }
 
         }
+
+        /// <summary>
+        /// Obtiene la última tasa registrada en la base de datos.
+        /// </summary>
+        /// <returns></returns>
         public tasasOmisiones getUltimaTasa()
         {
              try
@@ -257,9 +295,8 @@ namespace CR.Modelo
             catch (Exception) { throw; }
 
         }
-        public static IEnumerable<Tuple<string, int>> MonthsBetween(
-           DateTime startDate,
-           DateTime endDate)
+      
+        public static IEnumerable<Tuple<string, int>> MonthsBetween( DateTime startDate, DateTime endDate)
         {
             DateTime iterator;
             DateTime limit;
