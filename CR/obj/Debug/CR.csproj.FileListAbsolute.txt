@@ -91,7 +91,6 @@ C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\CR.exe.config
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.exe
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.pdb
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.csprojResolveAssemblyReference.cache
-C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmHome.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.Properties.Resources.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.csproj.GenerateResource.Cache
 C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\CR.exe
@@ -122,7 +121,9 @@ C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\EntityFramework.SqlServer.xml
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmVistaPrevia.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmAbrirOmision.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmReporteGeneral.resources
-C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.CrystalReport1.resources
 C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\es-MX\CR.resources.dll
-C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmHome.es-MX.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\es-MX\CR.resources.dll
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.Reportes.CROmision.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmOmisiones.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmOmisiones.es-MX.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmBonificaciones.resources

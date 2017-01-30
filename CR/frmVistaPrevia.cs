@@ -12,15 +12,15 @@ namespace CR
 {
     public partial class frmVistaPrevia : Form
     {
-        DataSet1 datos;
+        DSOmisiones datos;
         DSGeneral data;
-        public frmVistaPrevia(DataSet1 _datos)
+        public frmVistaPrevia(DSOmisiones _datos)
         {
             InitializeComponent();
             datos = _datos;
             crystalReportViewer2.Visible = false;
             crystalReportViewer1.Visible = true;
-            CrystalReport1 rpt = new CrystalReport1();
+            Reportes.CROmision rpt = new Reportes.CROmision();
             rpt.SetDataSource(datos);
             crystalReportViewer1.ReportSource = rpt;
 
@@ -32,22 +32,13 @@ namespace CR
             data = _datos;
             crystalReportViewer1.Visible = false;
             crystalReportViewer2.Visible = true;
-            CRGeneral rpt = new CRGeneral();
+            Reportes.CRGeneral rpt = new Reportes.CRGeneral();
 
             rpt.SetDataSource(data);
             crystalReportViewer2.ReportSource = rpt;
 
         }
 
-        private void frmVistaPrevia_Load(object sender, EventArgs e)
-        {
 
-           
-        }
-
-        private void crystalReportViewer1_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

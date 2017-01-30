@@ -71,7 +71,11 @@ namespace CR
                 dgDatos.Columns[39].DisplayIndex = 4;
                 dgDatos.Columns[7].DisplayIndex = 5;
                 dgDatos.Columns[9].DisplayIndex = 6;
-                lstEmpleados.Add(nombre);
+
+                if (lstEmpleados.Contains(nombre) ==false)
+                {
+                    lstEmpleados.Add(nombre);
+                }
                 lstChkEmpleados.Add(chknombre);
                 //lstEmpleadoSel.Add();
             }
@@ -191,7 +195,8 @@ namespace CR
                 }
 
                 count = 0;
-                foreach (var item in lstEmpleados)
+                List<string> lstNewEmpleados = lstEmpleados.OrderByDescending(r=>r).ToList();
+                foreach (var item in lstNewEmpleados)
                 {
                     DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
                     dato.nombre = item;

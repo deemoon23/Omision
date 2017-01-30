@@ -41,7 +41,7 @@ namespace CR.Modelo
             {
                 using (var ctx = new _Modelo())
                 {
-                    return ctx.localidades.ToList();
+                    return ctx.localidades.OrderBy(r=>r.descripcion).ToList();
                 }
             }
             catch (Exception) { throw; }

@@ -43,7 +43,6 @@
             this.crystalReportViewer1.Size = new System.Drawing.Size(818, 503);
             this.crystalReportViewer1.TabIndex = 0;
             this.crystalReportViewer1.Visible = false;
-            this.crystalReportViewer1.Load += new System.EventHandler(this.crystalReportViewer1_Load);
             // 
             // crystalReportViewer2
             // 
@@ -65,8 +64,7 @@
             this.Controls.Add(this.crystalReportViewer2);
             this.Controls.Add(this.crystalReportViewer1);
             this.Name = "frmVistaPrevia";
-            this.Text = "frmVistaPrevia";
-            this.Load += new System.EventHandler(this.frmVistaPrevia_Load);
+            this.Text = "Vista Previa";
             this.ResumeLayout(false);
 
         }

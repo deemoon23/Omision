@@ -75,7 +75,7 @@ namespace CR.Modelo
         /// <param name="Grid">DataGridView que se desea utilizar</param>
         /// <param name="_Interinato">Booleano que determina si el cálculo se realizara con las tasas de interinato</param>
         /// <param name="_Tipo">Tipo de cobro.</param>
-        public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
+        public void llenarGrid(Dictionary<DateTime, double> lstTasa, decimal sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
         {
            
             
@@ -118,64 +118,82 @@ namespace CR.Modelo
                 }
                 if (datos.ContainsKey(año))
                 {
-                    double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
-                    double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
-                    double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
-                    double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
-                    double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
-                    double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
-                    double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
-                    double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
-                    double importe = totalCuotas * (tasa / 100);
-                    double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
-                    double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
-                    double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
-                    double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
-                    double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
-                    double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
-                    double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
-                    double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
-                    double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
-                    double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
-                    double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
-                    double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
-                    double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
-                    double a_importe = (tasa / 100) * a_TotalAportaciones;
-                    double totalCuoApo = a_TotalAportaciones + totalCuotas;
-                    double totalMor = importe + a_importe;
-                    double totalGen = totalMor + totalCuoApo;
+
+                    decimal segurovida = 0, seguroretiro = 0, a_segurovida = 0, a_seguroretiro = 0;
+
+                   decimal servMed = (Convert.ToDecimal(datos[año].C_ServMedico) / 100) * sueldo;
+                   decimal gInfHosp = (Convert.ToDecimal(datos[año].C_GastosInfra) / 100) * sueldo;
+                   decimal fondoP = Convert.ToDecimal(datos[año].C_FondoPens / 100) * sueldo;
+                   decimal CP = Convert.ToDecimal(datos[año].C_CortoPlazo / 100) * sueldo;
+                   decimal prendario = Convert.ToDecimal(datos[año].C_Prendario / 100) * sueldo;
+
+                    if (_Tipo == 1)
+                    {
+                        segurovida = Convert.ToDecimal(datos[año].C_SeguroVida)/2;
+                        seguroretiro = Convert.ToDecimal(datos[año].C_SeguroRetiro)/2;
+
+                        a_segurovida = Convert.ToDecimal(datos[año].A_SeguroVida)/2;
+                        a_seguroretiro = Convert.ToDecimal(datos[año].A_SeguroRetiro)/2;
+
+                    }
+                    else
+                    {
+                        seguroretiro = Convert.ToDecimal(datos[año].C_SeguroRetiro);
+                        segurovida = Convert.ToDecimal(datos[año].C_SeguroVida);
+
+                        a_seguroretiro = Convert.ToDecimal(datos[año].A_SeguroRetiro);
+                        a_segurovida = Convert.ToDecimal(datos[año].A_SeguroVida);
+
+                    }
+                    decimal totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
+                   decimal importe = totalCuotas * (Convert.ToDecimal(tasa) / 100);
+                   decimal a_servMed = Convert.ToDecimal(datos[año].A_ServMedico / 100) * sueldo;
+                   decimal a_gInfHosp = Convert.ToDecimal(datos[año].A_GastosInfra / 100) * sueldo;
+                   decimal a_fondoP = Convert.ToDecimal(datos[año].A_FondoPens / 100) * sueldo;
+                   decimal a_CP = Convert.ToDecimal(datos[año].A_CortoPlazo / 100) * sueldo;
+                   decimal a_prendario = Convert.ToDecimal(datos[año].A_Prendario / 100) * sueldo;
+                   decimal a_indGlobal = Convert.ToDecimal(datos[año].A_Indemniza / 100) * sueldo;
+                   decimal a_ayudaFune = Convert.ToDecimal(datos[año].A_AyudaFune / 100) * sueldo;
+                   decimal a_GastosAdmin = Convert.ToDecimal(datos[año].A_GastosAdmin / 100) * sueldo;
+                   decimal a_pensionMin = Convert.ToDecimal(datos[año].A_PensionMin / 100) * sueldo;
+                   decimal a_Fovi = Convert.ToDecimal(datos[año].A_Fovisssteson / 100) * sueldo;
+                     decimal a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
+                   decimal a_importe = (Convert.ToDecimal(tasa) / 100) * a_TotalAportaciones;
+                   decimal totalCuoApo = a_TotalAportaciones + totalCuotas;
+                   decimal totalMor = importe + a_importe;
+                   decimal totalGen = totalMor + totalCuoApo;
 
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    servMed.ToString("#.00"),
-                    gInfHosp.ToString("#.00"),
-                    fondoP.ToString("#.00"),
-                    CP.ToString("#.00"),
-                    prendario.ToString("#.00"),
-                    segurovida.ToString("#.00"),
+                    servMed.ToString(),
+                    gInfHosp.ToString(),
+                    fondoP.ToString(),
+                    CP.ToString(),
+                    prendario.ToString(),
+                    segurovida.ToString(),
                     seguroretiro.ToString(),
-                    totalCuotas.ToString("#.00"),
-                    tasa.ToString("#.00")+"%",
+                    totalCuotas.ToString(),
+                    tasa.ToString()+"%",
                     importe.ToString(),
-                    a_servMed.ToString("#.00"),
-                    a_gInfHosp.ToString("#.00"),
-                    a_fondoP.ToString("#.00"),
-                    a_CP.ToString("#.00"),
-                    a_prendario.ToString("#.00"),
-                    a_indGlobal.ToString("#.00"),
-                    a_ayudaFune.ToString("#.00"),
-                    a_GastosAdmin.ToString("#.00"),
-                    a_pensionMin.ToString("#.00"),
-                    a_Fovi.ToString("#.00"),
-                    a_segurovida.ToString("#.00"),
-                    a_seguroretiro.ToString("#.00"),
-                    a_TotalAportaciones.ToString("#.00"),
+                    a_servMed.ToString(),
+                    a_gInfHosp.ToString(),
+                    a_fondoP.ToString(),
+                    a_CP.ToString(),
+                    a_prendario.ToString(),
+                    a_indGlobal.ToString(),
+                    a_ayudaFune.ToString(),
+                    a_GastosAdmin.ToString(),
+                    a_pensionMin.ToString(),
+                    a_Fovi.ToString(),
+                    a_segurovida.ToString(),
+                    a_seguroretiro.ToString(),
+                    a_TotalAportaciones.ToString(),
                     tasa.ToString()+"%",
                     a_importe.ToString(),
-                    totalCuoApo.ToString("#.00"),
-                    totalMor.ToString("#.00"),
-                    totalGen.ToString("#.00"),
+                    totalCuoApo.ToString(),
+                    totalMor.ToString(),
+                    totalGen.ToString(),
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
 
@@ -187,34 +205,34 @@ namespace CR.Modelo
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    "0.0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
 
@@ -235,7 +253,7 @@ namespace CR.Modelo
         /// <param name="_Interinato">Booleano que determina si el cálculo se realizara con las tasas de interinato</param>
         /// <param name="_UltimaTasa">Fecha de la ultima tasa que se desea utilizar para el cálculo.</param>
         /// <param name="_Tipo">Tipo de cobro.</param>
-        public void llenarGrid(Dictionary<DateTime, double> lstTasa, double sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, DateTime _UltimaTasa, int _Tipo)
+        public void llenarGrid(Dictionary<DateTime, double> lstTasa, decimal sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, DateTime _UltimaTasa, int _Tipo)
         {
             string mes = "";
             Modelo.tasasOmisiones tasas = new Modelo.tasasOmisiones();
@@ -243,6 +261,7 @@ namespace CR.Modelo
             var first = lstTasa.First();          
             foreach (var item in lstTasa)
             {
+               
                 double tasa;
                 if (_Interinato == false)
                 {
@@ -274,68 +293,86 @@ namespace CR.Modelo
 
                 if (datos.ContainsKey(año))
                 {
+                    decimal segurovida = 0, seguroretiro = 0, a_segurovida = 0, a_seguroretiro = 0;
+
+                    if (_Tipo == 1)
+                    {
+                        segurovida = Convert.ToDecimal(datos[año].C_SeguroVida) / 2;
+                        seguroretiro = Convert.ToDecimal(datos[año].C_SeguroRetiro) / 2;
+
+                        a_segurovida = Convert.ToDecimal(datos[año].A_SeguroVida) / 2;
+                        a_seguroretiro = Convert.ToDecimal(datos[año].A_SeguroRetiro) / 2;
+
+                    }
+                    else
+                    {
+                        seguroretiro = Convert.ToDecimal(datos[año].C_SeguroRetiro);
+                        segurovida = Convert.ToDecimal(datos[año].C_SeguroVida);
+
+                        a_seguroretiro = Convert.ToDecimal(datos[año].A_SeguroRetiro);
+                        a_segurovida = Convert.ToDecimal(datos[año].A_SeguroVida);
+
+                    }
 
 
-                    double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
-                    double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
-                    double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
-                    double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
-                    double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
-                    double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
-                    double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
-                    double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
-                    double importe = totalCuotas * (tasa / 100);
-                    double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
-                    double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
-                    double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
-                    double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
-                    double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
-                    double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
-                    double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
-                    double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
-                    double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
-                    double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
-                    double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
-                    double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
-                    double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
-                    double a_importe = (tasa / 100) * a_TotalAportaciones;
-                    double totalCuoApo = a_TotalAportaciones + totalCuotas;
-                    double totalMor = importe + a_importe;
-                    double totalGen = totalMor + totalCuoApo;
+                    decimal servMed = Convert.ToDecimal(datos[año].C_ServMedico / 100) * sueldo;
+                    decimal gInfHosp = Convert.ToDecimal(datos[año].C_GastosInfra / 100) * sueldo;
+                    decimal fondoP = Convert.ToDecimal(datos[año].C_FondoPens / 100) * sueldo;
+                    decimal CP = Convert.ToDecimal(datos[año].C_CortoPlazo / 100) * sueldo;
+                    decimal prendario = Convert.ToDecimal(datos[año].C_Prendario / 100) * sueldo;
+                   
+                    decimal totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
+                    decimal importe = totalCuotas * (Convert.ToDecimal(tasa) / 100);
+                    decimal a_servMed = Convert.ToDecimal(datos[año].A_ServMedico / 100) * sueldo;
+                    decimal a_gInfHosp = Convert.ToDecimal(datos[año].A_GastosInfra / 100) * sueldo;
+                    decimal a_fondoP = Convert.ToDecimal(datos[año].A_FondoPens / 100) * sueldo;
+                    decimal a_CP = Convert.ToDecimal(datos[año].A_CortoPlazo / 100) * sueldo;
+                    decimal a_prendario = Convert.ToDecimal(datos[año].A_Prendario / 100) * sueldo;
+                    decimal a_indGlobal = Convert.ToDecimal(datos[año].A_Indemniza / 100) * sueldo;
+                    decimal a_ayudaFune = Convert.ToDecimal(datos[año].A_AyudaFune / 100) * sueldo;
+                    decimal a_GastosAdmin = Convert.ToDecimal(datos[año].A_GastosAdmin / 100) * sueldo;
+                    decimal a_pensionMin = Convert.ToDecimal(datos[año].A_PensionMin / 100) * sueldo;
+                    decimal a_Fovi = Convert.ToDecimal(datos[año].A_Fovisssteson / 100) * sueldo;
+                   
+                    decimal a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
+                    decimal a_importe = (Convert.ToDecimal(tasa) / 100) * a_TotalAportaciones;
+                    decimal totalCuoApo = a_TotalAportaciones + totalCuotas;
+                    decimal totalMor = importe + a_importe;
+                    decimal totalGen = totalMor + totalCuoApo;
 
-                
+
 
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    servMed.ToString("#.0"),
-                    gInfHosp.ToString("#.0"),
-                    fondoP.ToString("#.0"),
-                    CP.ToString("#.0"),
-                    prendario.ToString("#.0"),
-                    segurovida.ToString("#.0"),
-                    seguroretiro.ToString("#.0"),
-                    totalCuotas.ToString("#.0"),
-                    tasa.ToString("#.0")+"%",
+                    servMed.ToString(),
+                    gInfHosp.ToString(),
+                    fondoP.ToString(),
+                    CP.ToString(),
+                    prendario.ToString(),
+                    segurovida.ToString(),
+                    seguroretiro.ToString(),
+                    totalCuotas.ToString(),
+                    tasa.ToString()+"%",
                     importe.ToString(),
-                    a_servMed.ToString("#.0"),
-                    a_gInfHosp.ToString("#.0"),
-                    a_fondoP.ToString("#.0"),
-                    a_CP.ToString("#.0"),
-                    a_prendario.ToString("#.0"),
-                    a_indGlobal.ToString("#.0"),
-                    a_ayudaFune.ToString("#.0"),
-                    a_GastosAdmin.ToString("#.0"),
-                    a_pensionMin.ToString("#.0"),
-                    a_Fovi.ToString("#.0"),
-                    a_segurovida.ToString("#.0"),
-                    a_seguroretiro.ToString("#.0"),
-                    a_TotalAportaciones.ToString("#.0"),
-                    tasa.ToString("#.0")+"%",
+                    a_servMed.ToString(),
+                    a_gInfHosp.ToString(),
+                    a_fondoP.ToString(),
+                    a_CP.ToString(),
+                    a_prendario.ToString(),
+                    a_indGlobal.ToString(),
+                    a_ayudaFune.ToString(),
+                    a_GastosAdmin.ToString(),
+                    a_pensionMin.ToString(),
+                    a_Fovi.ToString(),
+                    a_segurovida.ToString(),
+                    a_seguroretiro.ToString(),
+                    a_TotalAportaciones.ToString(),
+                    tasa.ToString()+"%",
                     a_importe.ToString(),
-                    totalCuoApo.ToString("#.0"),
-                    totalMor.ToString("#.0"),
-                    totalGen.ToString("#.0"),
+                    totalCuoApo.ToString(),
+                    totalMor.ToString(),
+                    totalGen.ToString(),
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
                     };
@@ -346,34 +383,34 @@ namespace CR.Modelo
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    "0.0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
 
@@ -383,7 +420,8 @@ namespace CR.Modelo
                 }
             }
         }
-        public void llenarGrid(Dictionary<DateTime, double> lstTasa, List<double> _sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
+        //Recalcular
+        public void llenarGrid(Dictionary<DateTime, double> lstTasa, List<decimal> _sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
         {
             
             Modelo.tasasOmisiones tasas = new Modelo.tasasOmisiones();
@@ -397,7 +435,7 @@ namespace CR.Modelo
 
             foreach (var item in lstTasa)
             {
-                double sueldo = _sueldo[i];
+                decimal sueldo = _sueldo[i];
                 i++;
                 string mes = "";
                 double tasa;
@@ -429,67 +467,87 @@ namespace CR.Modelo
                 }
                 if (datos.ContainsKey(año))
                 {
-                    double servMed = Convert.ToDouble(datos[año].C_ServMedico / 100) * sueldo;
-                    double gInfHosp = Convert.ToDouble(datos[año].C_GastosInfra / 100) * sueldo;
-                    double fondoP = Convert.ToDouble(datos[año].C_FondoPens / 100) * sueldo;
-                    double CP = Convert.ToDouble(datos[año].C_CortoPlazo / 100) * sueldo;
-                    double prendario = Convert.ToDouble(datos[año].C_Prendario / 100) * sueldo;
-                    double segurovida = Convert.ToDouble(datos[año].C_SeguroVida);
-                    double seguroretiro = Convert.ToDouble(datos[año].C_SeguroRetiro);
-                    double totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
-                    double importe = totalCuotas * (tasa / 100);
-                    double a_servMed = Convert.ToDouble(datos[año].A_ServMedico / 100) * sueldo;
-                    double a_gInfHosp = Convert.ToDouble(datos[año].A_GastosInfra / 100) * sueldo;
-                    double a_fondoP = Convert.ToDouble(datos[año].A_FondoPens / 100) * sueldo;
-                    double a_CP = Convert.ToDouble(datos[año].A_CortoPlazo / 100) * sueldo;
-                    double a_prendario = Convert.ToDouble(datos[año].A_Prendario / 100) * sueldo;
-                    double a_indGlobal = Convert.ToDouble(datos[año].A_Indemniza / 100) * sueldo;
-                    double a_ayudaFune = Convert.ToDouble(datos[año].A_AyudaFune / 100) * sueldo;
-                    double a_GastosAdmin = Convert.ToDouble(datos[año].A_GastosAdmin / 100) * sueldo;
-                    double a_pensionMin = Convert.ToDouble(datos[año].A_PensionMin / 100) * sueldo;
-                    double a_Fovi = Convert.ToDouble(datos[año].A_Fovisssteson / 100) * sueldo;
-                    double a_segurovida = Convert.ToDouble(datos[año].A_SeguroVida);
-                    double a_seguroretiro = Convert.ToDouble(datos[año].A_SeguroRetiro);
-                    double a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
-                    double a_importe = (tasa / 100) * a_TotalAportaciones;
-                    double totalCuoApo = a_TotalAportaciones + totalCuotas;
-                    double totalMor = importe + a_importe;
-                    double totalGen = totalMor + totalCuoApo;
+                    decimal segurovida = 0, seguroretiro = 0, a_segurovida = 0, a_seguroretiro = 0;
+
+
+                    if (_Tipo == 1)
+                    {
+                        segurovida = Convert.ToDecimal(datos[año].C_SeguroVida) / 2;
+                        seguroretiro = Convert.ToDecimal(datos[año].C_SeguroRetiro) / 2;
+
+                        a_segurovida = Convert.ToDecimal(datos[año].A_SeguroVida) / 2;
+                        a_seguroretiro = Convert.ToDecimal(datos[año].A_SeguroRetiro) / 2;
+
+                    }
+                    else
+                    {
+                        seguroretiro = Convert.ToDecimal(datos[año].C_SeguroRetiro);
+                        segurovida = Convert.ToDecimal(datos[año].C_SeguroVida);
+
+                        a_seguroretiro = Convert.ToDecimal(datos[año].A_SeguroRetiro);
+                        a_segurovida = Convert.ToDecimal(datos[año].A_SeguroVida);
+
+                    }
+                    decimal servMed = Convert.ToDecimal(datos[año].C_ServMedico / 100) * sueldo;
+                    decimal gInfHosp = Convert.ToDecimal(datos[año].C_GastosInfra / 100) * sueldo;
+                    decimal fondoP = Convert.ToDecimal(datos[año].C_FondoPens / 100) * sueldo;
+                    decimal CP = Convert.ToDecimal(datos[año].C_CortoPlazo / 100) * sueldo;
+                    decimal prendario = Convert.ToDecimal(datos[año].C_Prendario / 100) * sueldo;
+             
+              
+                    decimal totalCuotas = servMed + gInfHosp + fondoP + CP + prendario + segurovida + seguroretiro;
+                    decimal importe = totalCuotas * (Convert.ToDecimal(tasa) / 100);
+                    decimal a_servMed = Convert.ToDecimal(datos[año].A_ServMedico / 100) * sueldo;
+                    decimal a_gInfHosp = Convert.ToDecimal(datos[año].A_GastosInfra / 100) * sueldo;
+                    decimal a_fondoP = Convert.ToDecimal(datos[año].A_FondoPens / 100) * sueldo;
+                    decimal a_CP = Convert.ToDecimal(datos[año].A_CortoPlazo / 100) * sueldo;
+                    decimal a_prendario = Convert.ToDecimal(datos[año].A_Prendario / 100) * sueldo;
+                    decimal a_indGlobal = Convert.ToDecimal(datos[año].A_Indemniza / 100) * sueldo;
+                    decimal a_ayudaFune = Convert.ToDecimal(datos[año].A_AyudaFune / 100) * sueldo;
+                    decimal a_GastosAdmin = Convert.ToDecimal(datos[año].A_GastosAdmin / 100) * sueldo;
+                    decimal a_pensionMin = Convert.ToDecimal(datos[año].A_PensionMin / 100) * sueldo;
+                    decimal a_Fovi = Convert.ToDecimal(datos[año].A_Fovisssteson / 100) * sueldo;
+              
+              
+                    decimal a_TotalAportaciones = a_servMed + a_gInfHosp + a_fondoP + a_CP + a_prendario + a_indGlobal + a_ayudaFune + a_GastosAdmin + a_pensionMin + a_Fovi + a_segurovida + a_seguroretiro;
+                    decimal a_importe = (Convert.ToDecimal(tasa) / 100) * a_TotalAportaciones;
+                    decimal totalCuoApo = a_TotalAportaciones + totalCuotas;
+                    decimal totalMor = importe + a_importe;
+                    decimal totalGen = totalMor + totalCuoApo;
 
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    servMed.ToString("#.0"),
-                    gInfHosp.ToString("#.0"),
-                    fondoP.ToString("#.0"),
-                    CP.ToString("#.0"),
-                    prendario.ToString("#.0"),
-                    segurovida.ToString("#.0"),
-                    seguroretiro.ToString("#.0"),
-                    totalCuotas.ToString("#.0"),
-                    tasa.ToString("#.0")+"%",
+                    servMed.ToString(),
+                    gInfHosp.ToString(),
+                    fondoP.ToString(),
+                    CP.ToString(),
+                    prendario.ToString(),
+                    segurovida.ToString(),
+                    seguroretiro.ToString(),
+                    totalCuotas.ToString(),
+                    tasa.ToString()+"%",
                     importe.ToString(),
-                    a_servMed.ToString("#.0"),
-                    a_gInfHosp.ToString("#.0"),
-                    a_fondoP.ToString("#.0"),
-                    a_CP.ToString("#.0"),
-                    a_prendario.ToString("#.0"),
-                    a_indGlobal.ToString("#.0"),
-                    a_ayudaFune.ToString("#.0"),
-                    a_GastosAdmin.ToString("#.0"),
-                    a_pensionMin.ToString("#.0"),
-                    a_Fovi.ToString("#.0"),
-                    a_segurovida.ToString("#.0"),
-                    a_seguroretiro.ToString("#.0"),
-                    a_TotalAportaciones.ToString("#.0"),
-                    tasa.ToString("#.0")+"%",
+                    a_servMed.ToString(),
+                    a_gInfHosp.ToString(),
+                    a_fondoP.ToString(),
+                    a_CP.ToString(),
+                    a_prendario.ToString(),
+                    a_indGlobal.ToString(),
+                    a_ayudaFune.ToString(),
+                    a_GastosAdmin.ToString(),
+                    a_pensionMin.ToString(),
+                    a_Fovi.ToString(),
+                    a_segurovida.ToString(),
+                    a_seguroretiro.ToString(),
+                    a_TotalAportaciones.ToString(),
+                    tasa.ToString()+"%",
                     a_importe.ToString(),
-                    totalCuoApo.ToString("#.0"),
-                    totalMor.ToString("#.0"),
-                    totalGen.ToString("#.0"),
+                    totalCuoApo.ToString(),
+                    totalMor.ToString(),
+                    totalGen.ToString(),
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
-
                     };
                     Grid.Rows.Add(row);
                 }
@@ -498,34 +556,34 @@ namespace CR.Modelo
                     string[] row = new string[] { sueldo + "",
                     mes, "1",
                     sueldo.ToString(),
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    "0.0",
-                    ".0",
-                    ".0",
-                    ".0",
-                    ".0",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
+                    "0.00",
                     ultimaTasa.ToShortDateString(),
                     item.Key.ToShortDateString()
 

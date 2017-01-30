@@ -51,7 +51,7 @@
             this.dgEmpleados.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgEmpleados.Location = new System.Drawing.Point(12, 86);
             this.dgEmpleados.Name = "dgEmpleados";
-            this.dgEmpleados.Size = new System.Drawing.Size(420, 439);
+            this.dgEmpleados.Size = new System.Drawing.Size(458, 439);
             this.dgEmpleados.TabIndex = 0;
             this.dgEmpleados.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEmpleados_CellContentClick);
             this.dgEmpleados.CellContentDoubleClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgEmpleados_CellContentDoubleClick);
@@ -62,9 +62,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.dgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgDatos.Location = new System.Drawing.Point(468, 86);
+            this.dgDatos.Location = new System.Drawing.Point(490, 86);
             this.dgDatos.Name = "dgDatos";
-            this.dgDatos.Size = new System.Drawing.Size(643, 439);
+            this.dgDatos.Size = new System.Drawing.Size(621, 439);
             this.dgDatos.TabIndex = 1;
             // 
             // dateTimePicker1
@@ -175,7 +175,7 @@
             this.Controls.Add(this.dgEmpleados);
             this.MinimumSize = new System.Drawing.Size(743, 438);
             this.Name = "frmReporteGeneral";
-            this.Text = "frmReporteGeneral";
+            this.Text = "Reporte General";
             this.Load += new System.EventHandler(this.frmReporteGeneral_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgEmpleados)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).EndInit();

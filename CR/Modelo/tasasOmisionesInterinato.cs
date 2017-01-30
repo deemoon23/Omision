@@ -21,16 +21,36 @@ namespace CR.Modelo
         /// <param name="_inicio">Fecha desde la que se desea calcular la tasa.</param>
         /// <returns></returns>
         public double getTasa(DateTime _inicio)
-        {
-            DateTime inicio = new DateTime(_inicio.Year, _inicio.Month, 1);
+        {            
+            DateTime inicio = new DateTime();
+            if (_inicio.Month == 12)
+            {
+                int año = _inicio.Year + 1;
+
+                inicio = new DateTime(año, 1, 1, 0, 0, 0);
+            }
+            else
+            {
+                inicio = new DateTime(_inicio.Year, _inicio.Month + 1, 1, 0, 0, 0);
+            }
 
             try
             {
                 using (var ctx = new _Modelo())
                 {
+                    var y = ctx.tasasOmisionesInterinato.Where(r => r.fecha >= inicio).ToList();
+                    if (y.Count == 0)
+                    {
+                        Modelo.tasasOmisionesInterinato tasas = new tasasOmisionesInterinato();
+                        double ultimaTasa = Convert.ToDouble(tasas.getUltimaTasa().tasa);
+                        return ultimaTasa*100;
+                    }
+                    else
+                    {
+                        var query = ctx.tasasOmisionesInterinato.Where(r => r.fecha >= inicio).Select(r => r.tasa);
+                        return Convert.ToDouble(ctx.tasasOmisionesInterinato.Where(r => r.fecha >= inicio).Select(r => r.tasa).Sum()) * 100;
 
-                    return Convert.ToDouble(ctx.tasasOmisionesInterinato.Where(r => r.fecha >= _inicio).Select(r => r.tasa).Sum()) * 100 * .8;
-
+                    }
                 }
             }
             catch (Exception) { throw; }
@@ -74,6 +94,21 @@ namespace CR.Modelo
                 }
             }
             catch (Exception) { throw; }
+        }
+
+
+        public tasasOmisionesInterinato getUltimaTasa()
+        {
+            try
+            {
+                using (var ctx = new _Modelo())
+                {
+                    tasasOmisionesInterinato query = ctx.tasasOmisionesInterinato.OrderByDescending(r => r.fecha).Take(1).FirstOrDefault();
+                    return query;
+                }
+            }
+            catch (Exception) { throw; }
+
         }
     }
 }
