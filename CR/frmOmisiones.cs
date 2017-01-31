@@ -47,6 +47,21 @@ namespace CR
 
         private void Form1_Load(object sender, EventArgs e)
         {
+
+            try
+            {
+                //13.0.2000.0 is Crystal Reports for VS 2010
+                var a = System.Reflection.Assembly.Load("CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral,PublicKeyToken=692fbea5521e1304");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                //Not Installed
+            }
+            catch
+            {
+                //Runtime is in GAC but something else prevents it from loading. (bad install?, etc)
+            }
+
             rbActual.Checked = true;
             dateTimePicker1.CustomFormat = "MMMM yyyy";
             dateTimePicker2.CustomFormat = "MMMM yyyy";
@@ -82,17 +97,20 @@ namespace CR
 
 
                     //
-                    DateTime fechaHoyAux = DateTime.Today;
-                    DateTime fechaHoy = new DateTime(fechaHoyAux.Year, fechaHoyAux.Month, 1);
-                    Modelo.tasasOmisiones ultimaFechaTemp = tasas.getUltimaTasa();
+                      Modelo.tasasOmisiones ultimaFechaTemp = tasas.getUltimaTasa();
                     DateTime ultimaFecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month, 1);
-
-                    if (ultimaFecha < fechaHoy)
+                    var XXX = ultimaFecha.Month + ultimaFecha.Year*12;
+                    var zzz = DateTime.Now.Year *12+ DateTime.Now.Month;
+                    if ((ultimaFecha.Month+ultimaFecha.Year*12) < (DateTime.Now.Year*12+DateTime.Now.Month))
                     {
 
                         lblFecha.BackColor = Color.Red;
 
 
+                    }
+                    else
+                    {
+                        lblFecha.BackColor = Color.LightGreen;
                     }
 
                     lblFecha.Text = tasas.getUltimaTasa().fecha.AddMonths(1).ToString("MMMM yyyy").ToUpper();
@@ -172,47 +190,40 @@ namespace CR
 
         private void btnAgregar_Click(object sender, EventArgs e)
         {
+            Modelo.tasasOmisiones nuevo = new Modelo.tasasOmisiones();
+            Modelo.tasasOmisiones ultimaFechaTemp = tasas.getUltimaTasa();
+
             if (txtInteres.Text.Trim() != "")
             {
-
-                //PRUEBA || TODO CREAR UN NUEVO OBJETO CON LA NUEVA FECHA* || IMPLEMENTARLO
-                DateTime prueba = new DateTime(2016, 12, 1);
-                DateTime prueba2 = new DateTime();
-                if (prueba.Month == 12)
-                {
-                    prueba2 = new DateTime(prueba.Year + 1, 1, 1);
-                }
-
-                MessageBox.Show(prueba2.Year.ToString());
-
-                //
-                Modelo.tasasOmisiones nuevo = new Modelo.tasasOmisiones();
                 DateTime fechaHoyAux = DateTime.Today;
-                Modelo.tasasOmisiones ultimaFechaTemp = tasas.getUltimaTasa();
-                nuevo.fecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month + 1, 1);
+                if (ultimaFechaTemp.fecha.Month == 12)
+                {
+                    int año = ultimaFechaTemp.fecha.Year + 1;
+                    fechaHoyAux = new DateTime(año, 1, 1, 0, 0, 0);
+                }
+                else
+                {
+                    fechaHoyAux = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month + 1, 1, 0, 0, 0);
+                }
+                nuevo.fecha = fechaHoyAux;
                 nuevo.tasa = Convert.ToDecimal(txtInteres.Text.Trim());
-
                 var ctx = new Modelo._Modelo();
                 ctx.tasasOmisiones.Add(nuevo);
-                ctx.SaveChanges();
-
-
-                //AGREGAR A UNA CLASE
-                DateTime fechaHoy = new DateTime(fechaHoyAux.Year, fechaHoyAux.Month, 1);
-                DateTime ultimaFecha = new DateTime(ultimaFechaTemp.fecha.Year, ultimaFechaTemp.fecha.Month, 1);
-
-                if (ultimaFecha < fechaHoy)
+                ctx.SaveChanges();               
+                dgTasas.DataSource = ctx.tasasOmisiones.Select(r => new { r.fecha, r.tasa }).OrderByDescending(r => r.fecha).ToList();
+                if (fechaHoyAux.Month + fechaHoyAux.Year * 12 < DateTime.Now.Year * 12 + DateTime.Now.Month)
                 {
-
                     lblFecha.BackColor = Color.Red;
-
-
                 }
+                else
+                {
+                    lblFecha.BackColor = Color.LightGreen;
+                }
+                lblFecha.Text = tasas.getUltimaTasa().fecha.AddMonths(1).ToString("MMMM yyyy").ToUpper();
+                statusStrip1.Items[0].Text = "Tasa agregada exitosamente.";
+                statusStrip1.Items[0].ForeColor = Color.ForestGreen;
+                timer1.Start();
 
-                lblFecha.Text = tasas.getUltimaTasa().fecha.AddDays(1).ToString("MMMM yyyy").ToUpper();
-
-
-                //
 
             }
             else
@@ -233,7 +244,6 @@ namespace CR
                 dtUltimaTasa.Enabled = false;
             }
         }
-
         private void lstTipo_SelectedIndexChanged(object sender, EventArgs e)
         {
             if (lstTipo.SelectedIndex == 1)
@@ -248,7 +258,6 @@ namespace CR
             }
 
         }
-
         #region TextBox
         private void txtEmpleado_TextChanged(object sender, EventArgs e)
         {
@@ -260,8 +269,6 @@ namespace CR
             }
 
         }
-
-
         private void txtEmpleado_Click(object sender, EventArgs e)
         {
             if (txtApellidoPa.ForeColor == Color.Gray)
@@ -270,7 +277,6 @@ namespace CR
             }
 
         }
-
         private void txtEmpleado_Leave(object sender, EventArgs e)
         {
             if (txtApellidoPa.Text.Count() == 0)
@@ -279,7 +285,6 @@ namespace CR
                 txtApellidoPa.ForeColor = Color.Gray;
             }
         }
-
         private void txtSueldo_TextChanged(object sender, EventArgs e)
         {
             _TypedInto = !String.IsNullOrEmpty(txtSueldo.Text);
@@ -287,7 +292,6 @@ namespace CR
             if (_TypedInto) { txtSueldo.ForeColor = Color.Black; }
 
         }
-
         private void txtSueldo_Click(object sender, EventArgs e)
         {
             if (txtSueldo.ForeColor == Color.Gray)
@@ -295,7 +299,6 @@ namespace CR
                 txtSueldo.Text = "";
             }
         }
-
         private void txtSueldo_Leave(object sender, EventArgs e)
         {
             if (txtSueldo.Text.Count() == 0)
@@ -304,14 +307,12 @@ namespace CR
                 txtSueldo.ForeColor = Color.Gray;
             }
         }
-
         private void txtElaborada_TextChanged(object sender, EventArgs e)
         {
             _TypedInto = !String.IsNullOrEmpty(txtElaborada.Text);
 
             if (_TypedInto) { txtElaborada.ForeColor = Color.Black; }
         }
-
         private void txtElaborada_Click(object sender, EventArgs e)
         {
             if (txtElaborada.ForeColor == Color.Gray)
@@ -319,7 +320,6 @@ namespace CR
                 txtElaborada.Text = "";
             }
         }
-
         private void txtElaborada_Leave(object sender, EventArgs e)
         {
             if (txtElaborada.Text.Count() == 0)
@@ -328,10 +328,6 @@ namespace CR
                 txtElaborada.ForeColor = Color.Gray;
             }
         }
-        #endregion
-
-
-
         private void txtNombre_Click(object sender, EventArgs e)
         {
             if (txtNombre.ForeColor == Color.Gray)
@@ -340,7 +336,6 @@ namespace CR
             }
 
         }
-
         private void txtNombre_Leave(object sender, EventArgs e)
         {
             if (txtNombre.Text.Count() == 0)
@@ -349,21 +344,18 @@ namespace CR
                 txtNombre.ForeColor = Color.Gray;
             }
         }
-
         private void txtNombre_TextChanged(object sender, EventArgs e)
         {
             _TypedInto = !String.IsNullOrEmpty(txtNombre.Text);
 
             if (_TypedInto) { txtNombre.ForeColor = Color.Black; }
         }
-
         private void txtApellidoMa_TextChanged(object sender, EventArgs e)
         {
             _TypedInto = !String.IsNullOrEmpty(txtApellidoMa.Text);
 
             if (_TypedInto) { txtApellidoMa.ForeColor = Color.Black; }
         }
-
         private void txtApellidoMa_Click(object sender, EventArgs e)
         {
             if (txtApellidoMa.ForeColor == Color.Gray)
@@ -372,7 +364,6 @@ namespace CR
 
             }
         }
-
         private void txtApellidoMa_Leave(object sender, EventArgs e)
         {
             if (txtApellidoMa.Text.Count() == 0)
@@ -381,6 +372,7 @@ namespace CR
                 txtApellidoMa.ForeColor = Color.Gray;
             }
         }
+        #endregion
 
         private void btnVistaP_Click(object sender, EventArgs e)
         {
@@ -501,9 +493,6 @@ namespace CR
                         row._F_P = 0;
                         row._C_P = 0;
                         row._Pren_ = 0;
-                        // var uno = Convert.ToDouble(r.Cells[9].Value);
-                        //var dos = Convert.ToDouble(r.Cells[9].Value);
-                        //var tres = Convert.ToDouble(Convert.ToDouble(r.Cells[9].Value));
                         row._S_V = 0;
                         row._S_R = 0;
                         row._T__Cuotas = 0;
@@ -520,7 +509,6 @@ namespace CR
                         row._a_S_V = 0;
                         row._a_S_R = 0;
                         row._T__Aportaciones = 0;
-
                         row.Tasa = 0;
                         row._Mora__Cuotas = 0;
                         row._Mora__Aporta_ = 0;
@@ -538,9 +526,7 @@ namespace CR
             {
                 statusStrip1.Items[0].Text = "No hay datos en el grid.";
                 statusStrip1.Items[0].ForeColor = Color.OrangeRed;
-
                 timer1.Start();
-
             }
         }
 
@@ -676,7 +662,6 @@ namespace CR
             statusStrip1.Items[0].ForeColor = Color.ForestGreen;
             timer1.Start();
 
-            timer1.Start();
 
         }
 

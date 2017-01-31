@@ -78,14 +78,9 @@ namespace CR.Modelo
         public void llenarGrid(Dictionary<DateTime, double> lstTasa, decimal sueldo, Dictionary<int, Modelo.cat_organismos2> datos, DataGridView Grid, bool _Interinato, int _Tipo)
         {
            
-            
-           
             Modelo.tasasOmisiones tasas = new Modelo.tasasOmisiones();
             DateTime ultimaTasa = tasas.getUltimaTasa().fecha;
-            Modelo.tasasOmisionesInterinato tasasInter = new tasasOmisionesInterinato();
-            var y = 0.0;
-
-            
+            Modelo.tasasOmisionesInterinato tasasInter = new tasasOmisionesInterinato();            
             foreach (var item in lstTasa)
             {
                 string mes = "";
@@ -428,7 +423,6 @@ namespace CR.Modelo
             DateTime ultimaTasa = tasas.getUltimaTasa().fecha;
 
             Modelo.tasasOmisionesInterinato tasasInter = new tasasOmisionesInterinato();
-            var y = 0.0;
             int i = 0;
          
 

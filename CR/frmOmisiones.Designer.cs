@@ -309,9 +309,8 @@
             // 
             resources.ApplyResources(this.label1, "label1");
             this.label1.Name = "label1";
-         
             // 
-            // frmHome
+            // frmOmisiones
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
@@ -347,7 +346,7 @@
             this.Controls.Add(this.btnGenerar);
             this.Controls.Add(this.cbOrganismos);
             this.Controls.Add(this.cbLocalidad);
-            this.Name = "frmHome";
+            this.Name = "frmOmisiones";
             this.Load += new System.EventHandler(this.Form1_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).EndInit();

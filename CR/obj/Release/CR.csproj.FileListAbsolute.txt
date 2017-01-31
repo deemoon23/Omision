@@ -38,3 +38,9 @@ C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\es-MX\CR.resources.dll
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.exe
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.pdb
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.csprojResolveAssemblyReference.cache
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Release\CR.exe.manifest
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Release\CR.application
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Release\log4net.dll
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Release\log4net.xml
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.exe.manifest
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.application

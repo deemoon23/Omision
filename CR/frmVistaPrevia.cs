@@ -38,7 +38,6 @@ namespace CR
             crystalReportViewer2.ReportSource = rpt;
 
         }
-
-
+      
     }
 }

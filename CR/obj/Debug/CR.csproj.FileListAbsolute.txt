@@ -127,3 +127,9 @@ C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.Reportes.CROmision.resourc
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmOmisiones.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmOmisiones.es-MX.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmBonificaciones.resources
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\CR.exe.manifest
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\CR.application
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.exe.manifest
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.application
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\log4net.dll
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\log4net.xml

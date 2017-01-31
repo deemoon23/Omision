@@ -65,6 +65,7 @@
             this.Controls.Add(this.crystalReportViewer1);
             this.Name = "frmVistaPrevia";
             this.Text = "Vista Previa";
+         
             this.ResumeLayout(false);
 
         }

@@ -125,7 +125,7 @@ namespace CR
                 ds.dtInfo.AdddtInfoRow(dtInfoRow);
                 List<int> lstAnios = new List<int>();
                 int anio = 0;
-                double sm = 0;
+              
                 if (i == 0)
                 {
 
