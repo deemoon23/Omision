@@ -100,12 +100,6 @@
         "Entry"
         {
         "MsmKey" = "8:_UNDEFINED"
-        "OwnerKey" = "8:_100B112E36EDD201FA70CD0E3B423B52"
-        "MsmSig" = "8:_UNDEFINED"
-        }
-        "Entry"
-        {
-        "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_D38044F7BD6B41649F474C34EF49086A"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -157,6 +151,12 @@
         "OwnerKey" = "8:_856E18B92792F88ECDAFCAF9D2FA01E1"
         "MsmSig" = "8:_UNDEFINED"
         }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_100B112E36EDD201FA70CD0E3B423B52"
+        "MsmSig" = "8:_UNDEFINED"
+        }
     }
     "Configurations"
     {
@@ -175,6 +175,14 @@
         "PrivateKeyFile" = "8:"
         "TimeStampServer" = "8:"
         "InstallerBootstrapper" = "3:2"
+            "BootstrapperCfg:{63ACBE69-63AA-4F98-B2B6-99F9E24495F2}"
+            {
+            "Enabled" = "11:TRUE"
+            "PromptEnabled" = "11:TRUE"
+            "PrerequisitesLocation" = "2:1"
+            "Url" = "8:"
+            "ComponentsUrl" = "8:"
+            }
         }
         "Release"
         {
@@ -1123,7 +1131,7 @@
         {
             "{5259A561-127C-4D43-A0A1-72F10C7B3BF8}:_D38044F7BD6B41649F474C34EF49086A"
             {
-            "SourcePath" = "8:..\\CR\\obj\\Debug\\CR.exe"
+            "SourcePath" = "8:..\\CR\\obj\\Release\\Omisiones.exe"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_480DDB14C39749DBBF447C7CA7772359"

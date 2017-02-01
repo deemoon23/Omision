@@ -40,28 +40,13 @@ namespace CR
             ToolTip1.SetToolTip(this.btnGuardar, "Guardar");
             ToolTip1.SetToolTip(this.btnAbrir, "Abrir Omisión");
             ToolTip1.SetToolTip(this.btnRptGeneral, "Reporte General");
-
+            dateTimePicker2.Value = dateTimePicker1.Value;
 
 
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            try
-            {
-                //13.0.2000.0 is Crystal Reports for VS 2010
-                var a = System.Reflection.Assembly.Load("CrystalDecisions.CrystalReports.Engine, Version=13.0.2000.0, Culture=neutral,PublicKeyToken=692fbea5521e1304");
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                //Not Installed
-            }
-            catch
-            {
-                //Runtime is in GAC but something else prevents it from loading. (bad install?, etc)
-            }
-
             rbActual.Checked = true;
             dateTimePicker1.CustomFormat = "MMMM yyyy";
             dateTimePicker2.CustomFormat = "MMMM yyyy";
@@ -631,7 +616,10 @@ namespace CR
             string apellidoM = frmAbrir.apelidoM;
             dgDatos.Columns.Clear();
             dgDatos.DataSource = Omi.getOmision(nombre, apellidoP, apellidoM);
-
+            if (dgDatos.Rows.Count>0)
+            {
+                btnRecalcular.Enabled = true;
+            }
             this.dgDatos.Columns[0].Visible = false;
             this.dgDatos.Columns[1].Visible = false;
             this.dgDatos.Columns[8].Visible = true;
@@ -668,6 +656,11 @@ namespace CR
         private void txtApellidoPa_KeyPress(object sender, KeyPressEventArgs e)
         {
             e.KeyChar = Char.ToUpper(e.KeyChar);
+
+        }
+
+        private void cbOrganismos_SelectedIndexChanged(object sender, EventArgs e)
+        {
 
         }
 
@@ -794,6 +787,7 @@ namespace CR
                     dgv.llenarGrid(lstTasa, sueldos, datos, dgDatos, interinato, Convert.ToInt32(lstTipo.SelectedIndex));
 
                     statusStrip1.Items[0].Text = "Omisión recalculada.";
+                    btnRecalcular.Enabled = false;
                     statusStrip1.ForeColor = Color.ForestGreen;
                     {
                         statusStrip1.Items[0].Text = "Registros ya recalculados.";

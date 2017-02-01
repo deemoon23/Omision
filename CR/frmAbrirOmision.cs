@@ -63,19 +63,26 @@ namespace CR
             }
         }
 
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
-        }
-
-        private void lblNombre_Click(object sender, EventArgs e)
-        {
-
-        }
-
+       
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dgDatos.DataSource = Omi.getOmisiones(textBox1.Text.Trim());
+            dgDatos.DataSource = Omi.getOmisiones(txtNombre.Text.Trim());
 
+        }
+
+        private void dgDatos_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            nombree = dgDatos.Rows[rowIndex].Cells[0].Value.ToString();
+            apellidoMM = dgDatos.Rows[rowIndex].Cells[2].Value.ToString();
+            apellidoPP = dgDatos.Rows[rowIndex].Cells[1].Value.ToString();
+            txtNombre.Text = apellidoPP+" " + apellidoMM +" "+ nombre;
+         
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            this.Close();
         }
     }
 }

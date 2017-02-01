@@ -23,6 +23,7 @@ namespace CR
             Reportes.CROmision rpt = new Reportes.CROmision();
             rpt.SetDataSource(datos);
             crystalReportViewer1.ReportSource = rpt;
+            
 
         }
 
@@ -38,6 +39,10 @@ namespace CR
             crystalReportViewer2.ReportSource = rpt;
 
         }
-      
+
+        private void frmVistaPrevia_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }

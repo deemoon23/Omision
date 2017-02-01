@@ -47,14 +47,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CR.exe" size="2591176">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="CR.exe" size="2603464">
       <assemblyIdentity name="CR" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>hAt3Q390FnmcyMmc1WZerB1UDpT1SU+ZMTR6zoe1FHo=</dsig:DigestValue>
+        <dsig:DigestValue>IQdiSvCz9LXpI6wDs4C/CCuCBYlRE+KosUljxOqjWug=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -66,7 +66,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>pkLGt89VrEP6SvMCpJFwrl8f+1mCcNkJrqB4XGUtPaE=</dsig:DigestValue>
+        <dsig:DigestValue>nvifcdTWNSDThqICggQFmTwNF6uNsS22Ok3rUtg1t+M=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

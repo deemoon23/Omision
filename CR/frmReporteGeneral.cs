@@ -21,10 +21,12 @@ namespace CR
         BindingList<Modelo.Omisiones> lst;
         List<string> lstEmpleados = new List<string>();
         List<string> lstChkEmpleados = new List<string>();
-        List<Tuple<string, string, string,string>> lstTEmpleados = new List<Tuple<string, string, string,string>>();
+        List<Tuple<string, string, string, string>> lstTEmpleados = new List<Tuple<string, string, string, string>>();
+        string nombreX, chkNombreX, T1, T2, T3, T4;
         public frmReporteGeneral()
         {
             InitializeComponent();
+            statusStrip1.Items[0].Text = "";
         }
 
         private void frmReporteGeneral_Load(object sender, EventArgs e)
@@ -32,7 +34,7 @@ namespace CR
             dateTimePicker1.CustomFormat = "MMMM yyyy";
             dateTimePicker2.CustomFormat = "MMMM yyyy";
             dgEmpleados.DataSource = Omi.getOmisiones();
-         
+
             dgEmpleados.Columns[0].HeaderText = "Nombre";
             dgEmpleados.Columns[0].DisplayIndex = 2;
             dgEmpleados.Columns[1].HeaderText = "Apellido Paterno";
@@ -51,8 +53,8 @@ namespace CR
             //TODO ADD LIST TO BINDINGLIST
             int rowIndex = e.RowIndex;
             string nombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString();
-            string chknombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString();
-            lstTEmpleados.Add(new Tuple<string, string, string,string>(dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString()));
+            string chknombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString();
+            lstTEmpleados.Add(new Tuple<string, string, string, string>(dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString()));
             if (!lstChkEmpleados.Contains(chknombre))
             {
                 List<Modelo.Omisiones> newlst = new List<Modelo.Omisiones>();
@@ -71,8 +73,9 @@ namespace CR
                 dgDatos.Columns[39].DisplayIndex = 4;
                 dgDatos.Columns[7].DisplayIndex = 5;
                 dgDatos.Columns[9].DisplayIndex = 6;
+                statusStrip1.Items[0].Text = dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString()+" "+ dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString()+ " \t| AGREGADO.";
 
-                if (lstEmpleados.Contains(nombre) ==false)
+                if (lstEmpleados.Contains(nombre) == false)
                 {
                     lstEmpleados.Add(nombre);
                 }
@@ -88,14 +91,23 @@ namespace CR
 
         private void dateTimePicker2_ValueChanged(object sender, EventArgs e)
         {
-            int meses = ((dateTimePicker2.Value.Year*12 + dateTimePicker2.Value.Month)- (dateTimePicker1.Value.Year * 12 + dateTimePicker1.Value.Month))+1;
+            int meses = ((dateTimePicker2.Value.Year * 12 + dateTimePicker2.Value.Month) - (dateTimePicker1.Value.Year * 12 + dateTimePicker1.Value.Month)) + 1;
             lblParciales.Text = meses.ToString();
         }
 
         private void dateTimePicker1_ValueChanged(object sender, EventArgs e)
         {
-            int meses = ((dateTimePicker2.Value.Year * 12 + dateTimePicker2.Value.Month) - (dateTimePicker1.Value.Year * 12 + dateTimePicker1.Value.Month))+1;
+            int meses = ((dateTimePicker2.Value.Year * 12 + dateTimePicker2.Value.Month) - (dateTimePicker1.Value.Year * 12 + dateTimePicker1.Value.Month)) + 1;
             lblParciales.Text = meses.ToString();
+        }
+
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            if (txtNombre.Text.Count() == 0)
+            {
+                dgEmpleados.DataSource = Omi.getOmisiones();
+
+            }
         }
 
         //public static Tuple<int, double, double, double, double, double, double, Tuple<double, double, double, double, double, double, double,Tuple<double>>>
@@ -125,7 +137,7 @@ namespace CR
                 ds.dtInfo.AdddtInfoRow(dtInfoRow);
                 List<int> lstAnios = new List<int>();
                 int anio = 0;
-              
+
                 if (i == 0)
                 {
 
@@ -195,7 +207,7 @@ namespace CR
                 }
 
                 count = 0;
-                List<string> lstNewEmpleados = lstEmpleados.OrderByDescending(r=>r).ToList();
+                List<string> lstNewEmpleados = lstEmpleados.OrderByDescending(r => r).ToList();
                 foreach (var item in lstNewEmpleados)
                 {
                     DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
@@ -267,6 +279,14 @@ namespace CR
 
         private void dgEmpleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
+            int rowIndex = e.RowIndex;
+            nombreX = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString();
+            chkNombreX = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString();
+            T1 = dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString();
+            T2 = dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString();
+            T3 = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString();
+            T4 = dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString();
+
 
 
         }
@@ -302,6 +322,44 @@ namespace CR
         {
             dgEmpleados.DataSource = Omi.getOmisiones(txtNombre.Text.Trim());
 
+        }
+       
+
+        private void btnAceptar_Click(object sender, EventArgs e)
+        {
+            //TODO ADD LIST TO BINDINGLIST
+                lstTEmpleados.Add(new Tuple<string, string, string, string>(T1, T2, T3, T4));
+            if (!lstChkEmpleados.Contains(chkNombreX))
+            {
+                List<Modelo.Omisiones> newlst = new List<Modelo.Omisiones>();
+                newlst = Omi.getOmision(T3,T1, T2);
+                lstAux.AddRange(newlst);
+                lst = new BindingList<Modelo.Omisiones>(lstAux);
+                var source = new BindingSource(lst, null);
+
+                dgDatos.DataSource = lst;
+                dgDatos.Columns[0].Visible = false;
+                dgDatos.Columns[6].Visible = false;
+                dgDatos.Columns[8].Visible = false;
+
+                dgDatos.Columns[37].DisplayIndex = 2;
+                dgDatos.Columns[38].DisplayIndex = 3;
+                dgDatos.Columns[39].DisplayIndex = 4;
+                dgDatos.Columns[7].DisplayIndex = 5;
+                dgDatos.Columns[9].DisplayIndex = 6;
+                statusStrip1.Items[0].Text = T1 +" "+ T2 +" " + T3 +" \t| AGREGADO.";
+
+                if (lstEmpleados.Contains(nombreX) == false)
+                {
+                    lstEmpleados.Add(nombreX);
+                }
+                lstChkEmpleados.Add(chkNombreX);
+                //lstEmpleadoSel.Add();
+            }
+            else
+            {
+                MessageBox.Show("Registros ya agregados.");
+            }
         }
     }
 }
