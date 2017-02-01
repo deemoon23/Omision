@@ -54,33 +54,44 @@ namespace CR
             int rowIndex = e.RowIndex;
             string nombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString();
             string chknombre = dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString();
-            lstTEmpleados.Add(new Tuple<string, string, string, string>(dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString()));
-            if (!lstChkEmpleados.Contains(chknombre))
+            bool tupleHadProduct = lstTEmpleados.Any(m => m.Item1 == dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() && m.Item2 == dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() && m.Item3 == dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() && m.Item4 == dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString());
+
+            if (tupleHadProduct == false)
             {
-                List<Modelo.Omisiones> newlst = new List<Modelo.Omisiones>();
-                newlst = Omi.getOmision(dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString());
-                lstAux.AddRange(newlst);
-                lst = new BindingList<Modelo.Omisiones>(lstAux);
-                var source = new BindingSource(lst, null);
 
-                dgDatos.DataSource = lst;
-                dgDatos.Columns[0].Visible = false;
-                dgDatos.Columns[6].Visible = false;
-                dgDatos.Columns[8].Visible = false;
-
-                dgDatos.Columns[37].DisplayIndex = 2;
-                dgDatos.Columns[38].DisplayIndex = 3;
-                dgDatos.Columns[39].DisplayIndex = 4;
-                dgDatos.Columns[7].DisplayIndex = 5;
-                dgDatos.Columns[9].DisplayIndex = 6;
-                statusStrip1.Items[0].Text = dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() +" "+ dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString()+" "+ dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString()+ " \t| AGREGADO.";
-
-                if (lstEmpleados.Contains(nombre) == false)
+                lstTEmpleados.Add(new Tuple<string, string, string, string>(dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[3].Value.ToString()));
+                if (!lstChkEmpleados.Contains(chknombre))
                 {
-                    lstEmpleados.Add(nombre);
+                    List<Modelo.Omisiones> newlst = new List<Modelo.Omisiones>();
+                    newlst = Omi.getOmision(dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString(), dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString());
+                    lstAux.AddRange(newlst);
+                    lst = new BindingList<Modelo.Omisiones>(lstAux);
+                    var source = new BindingSource(lst, null);
+
+                    dgDatos.DataSource = lst;
+                    dgDatos.Columns[0].Visible = false;
+                    dgDatos.Columns[6].Visible = false;
+                    dgDatos.Columns[8].Visible = false;
+
+                    dgDatos.Columns[37].DisplayIndex = 2;
+                    dgDatos.Columns[38].DisplayIndex = 3;
+                    dgDatos.Columns[39].DisplayIndex = 4;
+                    dgDatos.Columns[7].DisplayIndex = 5;
+                    dgDatos.Columns[9].DisplayIndex = 6;
+                    statusStrip1.Items[0].Text = dgEmpleados.Rows[rowIndex].Cells[1].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[2].Value.ToString() + " " + dgEmpleados.Rows[rowIndex].Cells[0].Value.ToString() + " \t| AGREGADO.";
+
+                    if (lstEmpleados.Contains(nombre) == false)
+                    {
+                        lstEmpleados.Add(nombre);
+                    }
+                    lstChkEmpleados.Add(chknombre);
+                    //lstEmpleadoSel.Add();
                 }
-                lstChkEmpleados.Add(chknombre);
-                //lstEmpleadoSel.Add();
+                else
+                {
+                    MessageBox.Show("Registros ya agregados.");
+                }
+
             }
             else
             {
@@ -211,7 +222,7 @@ namespace CR
                 foreach (var item in lstNewEmpleados)
                 {
                     DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
-                    dato.nombre = item;
+                    dato.nombre = lstTEmpleados[count].Item1 + " " + lstTEmpleados[count].Item2 +" " +lstTEmpleados[count].Item3;
                     dato.tMes = Convert.ToDecimal((from a in lst
                                                    where a.nombre == lstTEmpleados[count].Item3 && a.apellidoM == lstTEmpleados[count].Item2 &&
                                      a.apellidoP == lstTEmpleados[count].Item1

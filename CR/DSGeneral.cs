@@ -4,6 +4,10 @@
 
     partial class DSGeneral
     {
+        partial class dtEmpleadoDataTable
+        {
+        }
+
         partial class dtInfoDataTable
         {
         }
