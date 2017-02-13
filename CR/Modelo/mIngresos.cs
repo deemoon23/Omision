@@ -5,10 +5,10 @@ namespace CR.Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Linq;
 
-    public partial class _Modelo : DbContext
+    public partial class mIngresos : DbContext
     {
-        public _Modelo()
-            : base("name=ModeloIngresos")
+        public mIngresos()
+            : base("name=mIngresos")
         {
         }
 
@@ -263,6 +263,10 @@ namespace CR.Modelo
             modelBuilder.Entity<Omisiones>()
         .Property(p => p.interinato)
         .HasColumnType("bit");
+
+            modelBuilder.Entity<Omisiones>()
+       .Property(p => p.activo)
+       .HasColumnType("bit");
 
             modelBuilder.Entity<organismos>()
                 .Property(e => e.descripcion)

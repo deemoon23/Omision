@@ -14,7 +14,7 @@ namespace CR.Modelo
 
         public DateTime fecha { get; set; }
 
-        public decimal tasa { get; set; }
+        public decimal? tasa { get; set; }
 
 
         /// <summary>
@@ -27,7 +27,7 @@ namespace CR.Modelo
 
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     return ctx.tasasOmisiones.ToList();
                 }
@@ -41,23 +41,23 @@ namespace CR.Modelo
         /// <param name="_inicio">Fecha desde la que se deasea calcular la tasa.</param>
         /// <returns></returns>
         public double getTasa(DateTime _inicio)
-         {
+        {
             DateTime inicio = new DateTime();
             if (_inicio.Month == 12)
             {
-                int año = _inicio.Year+1;
+                int año = _inicio.Year + 1;
 
-                 inicio = new DateTime(año, 1, 1,0,0,0);
+                inicio = new DateTime(año, 1, 1, 0, 0, 0);
             }
             else
             {
-                inicio = new DateTime(_inicio.Year, _inicio.Month + 1, 1,0,0,0);
+                inicio = new DateTime(_inicio.Year, _inicio.Month + 1, 1, 0, 0, 0);
             }
-            
+
 
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     var y = ctx.tasasOmisiones.Where(r => r.fecha >= inicio).ToList();
                     if (y.Count == 0)
@@ -65,14 +65,15 @@ namespace CR.Modelo
                         Modelo.tasasOmisiones tasas = new tasasOmisiones();
                         double ultimaTasa = Convert.ToDouble(tasas.getUltimaTasa().tasa);
                         return ultimaTasa * 100 * .8;
-                    }               
-                    else{
+                    }
+                    else
+                    {
                         return Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= inicio).Select(r => r.tasa).Sum()) * 100 * .8;
                     }
                 }
             }
             catch (Exception) { throw; }
-        }        
+        }
 
         /// <summary>
         /// Calcula la tasa entre las fechas indicadas como parametros.
@@ -87,20 +88,16 @@ namespace CR.Modelo
             if (_inicio.Month == 12)
             {
                 int año = _inicio.Year + 1;
-
-                inicio = new DateTime(año, 1, 1,0,0,0);
+                inicio = new DateTime(año, 1, 1, 0, 0, 0);
             }
             else
             {
-                inicio = new DateTime(_inicio.Year, _inicio.Month + 1, 1,0,0,0);
+                inicio = new DateTime(_inicio.Year, _inicio.Month + 1, 1, 0, 0, 0);
             }
-         
-                final = new DateTime(_final.Year, _final.Month, DateTime.DaysInMonth(_final.Year,_final.Month),23,59,59);
-         
-
+            final = new DateTime(_final.Year, _final.Month, DateTime.DaysInMonth(_final.Year, _final.Month), 23, 59, 59);            
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     var y = ctx.tasasOmisiones.Where(r => r.fecha >= inicio).ToList();
                     if (y.Count == 0)
@@ -109,15 +106,17 @@ namespace CR.Modelo
                         double ultimaTasa = Convert.ToDouble(tasas.getUltimaTasa().tasa);
                         return ultimaTasa * 100 * .8;
                     }
-                   
                     else
                     {
+                        var x = Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => r.tasa).Sum());
+                        var xx = Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => r.tasa).Sum()) * 100;
+                        var ccc = Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => r.tasa).Sum()) * 100 * .8; 
                         return Convert.ToDouble(ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => r.tasa).Sum()) * 100 * .8;
                     }
                 }
             }
             catch (Exception) { throw; }
-            
+
         }
 
         /// <summary>
@@ -135,19 +134,19 @@ namespace CR.Modelo
             DateTime final = new DateTime(_final.Year, _final.Month, DateTime.DaysInMonth(_final.Year, _final.Month));
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     var meses = MonthsBetween(inicio, final);
-                  //  var query = ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => new { r.tasa, r.fecha }).OrderBy(r => r.fecha).ToList();
+                    //  var query = ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => new { r.tasa, r.fecha }).OrderBy(r => r.fecha).ToList();
 
                     var query = ctx.tasasOmisiones.OrderBy(r => r.fecha).Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => r.tasa).ToList();
-                     do
+                    do
                     {
                         if (query.Count() != meses.Count())
                         {
                             query.Add(getUltimaTasa().tasa);
                         }
-                        
+
                     }
                     while (query.Count != meses.Count());
                     foreach (var item in meses)
@@ -184,57 +183,86 @@ namespace CR.Modelo
             int count = 0;
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    var query = ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => new { r.tasa, r.fecha }).OrderBy(r => r.fecha).ToList();
+                    var meses = MonthsBetween(inicio, final);
+              //      var query = ctx.tasasOmisiones.OrderBy(r => r.fecha).Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => r.tasa).ToList();
+
+                    List<tasasOmisiones> query = ctx.tasasOmisiones.OrderBy(r => r.fecha).Where(r => r.fecha >= inicio && r.fecha <= final).ToList();
+                    int i = 0;
+                    //      var query = ctx.tasasOmisiones.Where(r => r.fecha >= inicio && r.fecha <= final).Select(r => new { r.tasa, r.fecha }).OrderBy(r => r.fecha).ToList();
+                    do
+                    {
+                        if (query.Count() != meses.Count())
+                        {
+                            tasasOmisiones to = new tasasOmisiones();
+                            to.tasa = getUltimaTasa().tasa;
+                            to.fecha = _final.AddMonths(i);
+                           var lstMeses = meses.ToList();
+                            query.Add(to);
+                        }
+
+                    }
+                    while (query.Count != meses.Count());
+                    int aux = 1;
+
+
                     foreach (var item in query)
                     {
+                        DateTime fecha = new DateTime(item.fecha.Year, item.fecha.Month, 1, 0, 0, 0);
+                        DateTime fecha2 = new DateTime(item.fecha.Year, item.fecha.Month, 1,0, 1, 0);
+
                         count++;
-                        int aux=0;
 
-                        if (count == 1 && _quincenainicial == 1)
+                        if (aux == 1) //count == 1 
                         {
-                            tasas.Add(Convert.ToDouble(item.tasa));
-                            data.Add(item.fecha, Convert.ToDouble(item.tasa));
-                            tasas.Add(Convert.ToDouble(item.tasa));
-                            data.Add(item.fecha.AddMinutes(1), Convert.ToDouble(item.tasa));
-
-                            aux++;
-                        }
-                        else if (count == query.Count() && _quincenafinal == 2)
-                        {
-                            tasas.Add(Convert.ToDouble(item.tasa));
-                            data.Add(item.fecha, Convert.ToDouble(item.tasa));
-                            tasas.Add(Convert.ToDouble(item.tasa));
-                            data.Add(item.fecha.AddMinutes(1), Convert.ToDouble(item.tasa));
-                            aux++;
-                        }
-                        else
-                        {
-                            if (_quincenainicial == 2 && count == 1)
+                            if (_quincenainicial == 1 && _quincenafinal == 1)
                             {
                                 tasas.Add(Convert.ToDouble(item.tasa));
-                                data.Add(item.fecha.AddMinutes(1), Convert.ToDouble(item.tasa));
-                                aux++;
+                                data.Add(fecha, Convert.ToDouble(item.tasa));
+
+                            }                       
+                            if (_quincenainicial == 1 && _quincenafinal == 2)
+                            {
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha, Convert.ToDouble(item.tasa));
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha2, Convert.ToDouble(item.tasa));
+                            }
+                            if (_quincenainicial == 2)
+                            {
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha2, Convert.ToDouble(item.tasa));
 
                             }
-                            else if (_quincenafinal == 1 && count == query.Count())
+                        }
+                        if (query.Count == aux && query.Count !=1) 
+                        {
+                            if (_quincenafinal == 1)
                             {
                                 tasas.Add(Convert.ToDouble(item.tasa));
-                                data.Add(item.fecha, Convert.ToDouble(item.tasa));
-                                aux++;
-                            }else
+                                data.Add(fecha, Convert.ToDouble(item.tasa));
+
+                            }
+                            if (_quincenafinal == 2)
+                            {
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha, Convert.ToDouble(item.tasa));
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha2, Convert.ToDouble(item.tasa));
+                            }                          
+                        }
+                        if (aux != query.Count && aux != 1)
+                        {
+                           
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha, Convert.ToDouble(item.tasa));
+                                tasas.Add(Convert.ToDouble(item.tasa));
+                                data.Add(fecha2, Convert.ToDouble(item.tasa));
                             
-                            {
-                                tasas.Add(Convert.ToDouble(item.tasa));
-                                data.Add(item.fecha, Convert.ToDouble(item.tasa));
-                            }
                         }
-                        if (count != 1 && count != query.Count())
-                        {
-                            tasas.Add(Convert.ToDouble(item.tasa));
-                            data.Add(item.fecha.AddMinutes(1), Convert.ToDouble(item.tasa));
-                        }
+                        aux++;
+
 
 
 
@@ -261,7 +289,7 @@ namespace CR.Modelo
             DateTime inicio = new DateTime(_inicio.Year, _inicio.Month, 1);
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     var query = ctx.tasasOmisiones.Where(r => r.fecha > _inicio).Select(r => new { r.tasa, r.fecha }).OrderBy(r => r.fecha).ToList();
                     foreach (var item in query)
@@ -284,9 +312,9 @@ namespace CR.Modelo
         /// <returns></returns>
         public tasasOmisiones getUltimaTasa()
         {
-             try
+            try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     tasasOmisiones query = ctx.tasasOmisiones.OrderByDescending(r => r.fecha).Take(1).FirstOrDefault();
                     return query;
@@ -295,8 +323,8 @@ namespace CR.Modelo
             catch (Exception) { throw; }
 
         }
-      
-        public static IEnumerable<Tuple<string, int>> MonthsBetween( DateTime startDate, DateTime endDate)
+
+        public static IEnumerable<Tuple<string, int>> MonthsBetween(DateTime startDate, DateTime endDate)
         {
             DateTime iterator;
             DateTime limit;

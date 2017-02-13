@@ -1041,6 +1041,8 @@ namespace CR {
             
             private global::System.Data.DataColumn columntMes;
             
+            private global::System.Data.DataColumn columnpension;
+            
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public dtEmpleadoDataTable() {
@@ -1092,6 +1094,14 @@ namespace CR {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public global::System.Data.DataColumn pensionColumn {
+                get {
+                    return this.columnpension;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             [global::System.ComponentModel.Browsable(false)]
             public int Count {
                 get {
@@ -1127,11 +1137,12 @@ namespace CR {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
-            public dtEmpleadoRow AdddtEmpleadoRow(string nombre, decimal tMes) {
+            public dtEmpleadoRow AdddtEmpleadoRow(string nombre, decimal tMes, int pension) {
                 dtEmpleadoRow rowdtEmpleadoRow = ((dtEmpleadoRow)(this.NewRow()));
                 object[] columnValuesArray = new object[] {
                         nombre,
-                        tMes};
+                        tMes,
+                        pension};
                 rowdtEmpleadoRow.ItemArray = columnValuesArray;
                 this.Rows.Add(rowdtEmpleadoRow);
                 return rowdtEmpleadoRow;
@@ -1156,6 +1167,7 @@ namespace CR {
             internal void InitVars() {
                 this.columnnombre = base.Columns["nombre"];
                 this.columntMes = base.Columns["tMes"];
+                this.columnpension = base.Columns["pension"];
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -1165,6 +1177,8 @@ namespace CR {
                 base.Columns.Add(this.columnnombre);
                 this.columntMes = new global::System.Data.DataColumn("tMes", typeof(decimal), null, global::System.Data.MappingType.Element);
                 base.Columns.Add(this.columntMes);
+                this.columnpension = new global::System.Data.DataColumn("pension", typeof(int), null, global::System.Data.MappingType.Element);
+                base.Columns.Add(this.columnpension);
             }
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
@@ -3096,6 +3110,22 @@ namespace CR {
             
             [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public int pension {
+                get {
+                    try {
+                        return ((int)(this[this.tabledtEmpleado.pensionColumn]));
+                    }
+                    catch (global::System.InvalidCastException e) {
+                        throw new global::System.Data.StrongTypingException("The value for column \'pension\' in table \'dtEmpleado\' is DBNull.", e);
+                    }
+                }
+                set {
+                    this[this.tabledtEmpleado.pensionColumn] = value;
+                }
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public bool IsnombreNull() {
                 return this.IsNull(this.tabledtEmpleado.nombreColumn);
             }
@@ -3116,6 +3146,18 @@ namespace CR {
             [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
             public void SettMesNull() {
                 this[this.tabledtEmpleado.tMesColumn] = global::System.Convert.DBNull;
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public bool IspensionNull() {
+                return this.IsNull(this.tabledtEmpleado.pensionColumn);
+            }
+            
+            [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+            [global::System.CodeDom.Compiler.GeneratedCodeAttribute("System.Data.Design.TypedDataSetGenerator", "4.0.0.0")]
+            public void SetpensionNull() {
+                this[this.tabledtEmpleado.pensionColumn] = global::System.Convert.DBNull;
             }
         }
         

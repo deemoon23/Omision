@@ -7,14 +7,14 @@
     <framework targetVersion="4.5.2" profile="Full" supportedRuntime="4.0.30319" />
   </compatibleFrameworks>
   <dependency>
-    <dependentAssembly dependencyType="install" codebase="Omisiones.exe.manifest" size="20752">
+    <dependentAssembly dependencyType="install" codebase="Omisiones.exe.manifest" size="21463">
       <assemblyIdentity name="Omisiones.exe" version="1.0.0.3" publicKeyToken="0000000000000000" language="neutral" processorArchitecture="msil" type="win32" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>81dpeLQZ63jFVtgeUwg8FFFRMf08Ybqdg1yH1EX4c/I=</dsig:DigestValue>
+        <dsig:DigestValue>36aw2CyJfKLHxkli7b/qaixlDnJkm2vht8H5M/7PW+Q=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>

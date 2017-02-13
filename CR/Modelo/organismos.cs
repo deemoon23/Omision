@@ -27,9 +27,23 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    return ctx.organismos.OrderBy(r=>r.descripcion).ToList();
+                    organismos tod = new organismos();
+                    tod.codigo = 0;
+                    tod.descripcion = "---TODOS---";
+                    List<organismos> org=new List<organismos>();
+                    org.Add(tod);
+                    var query = ctx.organismos.OrderBy(r => r.descripcion).ToList();
+                    foreach (var item in query)
+                    {
+                        organismos newOrg = new organismos();
+                        newOrg.codigo = item.codigo;
+                        newOrg.descripcion = item.descripcion;
+                        org.Add(newOrg);
+                    }
+                
+                    return org;
                 }
             }
             catch (Exception) { throw; }
@@ -44,9 +58,26 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     return ctx.organismos.Where(r => r.descripcion == _descripcion).Single();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        /// <summary>
+        /// Obtiene un organismo buscado por el id
+        /// </summary>
+        /// <param name="_id">id del organismo</param>
+        /// <returns></returns>
+        public organismos getById(int _id)
+        {
+            try
+            {
+                using (var ctx = new mIngresos())
+                {
+                    return ctx.organismos.Where(r => r.codigo == _id).Single();
                 }
             }
             catch (Exception) { throw; }

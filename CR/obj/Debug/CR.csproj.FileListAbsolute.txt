@@ -87,7 +87,6 @@ C:\Users\esandez.ISSSTESON\Source\Repos\Omision\CR\obj\Debug\CR.frmHome.resource
 C:\Users\esandez.ISSSTESON\Source\Repos\Omision\CR\obj\Debug\CR.frmTabla.resources
 C:\Users\esandez.ISSSTESON\Source\Repos\Omision\CR\obj\Debug\CR.Properties.Resources.resources
 C:\Users\esandez.ISSSTESON\Source\Repos\Omision\CR\obj\Debug\CR.csproj.GenerateResource.Cache
-C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.csprojResolveAssemblyReference.cache
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.Properties.Resources.resources
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.csproj.GenerateResource.Cache
 C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\CrystalDecisions.CrystalReports.Engine.dll
@@ -133,3 +132,6 @@ C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\Omisiones.exe.manifest
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\Omisiones.application
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\Omisiones.exe
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\Omisiones.pdb
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.frmBuscarEmpleado.resources
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Debug\CR.csprojResolveAssemblyReference.cache
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Debug\Z.EntityFramework.Extensions.dll

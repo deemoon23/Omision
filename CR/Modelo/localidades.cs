@@ -7,7 +7,6 @@ namespace CR.Modelo
     using System.Data.Entity.Spatial;
     using System.Linq;
 
-
     public partial class localidades
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
@@ -15,7 +14,6 @@ namespace CR.Modelo
         {
             cat_organismos2 = new HashSet<cat_organismos2>();
         }
-    
 
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.None)]
@@ -30,7 +28,6 @@ namespace CR.Modelo
 
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<cat_organismos2> cat_organismos2 { get; set; }
-        
         /// <summary>
         /// Obtiene una lista con todas las localidades.
         /// </summary>
@@ -39,10 +36,20 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    return ctx.localidades.OrderBy(r=>r.descripcion).ToList();
+                  
+                    localidades tod = new localidades();
+                    tod.codigo = 0;
+                    tod.descripcion = "---TODOS---";
+                    List<localidades> loc = new List<localidades>();
+                    loc.Add(tod);
+                    loc.AddRange(ctx.localidades.OrderBy(r => r.descripcion).ToList());
+                    return loc;
                 }
+
+
+
             }
             catch (Exception) { throw; }
         }
@@ -56,9 +63,26 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    return ctx.localidades.Where(r => r.descripcion== _descripcion).Single();
+                    return ctx.localidades.Where(r => r.descripcion == _descripcion).Single();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+        /// <summary>
+        /// Obtiene una localidad buscada por el id
+        /// </summary>
+        /// <param name="_id">id de la localidad</param>
+        /// <returns></returns>
+        public localidades getById(int _id)
+        {
+            try
+            {
+                using (var ctx = new mIngresos())
+                {
+                    return ctx.localidades.Where(r => r.codigo == _id).Single();
                 }
             }
             catch (Exception) { throw; }
@@ -66,6 +90,6 @@ namespace CR.Modelo
 
 
 
-
     }
 }
+

@@ -7,8 +7,10 @@ namespace CR.Modelo
     using System.Data.Entity.Spatial;
     using System.Linq;
     using System.Windows.Forms;
+
     public partial class cat_organismos2
     {
+        #region atributos
         public int id { get; set; }
 
         public int idLocalidad { get; set; }
@@ -78,6 +80,7 @@ namespace CR.Modelo
 
         [Column(TypeName = "image")]
         public byte[] logo { get; set; }
+        #endregion
 
         public virtual localidades localidades { get; set; }
 
@@ -96,12 +99,12 @@ namespace CR.Modelo
             int inicio = _inicio.Year;
             int final = _final.Year;
             Dictionary<int, cat_organismos2> empty = null;
-                try
+            try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     int vigencia = 0;
-                var query=ctx.cat_organismos2.OrderBy(r=>r.vigencia).Where(r => r.idLocalidad == _localidad.codigo && r.idOrganismo == _organismo.codigo && r.idTipoGenera == _tipoGenera && r.vigencia >= inicio && r.vigencia <= final).ToList();
+                    var query = ctx.cat_organismos2.OrderBy(r => r.vigencia).Where(r => r.idLocalidad == _localidad.codigo && r.idOrganismo == _organismo.codigo && r.idTipoGenera == _tipoGenera && r.vigencia >= inicio && r.vigencia <= final).ToList();
                     List<cat_organismos2> lista = new List<cat_organismos2>();
                     foreach (var item in query)
                     {
@@ -111,22 +114,46 @@ namespace CR.Modelo
                         }
                         vigencia = Convert.ToInt32(item.vigencia);
                     }
-                        foreach (var item in lista)
+                    foreach (var item in lista)
                     {
-                                        
-                        data.Add(item.vigencia.Value,item);
+
+                        data.Add(item.vigencia.Value, item);
                     }
 
                     return data;
 
                 }
             }
-            catch (InvalidOperationException) {
+            catch (InvalidOperationException)
+            {
                 MessageBox.Show("No hay datos");
                 return empty;
             }
 
 
         }
+
+        /// <summary>
+        /// Obtiene solo un registro de la tabla cat_organismos2
+        /// </summary>
+        /// <param name="_idLoc">id de la localidad</param>
+        /// <param name="_idOrg">id del organismo</param>
+        /// <param name="_año">Año de vigencia</param>
+        /// <param name="_generacion">Tipo de generación</param>
+        /// <returns></returns>
+        public cat_organismos2 getOrganismo(int _idLoc, int _idOrg, int _año, string _generacion)
+        {
+            try
+            {
+                using (var ctx = new mIngresos())
+                {
+                    return ctx.cat_organismos2.Where(r => r.idLocalidad == _idLoc && r.idOrganismo == _idOrg && r.vigencia == _año && r.idTipoGenera == _generacion).FirstOrDefault();
+                    
+                }
+            }
+            catch (Exception) { throw; }
+
+        }
+
     }
 }

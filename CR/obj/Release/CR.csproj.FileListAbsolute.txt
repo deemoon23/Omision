@@ -43,3 +43,6 @@ C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\Omisiones.exe.manifest
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\Omisiones.application
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\Omisiones.exe
 C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\Omisiones.pdb
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.frmBuscarEmpleado.resources
+C:\Users\esandez\Source\Repos\Omision\CR\bin\Release\Z.EntityFramework.Extensions.dll
+C:\Users\esandez\Source\Repos\Omision\CR\obj\Release\CR.csprojResolveAssemblyReference.cache

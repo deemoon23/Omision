@@ -6,6 +6,8 @@ namespace CR.Modelo
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
     using System.Linq;
+    using System.Windows.Forms;
+    using System.Web.UI.WebControls;
 
     public partial class Omisiones
     {
@@ -79,6 +81,7 @@ namespace CR.Modelo
         public decimal? taporta { get; set; }
 
         public decimal? importeA { get; set; }
+
         public decimal? tasa { get; set; }
 
         public decimal? tmoratorio { get; set; }
@@ -96,11 +99,12 @@ namespace CR.Modelo
         [StringLength(30)]
         public string apellidoM { get; set; }
 
-        [Column(TypeName = "char")]
+        [StringLength(1)]
         public string generacion { get; set; }
 
-        public bool interinato { get; set; }
+        public bool? interinato { get; set; }
 
+        public bool? activo { get; set; }
 
         // Guarda una omisión.
         /// <summary>
@@ -110,7 +114,7 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     ctx.Omisiones.Add(_omision);
 
@@ -128,14 +132,14 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    List<Tuple<string, string, string,string, string, string>> lst = new List<Tuple<string, string, string,string, string, string>>();
-                    var x = (ctx.Omisiones.Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).OrderByDescending(r=>r.mesCalculo).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo })).ToList();
+                    List<Tuple<string, string, string, string, string, string>> lst = new List<Tuple<string, string, string, string, string, string>>();
+                    var x = (ctx.Omisiones.Where(r=>r.activo==true).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).OrderByDescending(r => r.mesCalculo).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo })).ToList();
                     var xx = x.OrderByDescending(r => r.Key.mesCalculo);
                     foreach (var item in xx)
                     {
-                        lst.Add(new Tuple<string, string, string, string,string, string>(item.Key.nombre,item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(),  item.Key.Localidad, item.Key.Organismo));
+                        lst.Add(new Tuple<string, string, string, string, string, string>(item.Key.nombre, item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(), item.Key.Localidad, item.Key.Organismo));
                     }
                     return lst;
                 }
@@ -148,47 +152,38 @@ namespace CR.Modelo
         /// </summary>
         /// <param name="_nombre">Busca las omisiones que contengan el texto de la variable.</param>
         /// <returns></returns>
-        public List<Tuple<string, string, string, string, string, string>> getOmisiones(string _nombre)
+        public List<Tuple<string, string, string, string, string, string>> getOmisiones(string _nombre, string _apellidoP, string _apellidoM, string _localidad, string _organismo)
         {
+            // TODO BUSCAR POR TODO
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     List<Tuple<string, string, string, string, string, string>> lst = new List<Tuple<string, string, string, string, string, string>>();
-                    var x= ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(_nombre) || r.apellidoM.Contains(_nombre) || r.apellidoP.Contains(_nombre)).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
-                    string[] nombre = _nombre.Split(null);
-                    if (nombre.Count() == 1)
-                    {
-                        string array = nombre[0];
-                         x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(array) || r.apellidoM.Contains(array) || r.apellidoP.Contains(array)).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
-                    }
-                    if (nombre.Count() == 2)
-                    {
-                        string array = nombre[0];
-                        string array2 = nombre[1];
-                         x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(array) || r.apellidoM.Contains(array) || r.apellidoP.Contains(array) || r.nombre.Contains(array2) || r.apellidoM.Contains(array2) || r.apellidoP.Contains(array2)).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
-                    }
 
-                    if (nombre.Count() == 3)
-                    {
-                        string array = nombre[0];
-                        string array2 = nombre[1];
-                        string array3 = nombre[2];
+                    var x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo, r.activo }).Where(r => r.nombre.Contains(_nombre) && r.apellidoM.Contains(_apellidoM) && r.apellidoP.Contains(_apellidoP) && r.activo == true).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
+                        if (_localidad != "---TODOS---")
+                        {
+                            x = x.Where(r => r.Key.Localidad == _localidad).ToList();
 
-                        x = ctx.Omisiones.OrderBy(r => apellidoP).Select(r => new { r.apellidoP, r.apellidoM, r.nombre, r.mesCalculo, r.Localidad, r.Organismo }).Where(r => r.nombre.Contains(array3) && r.apellidoM.Contains(array2) && r.apellidoP.Contains(array) ).GroupBy(r => new { r.apellidoP, r.apellidoM, r.nombre, r.Localidad, r.Organismo, r.mesCalculo }).ToList();
-                    }
+                        }
+                        if (_organismo != "---TODOS---")
+                        {
+                            x = x.Where(r => r.Key.Organismo == _organismo).ToList();
 
+                        }
 
-
-                    foreach (var item in x)
-                    {
-                        lst.Add(new Tuple<string, string, string, string, string, string>(item.Key.nombre, item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(), item.Key.Localidad, item.Key.Organismo));
-                    }
+                        foreach (var item in x)
+                        {
+                            lst.Add(new Tuple<string, string, string, string, string, string>(item.Key.nombre, item.Key.apellidoP, item.Key.apellidoM, item.Key.mesCalculo.ToString(), item.Key.Localidad, item.Key.Organismo));
+                        }
+                 
                     return lst;
                 }
             }
             catch (Exception) { throw; }
         }
+        
 
         /// <summary>
         /// Obtiene una lista con todas las omisiones de un empleado en específico.
@@ -201,9 +196,9 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    return ctx.Omisiones.OrderBy(r=>r.mesOmitido).Where(r => r.nombre == _nombre && r.apellidoP == _apellidoP && r.apellidoM == _apellidoM).ToList();
+                    return ctx.Omisiones.OrderBy(r => r.mesOmitido).Where(r => r.nombre == _nombre && r.apellidoP == _apellidoP && r.apellidoM == _apellidoM &&r.activo==true).ToList();
                 }
             }
             catch (Exception) { throw; }
@@ -217,13 +212,56 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
-                    return ctx.Omisiones.Select(r=>r.empleado).ToList();
+                    return ctx.Omisiones.Where(r=>r.activo==true).Select(r => r.empleado).ToList();
                 }
             }
             catch (Exception) { throw; }
         }
+
+        /// <summary>
+        /// Borrado lógico de un solo registro, pone en 0 el status de activo.
+        /// </summary>
+        /// <param name="_id">id del registro</param>
+        public void borrarRegistro(int _id)
+        {
+            try
+            {
+                using (var ctx = new mIngresos())
+                {
+                    Omisiones omi = ctx.Omisiones.Where(r => r.id == _id).SingleOrDefault();
+                    omi.activo = false;
+                    ctx.SaveChanges();
+                }
+            }
+            catch (Exception) { throw; }
+            
+        }
+
+        /// <summary>
+        /// Obtiene un registro de la tabla omisiones.
+        /// </summary>
+        /// <param name="_id">id de la omisión</param>
+        /// <returns></returns>
+        public Omisiones getOmision(int _id)
+        {
+            try
+            {
+                using (var ctx = new mIngresos())
+                {
+                    return ctx.Omisiones.Where(r => r.id == _id).SingleOrDefault();
+                }
+            }
+            catch (Exception) { throw; }
+        }
+
+
+
+
+
+
+
     }
-   
+
 }

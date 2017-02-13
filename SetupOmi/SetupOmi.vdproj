@@ -33,6 +33,12 @@
         }
         "Entry"
         {
+        "MsmKey" = "8:_7F39176094F639F0208C8D78AF60FA8D"
+        "OwnerKey" = "8:_D38044F7BD6B41649F474C34EF49086A"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
         "MsmKey" = "8:_856E18B92792F88ECDAFCAF9D2FA01E1"
         "OwnerKey" = "8:_D38044F7BD6B41649F474C34EF49086A"
         "MsmSig" = "8:_UNDEFINED"
@@ -94,6 +100,12 @@
         "Entry"
         {
         "MsmKey" = "8:_EE11FF608489D038F335A0B1D1C5CC8C"
+        "OwnerKey" = "8:_7F39176094F639F0208C8D78AF60FA8D"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_EE11FF608489D038F335A0B1D1C5CC8C"
         "OwnerKey" = "8:_088C39B233ED8A989F9998A9ACADBDEC"
         "MsmSig" = "8:_UNDEFINED"
         }
@@ -107,6 +119,12 @@
         {
         "MsmKey" = "8:_UNDEFINED"
         "OwnerKey" = "8:_87F4EBB81D88BD3D50E447F86C707678"
+        "MsmSig" = "8:_UNDEFINED"
+        }
+        "Entry"
+        {
+        "MsmKey" = "8:_UNDEFINED"
+        "OwnerKey" = "8:_7F39176094F639F0208C8D78AF60FA8D"
         "MsmSig" = "8:_UNDEFINED"
         }
         "Entry"
@@ -182,6 +200,14 @@
             "PrerequisitesLocation" = "2:1"
             "Url" = "8:"
             "ComponentsUrl" = "8:"
+                "Items"
+                {
+                    "{EDC2488A-8267-493A-A98E-7D9C3B36CDF3}:.NETFramework,Version=v4.5"
+                    {
+                    "Name" = "8:Microsoft .NET Framework 4.5 (x86 and x64)"
+                    "ProductCode" = "8:.NETFramework,Version=v4.5"
+                    }
+                }
             }
         }
         "Release"
@@ -299,6 +325,37 @@
                     }
                 }
             "SourcePath" = "8:stdole.dll"
+            "TargetName" = "8:"
+            "Tag" = "8:"
+            "Folder" = "8:_480DDB14C39749DBBF447C7CA7772359"
+            "Condition" = "8:"
+            "Transitive" = "11:FALSE"
+            "Vital" = "11:TRUE"
+            "ReadOnly" = "11:FALSE"
+            "Hidden" = "11:FALSE"
+            "System" = "11:FALSE"
+            "Permanent" = "11:FALSE"
+            "SharedLegacy" = "11:FALSE"
+            "PackageAs" = "3:1"
+            "Register" = "3:1"
+            "Exclude" = "11:FALSE"
+            "IsDependency" = "11:TRUE"
+            "IsolateTo" = "8:"
+            }
+            "{9F6F8455-1EF1-4B85-886A-4223BCC8E7F7}:_7F39176094F639F0208C8D78AF60FA8D"
+            {
+            "AssemblyRegister" = "3:1"
+            "AssemblyIsInGAC" = "11:FALSE"
+            "AssemblyAsmDisplayName" = "8:Z.EntityFramework.Extensions, Version=3.10.48.0, Culture=neutral, PublicKeyToken=59b66d028979105b, processorArchitecture=MSIL"
+                "ScatterAssemblies"
+                {
+                    "_7F39176094F639F0208C8D78AF60FA8D"
+                    {
+                    "Name" = "8:Z.EntityFramework.Extensions.dll"
+                    "Attributes" = "3:512"
+                    }
+                }
+            "SourcePath" = "8:Z.EntityFramework.Extensions.dll"
             "TargetName" = "8:"
             "Tag" = "8:"
             "Folder" = "8:_480DDB14C39749DBBF447C7CA7772359"
@@ -608,24 +665,24 @@
         "Product"
         {
         "Name" = "8:Microsoft Visual Studio"
-        "ProductName" = "8:SetupOmi"
-        "ProductCode" = "8:{C8D97E79-C08E-4DDF-A021-0A03D1DAC16B}"
-        "PackageCode" = "8:{D8FE485F-5FB9-42A0-ABDC-504D8FD85872}"
+        "ProductName" = "8:Omisiones2017"
+        "ProductCode" = "8:{6C799DBE-A3EE-4675-9139-2A36FA5B59F0}"
+        "PackageCode" = "8:{4DCC01B3-4894-4266-B46D-D822618B59D9}"
         "UpgradeCode" = "8:{5D7CDFCC-F042-4878-BEF3-E5854E4E6DAC}"
         "AspNetVersion" = "8:4.0.30319.0"
         "RestartWWWService" = "11:FALSE"
         "RemovePreviousVersions" = "11:FALSE"
         "DetectNewerInstalledVersion" = "11:TRUE"
         "InstallAllUsers" = "11:FALSE"
-        "ProductVersion" = "8:1.0.0"
-        "Manufacturer" = "8:Default Company Name"
+        "ProductVersion" = "8:0.7.0"
+        "Manufacturer" = "8:ISSSTESON"
         "ARPHELPTELEPHONE" = "8:"
         "ARPHELPLINK" = "8:"
-        "Title" = "8:SetupOmi"
+        "Title" = "8:Omisiones2017"
         "Subject" = "8:"
-        "ARPCONTACT" = "8:Default Company Name"
+        "ARPCONTACT" = "8:ISSSTESON"
         "Keywords" = "8:"
-        "ARPCOMMENTS" = "8:"
+        "ARPCOMMENTS" = "8:Calculo de Omisiones y Bonificaciones"
         "ARPURLINFOABOUT" = "8:"
         "ARPPRODUCTICON" = "8:"
         "ARPIconIndex" = "3:0"

@@ -14,9 +14,12 @@ namespace CR
 {
     public partial class frmReporteGeneral : Form
     {
+        private bool _TypedInto;
+
         Modelo.Omisiones Omi = new Modelo.Omisiones();
         Modelo.organismos Org = new Modelo.organismos();
         Modelo.localidades Loc = new Modelo.localidades();
+        Modelo.trabajadores Tra = new Modelo.trabajadores();
         List<Modelo.Omisiones> lstAux = new List<Modelo.Omisiones>();
         BindingList<Modelo.Omisiones> lst;
         List<string> lstEmpleados = new List<string>();
@@ -27,14 +30,28 @@ namespace CR
         {
             InitializeComponent();
             statusStrip1.Items[0].Text = "";
+            cbLocalidad.DataSource = Loc.getAll();
+            cbLocalidad.DisplayMember = "DESCRIPCION";
+            cbLocalidad.ValueMember = "codigo";
+            cbOrganismos.DataSource = Org.getAll();
+            cbOrganismos.DisplayMember = "DESCRIPCION";
+            cbOrganismos.ValueMember = "codigo";
+
         }
 
         private void frmReporteGeneral_Load(object sender, EventArgs e)
         {
+            
+
             dateTimePicker1.CustomFormat = "MMMM yyyy";
             dateTimePicker2.CustomFormat = "MMMM yyyy";
             dgEmpleados.DataSource = Omi.getOmisiones();
-
+            txtApellidoP.Text = "Apellido Paterno";
+            txtApellidoP.ForeColor = Color.Gray;
+            txtApellidoM.Text = "Apellido Materno";
+            txtApellidoM.ForeColor = Color.Gray;
+            txtNombre.Text = "Nombre";
+            txtNombre.ForeColor = Color.Gray;
             dgEmpleados.Columns[0].HeaderText = "Nombre";
             dgEmpleados.Columns[0].DisplayIndex = 2;
             dgEmpleados.Columns[1].HeaderText = "Apellido Paterno";
@@ -112,22 +129,25 @@ namespace CR
             lblParciales.Text = meses.ToString();
         }
 
-        private void txtNombre_TextChanged(object sender, EventArgs e)
+        private void cbOrganismos_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if (txtNombre.Text.Count() == 0)
-            {
-                dgEmpleados.DataSource = Omi.getOmisiones();
-
-            }
+            
         }
 
-        //public static Tuple<int, double, double, double, double, double, double, Tuple<double, double, double, double, double, double, double,Tuple<double>>>
-        //Create(int t1, double t2, double t3, double t4, double t5, double t6, double t7, double t8, double t9, double t10, double t11, double t12, double t13, double t14,
-        //    double t15)
-        //{
-        //    return new Tuple<int, double, double, double, double, double, double, Tuple<double, double, double, double, double, double, double,Tuple<double>>>
-        //        (t1, t2, t3, t4, t5, t6, t7, Tuple.Create(t8, t9,t10,t11,t12,t13,t14,Tuple.Create(t15)));
-        //}
+        private void btnLimpiar_Click(object sender, EventArgs e)
+        {
+            dgDatos.Rows.Clear();
+            lstEmpleados.Clear();
+            lstChkEmpleados.Clear();
+            lstTEmpleados.Clear();
+            nombreX = "";
+            chkNombreX = "";
+            T2 = "";
+            T3 = "";
+            T4 = "";
+            T1 = "";
+
+        }
 
         private void button1_Click(object sender, EventArgs e)
         {
@@ -221,12 +241,14 @@ namespace CR
                 List<string> lstNewEmpleados = lstEmpleados.OrderByDescending(r => r).ToList();
                 foreach (var item in lstNewEmpleados)
                 {
-                    DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
+                    int pension = Convert.ToInt32(Tra.getTrabajador(lstTEmpleados[count].Item1, lstTEmpleados[count].Item2, lstTEmpleados[count].Item3).tpension);
+                     DSGeneral.dtEmpleadoRow dato = ds.dtEmpleado.NewdtEmpleadoRow();
                     dato.nombre = lstTEmpleados[count].Item1 + " " + lstTEmpleados[count].Item2 +" " +lstTEmpleados[count].Item3;
                     dato.tMes = Convert.ToDecimal((from a in lst
                                                    where a.nombre == lstTEmpleados[count].Item3 && a.apellidoM == lstTEmpleados[count].Item2 &&
                                      a.apellidoP == lstTEmpleados[count].Item1
                                                    select a.tmes).Sum());
+                    dato.pension = pension;
                     ds.dtEmpleado.AdddtEmpleadoRow(dato);
                     count++;
                 }
@@ -288,6 +310,8 @@ namespace CR
             }
         }
 
+       
+
         private void dgEmpleados_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             int rowIndex = e.RowIndex;
@@ -301,6 +325,9 @@ namespace CR
 
 
         }
+
+    
+
         public static IEnumerable<Tuple<string, int>> MonthsBetween(
           DateTime startDate,
           DateTime endDate)
@@ -331,10 +358,19 @@ namespace CR
 
         private void btnBuscar_Click(object sender, EventArgs e)
         {
-            dgEmpleados.DataSource = Omi.getOmisiones(txtNombre.Text.Trim());
+            string nombre = txtNombre.Text;
+            string apellidoP = txtApellidoP.Text;
+            string apellidoM = txtApellidoM.Text;
+            if (txtNombre.ForeColor == Color.Gray)
+            { nombre = ""; }
+            if (txtApellidoM.ForeColor == Color.Gray)
+            { apellidoM = ""; }
+            if (txtApellidoP.ForeColor == Color.Gray)
+            { apellidoP = ""; }
 
-        }
-       
+            dgEmpleados.DataSource = Omi.getOmisiones(nombre,apellidoP, apellidoM,cbLocalidad.Text,cbOrganismos.Text);
+
+        }       
 
         private void btnAceptar_Click(object sender, EventArgs e)
         {
@@ -372,5 +408,94 @@ namespace CR
                 MessageBox.Show("Registros ya agregados.");
             }
         }
+
+
+        private void txtApellidoP_Click(object sender, EventArgs e)
+        {
+            if (txtApellidoP.ForeColor == Color.Gray)
+            {
+                txtApellidoP.Text = "";
+            }
+
+        }
+        private void txtApellidoP_TextChanged(object sender, EventArgs e)
+        {
+            _TypedInto = !String.IsNullOrEmpty(txtApellidoP.Text);
+
+            if (_TypedInto)
+            {
+                txtApellidoP.ForeColor = Color.Black;
+            }
+
+        }
+        private void txtApellidoP_Leave(object sender, EventArgs e)
+        {
+            if (txtApellidoP.Text.Count() == 0)
+            {
+                txtApellidoP.Text = "Apellido Paterno";
+                txtApellidoP.ForeColor = Color.Gray;
+            }
+        }
+
+
+
+
+        private void txtApellidoM_Click(object sender, EventArgs e)
+        {
+            if (txtApellidoM.ForeColor == Color.Gray)
+            {
+                txtApellidoM.Text = "";
+            }
+
+        }
+        private void txtApellidoM_TextChanged(object sender, EventArgs e)
+        {
+            _TypedInto = !String.IsNullOrEmpty(txtApellidoM.Text);
+
+            if (_TypedInto)
+            {
+                txtApellidoM.ForeColor = Color.Black;
+            }
+
+        }
+        private void txtApellidoM_Leave(object sender, EventArgs e)
+        {
+            if (txtApellidoM.Text.Count() == 0)
+            {
+                txtApellidoM.Text = "Apellido Materno";
+                txtApellidoM.ForeColor = Color.Gray;
+            }
+        }
+
+        private void txtNombre_Click(object sender, EventArgs e)
+        {
+            if (txtNombre.ForeColor == Color.Gray)
+            {
+                txtNombre.Text = "";
+            }
+
+        }
+        private void txtNombre_TextChanged(object sender, EventArgs e)
+        {
+            _TypedInto = !String.IsNullOrEmpty(txtNombre.Text);
+
+            if (_TypedInto)
+            {
+                txtNombre.ForeColor = Color.Black;
+            }
+
+        }
+        private void txtNombre_Leave(object sender, EventArgs e)
+        {
+            if (txtNombre.Text.Count() == 0)
+            {
+                txtNombre.Text = "Nombre";
+                txtNombre.ForeColor = Color.Gray;
+            }
+        }
+
+
+
+
     }
 }

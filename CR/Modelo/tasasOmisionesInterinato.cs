@@ -5,6 +5,7 @@ namespace CR.Modelo
     using System.ComponentModel.DataAnnotations;
     using System.ComponentModel.DataAnnotations.Schema;
     using System.Data.Entity.Spatial;
+    using System.Globalization;
     using System.Linq;
 
     [Table("tasasOmisionesInterinato")]
@@ -12,7 +13,7 @@ namespace CR.Modelo
     {
         public long id { get; set; }
 
-        public DateTime? fecha { get; set; }
+        public DateTime fecha { get; set; }
 
         public decimal? tasa { get; set; }
         /// <summary>
@@ -21,7 +22,7 @@ namespace CR.Modelo
         /// <param name="_inicio">Fecha desde la que se desea calcular la tasa.</param>
         /// <returns></returns>
         public double getTasa(DateTime _inicio)
-        {            
+        {
             DateTime inicio = new DateTime();
             if (_inicio.Month == 12)
             {
@@ -36,14 +37,14 @@ namespace CR.Modelo
 
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     var y = ctx.tasasOmisionesInterinato.Where(r => r.fecha >= inicio).ToList();
                     if (y.Count == 0)
                     {
                         Modelo.tasasOmisionesInterinato tasas = new tasasOmisionesInterinato();
                         double ultimaTasa = Convert.ToDouble(tasas.getUltimaTasa().tasa);
-                        return ultimaTasa*100;
+                        return ultimaTasa * 100;
                     }
                     else
                     {
@@ -55,7 +56,7 @@ namespace CR.Modelo
             }
             catch (Exception) { throw; }
         }
-        
+
         /// <summary>
         /// Calcula la tasa entre las fechas indicadas como parametros.
         /// </summary>
@@ -68,7 +69,7 @@ namespace CR.Modelo
             DateTime final = new DateTime(_final.Year, _final.Month, 1);
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
 
                     return Convert.ToDouble(ctx.tasasOmisionesInterinato.Where(r => r.fecha >= _inicio && r.fecha <= final).Select(r => r.tasa).Sum()) * 100 * .8;
@@ -84,11 +85,11 @@ namespace CR.Modelo
         /// <returns></returns>
         public List<tasasOmisionesInterinato> getAll()
         {
-           
+
 
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     return ctx.tasasOmisionesInterinato.ToList();
                 }
@@ -101,7 +102,7 @@ namespace CR.Modelo
         {
             try
             {
-                using (var ctx = new _Modelo())
+                using (var ctx = new mIngresos())
                 {
                     tasasOmisionesInterinato query = ctx.tasasOmisionesInterinato.OrderByDescending(r => r.fecha).Take(1).FirstOrDefault();
                     return query;

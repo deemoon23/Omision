@@ -288,14 +288,14 @@
     </dependentAssembly>
   </dependency>
   <dependency>
-    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Omisiones.exe" size="4907464">
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Omisiones.exe" size="5455816">
       <assemblyIdentity name="Omisiones" version="1.0.0.0" language="neutral" processorArchitecture="msil" />
       <hash>
         <dsig:Transforms>
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>zXtPebVIAX9hLMXW9N/vw8hZj6W/QCY94tCFQ1zTYF0=</dsig:DigestValue>
+        <dsig:DigestValue>NMYc7wptxfai8O7/6RipsxH6YBBauch0h3TfKZWtYBs=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -307,7 +307,7 @@
           <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
         </dsig:Transforms>
         <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-        <dsig:DigestValue>uE9K/8anc8dg6Vl06IZMV3JUZCZbATilA3UptK1Gcew=</dsig:DigestValue>
+        <dsig:DigestValue>gy6cE4vNcSIESq36ltKBju95RlWF3hP/Ib4fQioCV00=</dsig:DigestValue>
       </hash>
     </dependentAssembly>
   </dependency>
@@ -335,6 +335,18 @@
       </hash>
     </dependentAssembly>
   </dependency>
+  <dependency>
+    <dependentAssembly dependencyType="install" allowDelayedBinding="true" codebase="Z.EntityFramework.Extensions.dll" size="852480">
+      <assemblyIdentity name="Z.EntityFramework.Extensions" version="3.10.48.0" publicKeyToken="59B66D028979105B" language="neutral" processorArchitecture="msil" />
+      <hash>
+        <dsig:Transforms>
+          <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
+        </dsig:Transforms>
+        <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
+        <dsig:DigestValue>TkAQ8awPXD3WhSio+3WCzvqH7+cZThkeez6BMpwE0VQ=</dsig:DigestValue>
+      </hash>
+    </dependentAssembly>
+  </dependency>
   <file name="logoico.ico.ico" size="370070">
     <hash>
       <dsig:Transforms>
@@ -344,13 +356,13 @@
       <dsig:DigestValue>xPDa99Jnk+/67/L4a8iGivIUUfuiJ0hJCnW1NuifKDI=</dsig:DigestValue>
     </hash>
   </file>
-  <file name="Omisiones.exe.config" size="3018">
+  <file name="Omisiones.exe.config" size="4385">
     <hash>
       <dsig:Transforms>
         <dsig:Transform Algorithm="urn:schemas-microsoft-com:HashTransforms.Identity" />
       </dsig:Transforms>
       <dsig:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha256" />
-      <dsig:DigestValue>ad/VgtlYVE8TosfmPkfddajzH0VJwTt4wCECtUhY4I8=</dsig:DigestValue>
+      <dsig:DigestValue>M/SmfUCr7atGJPzCB62DfzBgcxehkyd8VSURxWC23LA=</dsig:DigestValue>
     </hash>
   </file>
 </asmv1:assembly>

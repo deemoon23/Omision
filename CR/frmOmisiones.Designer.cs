@@ -55,6 +55,49 @@
             this.rbActual = new System.Windows.Forms.RadioButton();
             this.txtApellidoPa = new System.Windows.Forms.TextBox();
             this.dgDatos = new System.Windows.Forms.DataGridView();
+            this.ColumnID = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apellidoP = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ApellidoM = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Nombre = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.sueldo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tipoCobro = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesOmitido = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.mesCalculo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.folio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idLoc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Localidad = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.idOrg = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Organismo = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.csm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cfp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ccp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cpren = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.csv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.csr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cgi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tcuotas = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importeC = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.afp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.acp = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apren = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asv = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.asr = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.agi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.afovi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.apm = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aaf = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aig = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.aga = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.taporta = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.importeA = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tasa = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tmoratorio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tmes = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TasaCalculada = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.genera = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.interi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.activo = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.cbLocalidad = new System.Windows.Forms.ComboBox();
             this.dtUltimaTasa = new System.Windows.Forms.DateTimePicker();
             this.chkInterinato = new System.Windows.Forms.CheckBox();
@@ -64,6 +107,8 @@
             this.lstTipo = new System.Windows.Forms.ListBox();
             this.lstDe = new System.Windows.Forms.ListBox();
             this.lstHasta = new System.Windows.Forms.ListBox();
+            this.btnBorrar = new System.Windows.Forms.Button();
+            this.btnBuscar = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgTasas)).BeginInit();
             this.statusStrip1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgDatos)).BeginInit();
@@ -201,6 +246,7 @@
             // cbOrganismos
             // 
             resources.ApplyResources(this.cbOrganismos, "cbOrganismos");
+            this.cbOrganismos.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbOrganismos.FormattingEnabled = true;
             this.cbOrganismos.Name = "cbOrganismos";
             // 
@@ -237,13 +283,318 @@
             // 
             // dgDatos
             // 
-            resources.ApplyResources(this.dgDatos, "dgDatos");
             this.dgDatos.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgDatos.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.ColumnID,
+            this.apellidoP,
+            this.ApellidoM,
+            this.Nombre,
+            this.sueldo,
+            this.tipoCobro,
+            this.mesOmitido,
+            this.mesCalculo,
+            this.folio,
+            this.idLoc,
+            this.Localidad,
+            this.idOrg,
+            this.Organismo,
+            this.csm,
+            this.cfp,
+            this.ccp,
+            this.cpren,
+            this.csv,
+            this.csr,
+            this.cgi,
+            this.tcuotas,
+            this.importeC,
+            this.asm,
+            this.afp,
+            this.acp,
+            this.apren,
+            this.asv,
+            this.asr,
+            this.agi,
+            this.afovi,
+            this.apm,
+            this.aaf,
+            this.aig,
+            this.aga,
+            this.taporta,
+            this.importeA,
+            this.tasa,
+            this.tmoratorio,
+            this.tmes,
+            this.TasaCalculada,
+            this.genera,
+            this.interi,
+            this.activo});
+            resources.ApplyResources(this.dgDatos, "dgDatos");
             this.dgDatos.Name = "dgDatos";
+            this.dgDatos.CellBeginEdit += new System.Windows.Forms.DataGridViewCellCancelEventHandler(this.dgDatos_CellBeginEdit);
+            this.dgDatos.CellValueChanged += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgDatos_CellValueChanged);
+            // 
+            // ColumnID
+            // 
+            this.ColumnID.DataPropertyName = "ID";
+            resources.ApplyResources(this.ColumnID, "ColumnID");
+            this.ColumnID.Name = "ColumnID";
+            // 
+            // apellidoP
+            // 
+            this.apellidoP.DataPropertyName = "apellidoP";
+            resources.ApplyResources(this.apellidoP, "apellidoP");
+            this.apellidoP.Name = "apellidoP";
+            // 
+            // ApellidoM
+            // 
+            this.ApellidoM.DataPropertyName = "apellidoM";
+            resources.ApplyResources(this.ApellidoM, "ApellidoM");
+            this.ApellidoM.Name = "ApellidoM";
+            // 
+            // Nombre
+            // 
+            this.Nombre.DataPropertyName = "nombre";
+            resources.ApplyResources(this.Nombre, "Nombre");
+            this.Nombre.Name = "Nombre";
+            // 
+            // sueldo
+            // 
+            this.sueldo.DataPropertyName = "sueldo";
+            resources.ApplyResources(this.sueldo, "sueldo");
+            this.sueldo.Name = "sueldo";
+            // 
+            // tipoCobro
+            // 
+            this.tipoCobro.DataPropertyName = "tipoCobro";
+            resources.ApplyResources(this.tipoCobro, "tipoCobro");
+            this.tipoCobro.Name = "tipoCobro";
+            // 
+            // mesOmitido
+            // 
+            this.mesOmitido.DataPropertyName = "mesOmitido";
+            resources.ApplyResources(this.mesOmitido, "mesOmitido");
+            this.mesOmitido.Name = "mesOmitido";
+            // 
+            // mesCalculo
+            // 
+            this.mesCalculo.DataPropertyName = "mesCalculo";
+            resources.ApplyResources(this.mesCalculo, "mesCalculo");
+            this.mesCalculo.Name = "mesCalculo";
+            // 
+            // folio
+            // 
+            this.folio.DataPropertyName = "folio";
+            resources.ApplyResources(this.folio, "folio");
+            this.folio.Name = "folio";
+            // 
+            // idLoc
+            // 
+            this.idLoc.DataPropertyName = "idLoc";
+            resources.ApplyResources(this.idLoc, "idLoc");
+            this.idLoc.Name = "idLoc";
+            // 
+            // Localidad
+            // 
+            this.Localidad.DataPropertyName = "localidad";
+            resources.ApplyResources(this.Localidad, "Localidad");
+            this.Localidad.Name = "Localidad";
+            // 
+            // idOrg
+            // 
+            this.idOrg.DataPropertyName = "idOrg";
+            resources.ApplyResources(this.idOrg, "idOrg");
+            this.idOrg.Name = "idOrg";
+            // 
+            // Organismo
+            // 
+            this.Organismo.DataPropertyName = "Organismo";
+            resources.ApplyResources(this.Organismo, "Organismo");
+            this.Organismo.Name = "Organismo";
+            // 
+            // csm
+            // 
+            this.csm.DataPropertyName = "csm";
+            resources.ApplyResources(this.csm, "csm");
+            this.csm.Name = "csm";
+            // 
+            // cfp
+            // 
+            this.cfp.DataPropertyName = "cfp";
+            resources.ApplyResources(this.cfp, "cfp");
+            this.cfp.Name = "cfp";
+            // 
+            // ccp
+            // 
+            this.ccp.DataPropertyName = "ccp";
+            resources.ApplyResources(this.ccp, "ccp");
+            this.ccp.Name = "ccp";
+            // 
+            // cpren
+            // 
+            this.cpren.DataPropertyName = "cpren";
+            resources.ApplyResources(this.cpren, "cpren");
+            this.cpren.Name = "cpren";
+            // 
+            // csv
+            // 
+            this.csv.DataPropertyName = "csv";
+            resources.ApplyResources(this.csv, "csv");
+            this.csv.Name = "csv";
+            // 
+            // csr
+            // 
+            this.csr.DataPropertyName = "csr";
+            resources.ApplyResources(this.csr, "csr");
+            this.csr.Name = "csr";
+            // 
+            // cgi
+            // 
+            this.cgi.DataPropertyName = "cgi";
+            resources.ApplyResources(this.cgi, "cgi");
+            this.cgi.Name = "cgi";
+            // 
+            // tcuotas
+            // 
+            this.tcuotas.DataPropertyName = "tcuotas";
+            resources.ApplyResources(this.tcuotas, "tcuotas");
+            this.tcuotas.Name = "tcuotas";
+            // 
+            // importeC
+            // 
+            this.importeC.DataPropertyName = "importeC";
+            resources.ApplyResources(this.importeC, "importeC");
+            this.importeC.Name = "importeC";
+            // 
+            // asm
+            // 
+            this.asm.DataPropertyName = "asm";
+            resources.ApplyResources(this.asm, "asm");
+            this.asm.Name = "asm";
+            // 
+            // afp
+            // 
+            this.afp.DataPropertyName = "afp";
+            resources.ApplyResources(this.afp, "afp");
+            this.afp.Name = "afp";
+            // 
+            // acp
+            // 
+            this.acp.DataPropertyName = "acp";
+            resources.ApplyResources(this.acp, "acp");
+            this.acp.Name = "acp";
+            // 
+            // apren
+            // 
+            this.apren.DataPropertyName = "apren";
+            resources.ApplyResources(this.apren, "apren");
+            this.apren.Name = "apren";
+            // 
+            // asv
+            // 
+            this.asv.DataPropertyName = "asv";
+            resources.ApplyResources(this.asv, "asv");
+            this.asv.Name = "asv";
+            // 
+            // asr
+            // 
+            this.asr.DataPropertyName = "asr";
+            resources.ApplyResources(this.asr, "asr");
+            this.asr.Name = "asr";
+            // 
+            // agi
+            // 
+            this.agi.DataPropertyName = "agi";
+            resources.ApplyResources(this.agi, "agi");
+            this.agi.Name = "agi";
+            // 
+            // afovi
+            // 
+            this.afovi.DataPropertyName = "afovi";
+            resources.ApplyResources(this.afovi, "afovi");
+            this.afovi.Name = "afovi";
+            // 
+            // apm
+            // 
+            this.apm.DataPropertyName = "apm";
+            resources.ApplyResources(this.apm, "apm");
+            this.apm.Name = "apm";
+            // 
+            // aaf
+            // 
+            this.aaf.DataPropertyName = "aaf";
+            resources.ApplyResources(this.aaf, "aaf");
+            this.aaf.Name = "aaf";
+            // 
+            // aig
+            // 
+            this.aig.DataPropertyName = "aig";
+            resources.ApplyResources(this.aig, "aig");
+            this.aig.Name = "aig";
+            // 
+            // aga
+            // 
+            this.aga.DataPropertyName = "aga";
+            resources.ApplyResources(this.aga, "aga");
+            this.aga.Name = "aga";
+            // 
+            // taporta
+            // 
+            this.taporta.DataPropertyName = "taporta";
+            resources.ApplyResources(this.taporta, "taporta");
+            this.taporta.Name = "taporta";
+            // 
+            // importeA
+            // 
+            this.importeA.DataPropertyName = "importeA";
+            resources.ApplyResources(this.importeA, "importeA");
+            this.importeA.Name = "importeA";
+            // 
+            // tasa
+            // 
+            this.tasa.DataPropertyName = "tasa";
+            resources.ApplyResources(this.tasa, "tasa");
+            this.tasa.Name = "tasa";
+            // 
+            // tmoratorio
+            // 
+            this.tmoratorio.DataPropertyName = "tmoratorio";
+            resources.ApplyResources(this.tmoratorio, "tmoratorio");
+            this.tmoratorio.Name = "tmoratorio";
+            // 
+            // tmes
+            // 
+            this.tmes.DataPropertyName = "tmes";
+            resources.ApplyResources(this.tmes, "tmes");
+            this.tmes.Name = "tmes";
+            // 
+            // TasaCalculada
+            // 
+            this.TasaCalculada.DataPropertyName = "TasaCalculada";
+            resources.ApplyResources(this.TasaCalculada, "TasaCalculada");
+            this.TasaCalculada.Name = "TasaCalculada";
+            // 
+            // genera
+            // 
+            this.genera.DataPropertyName = "generacion";
+            resources.ApplyResources(this.genera, "genera");
+            this.genera.Name = "genera";
+            // 
+            // interi
+            // 
+            this.interi.DataPropertyName = "interinato";
+            resources.ApplyResources(this.interi, "interi");
+            this.interi.Name = "interi";
+            // 
+            // activo
+            // 
+            this.activo.DataPropertyName = "activo";
+            resources.ApplyResources(this.activo, "activo");
+            this.activo.Name = "activo";
             // 
             // cbLocalidad
             // 
             resources.ApplyResources(this.cbLocalidad, "cbLocalidad");
+            this.cbLocalidad.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbLocalidad.FormattingEnabled = true;
             this.cbLocalidad.Name = "cbLocalidad";
             // 
@@ -258,6 +609,7 @@
             resources.ApplyResources(this.chkInterinato, "chkInterinato");
             this.chkInterinato.Name = "chkInterinato";
             this.chkInterinato.UseVisualStyleBackColor = true;
+            this.chkInterinato.CheckedChanged += new System.EventHandler(this.chkInterinato_CheckedChanged);
             // 
             // txtNombre
             // 
@@ -312,11 +664,29 @@
             resources.GetString("lstHasta.Items1")});
             this.lstHasta.Name = "lstHasta";
             // 
+            // btnBorrar
+            // 
+            resources.ApplyResources(this.btnBorrar, "btnBorrar");
+            this.btnBorrar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnBorrar.Name = "btnBorrar";
+            this.btnBorrar.UseVisualStyleBackColor = true;
+            this.btnBorrar.Click += new System.EventHandler(this.btnBorrar_Click);
+            // 
+            // btnBuscar
+            // 
+            resources.ApplyResources(this.btnBuscar, "btnBuscar");
+            this.btnBuscar.ForeColor = System.Drawing.SystemColors.Control;
+            this.btnBuscar.Name = "btnBuscar";
+            this.btnBuscar.UseVisualStyleBackColor = true;
+            this.btnBuscar.Click += new System.EventHandler(this.btnBuscar_Click);
+            // 
             // frmOmisiones
             // 
             resources.ApplyResources(this, "$this");
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
+            this.Controls.Add(this.btnBuscar);
+            this.Controls.Add(this.btnBorrar);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.btnLimpiar);
@@ -384,7 +754,6 @@
         private System.Windows.Forms.RadioButton rbFutura;
         private System.Windows.Forms.RadioButton rbActual;
         private System.Windows.Forms.TextBox txtApellidoPa;
-        private System.Windows.Forms.DataGridView dgDatos;
         private System.Windows.Forms.ComboBox cbLocalidad;
         private System.Windows.Forms.DateTimePicker dtUltimaTasa;
         private System.Windows.Forms.CheckBox chkInterinato;
@@ -394,6 +763,52 @@
         private System.Windows.Forms.ListBox lstTipo;
         private System.Windows.Forms.ListBox lstDe;
         private System.Windows.Forms.ListBox lstHasta;
+        private System.Windows.Forms.Button btnBorrar;
+        private System.Windows.Forms.DataGridView dgDatos;
+        private System.Windows.Forms.Button btnBuscar;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColumnID;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apellidoP;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ApellidoM;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Nombre;
+        private System.Windows.Forms.DataGridViewTextBoxColumn sueldo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tipoCobro;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mesOmitido;
+        private System.Windows.Forms.DataGridViewTextBoxColumn mesCalculo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn folio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idLoc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Localidad;
+        private System.Windows.Forms.DataGridViewTextBoxColumn idOrg;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Organismo;
+        private System.Windows.Forms.DataGridViewTextBoxColumn csm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cfp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ccp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cpren;
+        private System.Windows.Forms.DataGridViewTextBoxColumn csv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn csr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cgi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tcuotas;
+        private System.Windows.Forms.DataGridViewTextBoxColumn importeC;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn afp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn acp;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apren;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asv;
+        private System.Windows.Forms.DataGridViewTextBoxColumn asr;
+        private System.Windows.Forms.DataGridViewTextBoxColumn agi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn afovi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn apm;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aaf;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aig;
+        private System.Windows.Forms.DataGridViewTextBoxColumn aga;
+        private System.Windows.Forms.DataGridViewTextBoxColumn taporta;
+        private System.Windows.Forms.DataGridViewTextBoxColumn importeA;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tasa;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tmoratorio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn tmes;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TasaCalculada;
+        private System.Windows.Forms.DataGridViewTextBoxColumn genera;
+        private System.Windows.Forms.DataGridViewTextBoxColumn interi;
+        private System.Windows.Forms.DataGridViewTextBoxColumn activo;
     }
 }
 

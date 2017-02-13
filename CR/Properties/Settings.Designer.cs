@@ -22,15 +22,5 @@ namespace CR.Properties {
                 return defaultInstance;
             }
         }
-        
-        [global::System.Configuration.ApplicationScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.SpecialSettingAttribute(global::System.Configuration.SpecialSetting.ConnectionString)]
-        [global::System.Configuration.DefaultSettingValueAttribute("Data Source=DESKTOP-ITKNE3E\\SQL;Initial Catalog=test;Integrated Security=True")]
-        public string testConnectionString {
-            get {
-                return ((string)(this["testConnectionString"]));
-            }
-        }
     }
 }
